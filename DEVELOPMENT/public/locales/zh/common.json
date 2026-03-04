@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "首页",
+    "ourApproach": "我们的方法",
+    "whyComplianceMatters": "为何合规至关重要",
+    "getStarted": "立即开始"
+  },
+  "header": {
+    "languageToggle": "Change Language English",
+    "ctaButton": "立即开始"
+  },
+  "footer": {
+    "tagline": "合规优先的品类管理咨询公司。符合ISO 37301:2021标准。",
+    "copyright": "© {{year}} Synergistic Interaction. 版权所有。",
+    "contact": "联系我们"
+  },
+  "accessibility": {
+    "skipToContent": "跳至主要内容",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "switchToChineseLanguage": "切换至英文"
+  }
+}

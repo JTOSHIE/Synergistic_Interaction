@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "Home",
+    "ourApproach": "Our Approach",
+    "whyComplianceMatters": "Why Compliance Matters",
+    "getStarted": "Get Started"
+  },
+  "header": {
+    "languageToggle": "Change Language 中文",
+    "ctaButton": "Get Started"
+  },
+  "footer": {
+    "tagline": "Compliance-first category management consultancy. ISO 37301:2021 aligned.",
+    "copyright": "© {{year}} Synergistic Interaction. All rights reserved.",
+    "contact": "Contact"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchToChineseLanguage": "Switch to Chinese language"
+  }
+}

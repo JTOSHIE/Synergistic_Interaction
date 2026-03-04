@@ -1,0 +1,86 @@
+/* V7 §11: Global styles — Tailwind base + custom properties */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-noto-sans-sc: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-si-bg-primary text-si-white;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* V7 §6: CJK typography */
+  :lang(zh) {
+    font-family: var(--font-noto-sans-sc);
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+
+  /* Focus styles — WCAG 2.1 AA */
+  :focus-visible {
+    @apply outline-none ring-2 ring-si-teal ring-offset-2 ring-offset-si-bg-primary;
+  }
+
+  /* Remove focus ring for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer components {
+  /* V7 §11: Glassmorphism card */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl;
+  }
+
+  /* V7 §11: ISO badge */
+  .iso-badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full
+           bg-si-gold/10 border border-si-gold/30 text-si-gold
+           text-xs font-semibold uppercase tracking-wider;
+  }
+
+  /* Page section */
+  .section {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-lg {
+    @apply py-28 px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Max width container */
+  .container-xl {
+    @apply max-w-7xl mx-auto w-full;
+  }
+}
+
+@layer utilities {
+  /* V7 §5: WebGPU canvas full bleed */
+  .canvas-full {
+    @apply w-full h-full block;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-si-teal to-si-gold bg-clip-text text-transparent;
+  }
+
+  /* Subtle gradient border */
+  .border-gradient {
+    background: linear-gradient(#111827, #111827) padding-box,
+                linear-gradient(135deg, #00C9A7, #F5A623) border-box;
+    border: 1px solid transparent;
+  }
+}

@@ -1,0 +1,18 @@
+# Brief documents — keep local, do not commit to public repo
+*.docx
+~$*.docx
+
+# Next.js
+DEVELOPMENT/.next/
+DEVELOPMENT/node_modules/
+DEVELOPMENT/.env
+DEVELOPMENT/.env.local
+DEVELOPMENT/.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
