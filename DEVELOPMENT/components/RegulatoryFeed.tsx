@@ -1,14 +1,15 @@
 // V7 §4: Regulatory Intelligence Feed component
-// Displays live updates from ACCC, CAV, TGA
+// Displays live updates from ACCC, CAV, TGA, ESV (V7 — ESV added)
 'use client';
 
 import { useState, useEffect } from 'react';
 
 interface RegulatoryUpdate {
   id: string;
-  source: 'ACCC' | 'CAV' | 'TGA';
+  source: 'ACCC' | 'CAV' | 'TGA' | 'ESV';
   title: string;
   summary: string;
+  urgency?: 'Critical' | 'High' | 'Medium' | 'Low';
   url: string;
   publishedAt: string;
   categories: string[];
@@ -16,23 +17,35 @@ interface RegulatoryUpdate {
 
 interface RegulatoryFeedProps {
   maxItems?: number;
+  limit?: number;        // Alias for maxItems — use either
   showFilter?: boolean;
   categories?: string[];
 }
 
+// V7 §4: Source colour coding — ESV is orange (electrical safety regulator)
 const sourceColors: Record<string, string> = {
   ACCC: 'bg-blue-500/10 border-blue-500/30 text-blue-400',
   CAV: 'bg-purple-500/10 border-purple-500/30 text-purple-400',
   TGA: 'bg-green-500/10 border-green-500/30 text-green-400',
+  ESV: 'bg-orange-500/10 border-orange-500/30 text-orange-400',
 };
 
-const allCategories = ['Pricing', 'Product Safety', 'Labelling', 'Supplier Conduct', 'Environmental'];
+const urgencyColors: Record<string, string> = {
+  Critical: 'bg-si-error/10 border-si-error/30 text-si-error',
+  High: 'bg-orange-500/10 border-orange-500/30 text-orange-400',
+  Medium: 'bg-si-warning/10 border-si-warning/30 text-si-warning',
+  Low: 'bg-white/5 border-white/10 text-si-white-dim',
+};
+
+const allCategories = ['Product Safety', 'Electrical', 'Baby & Toys', 'Labelling', 'Recalls', 'Enforcement'];
 
 export default function RegulatoryFeed({
   maxItems = 5,
+  limit,
   showFilter = false,
   categories: initialCategories,
 }: RegulatoryFeedProps) {
+  const effectiveLimit = limit ?? maxItems;
   const [updates, setUpdates] = useState<RegulatoryUpdate[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>(initialCategories ?? []);
@@ -41,7 +54,7 @@ export default function RegulatoryFeed({
   useEffect(() => {
     async function fetchUpdates() {
       try {
-        const params = new URLSearchParams({ limit: String(maxItems) });
+        const params = new URLSearchParams({ limit: String(effectiveLimit) });
         if (activeFilters.length > 0) {
           params.set('categories', activeFilters.join(','));
         }
@@ -59,7 +72,7 @@ export default function RegulatoryFeed({
     }
 
     fetchUpdates();
-  }, [maxItems, activeFilters]);
+  }, [effectiveLimit, activeFilters]);
 
   const toggleFilter = (category: string) => {
     setActiveFilters((prev) =>
@@ -73,7 +86,7 @@ export default function RegulatoryFeed({
       <div className="flex items-center justify-between">
         {lastUpdated && (
           <p className="text-xs text-si-white-dim">
-            Updated {new Date(lastUpdated).toRelativeString?.() ?? lastUpdated}
+            Updated {new Date(lastUpdated).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
           </p>
         )}
       </div>
@@ -101,7 +114,7 @@ export default function RegulatoryFeed({
       {/* Feed items */}
       {loading ? (
         <div className="space-y-3">
-          {Array.from({ length: maxItems }).map((_, i) => (
+          {Array.from({ length: effectiveLimit }).map((_, i) => (
             <div key={i} className="bg-white/5 rounded-xl p-4 animate-pulse">
               <div className="h-4 bg-white/10 rounded w-3/4 mb-2" />
               <div className="h-3 bg-white/5 rounded w-full mb-1" />
@@ -133,6 +146,15 @@ export default function RegulatoryFeed({
                   >
                     {update.source}
                   </span>
+                  {update.urgency && update.urgency !== 'Low' && (
+                    <span
+                      className={`px-2 py-0.5 rounded-full text-xs font-semibold border ${
+                        urgencyColors[update.urgency] ?? urgencyColors.Low
+                      }`}
+                    >
+                      {update.urgency}
+                    </span>
+                  )}
                   <span className="text-xs text-si-white-dim">
                     {new Date(update.publishedAt).toLocaleDateString('en-AU', {
                       day: 'numeric',

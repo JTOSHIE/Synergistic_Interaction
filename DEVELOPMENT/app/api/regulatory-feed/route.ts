@@ -64,7 +64,8 @@ export async function GET(request: NextRequest) {
 
 // V7 §4.2: Stage 1 + Stage 2 — fetch and AI-parse RSS feeds
 // Called by Vercel Cron; output staged for human-in-loop validation
-export async function fetchAndParseFeeds(): Promise<RegulatoryUpdate[]> {
+// Not exported — route files may only export HTTP method handlers
+async function fetchAndParseFeeds(): Promise<RegulatoryUpdate[]> {
   const openai = new OpenAI({ apiKey: process.env['OPENAI_API_KEY'] });
   const results: RegulatoryUpdate[] = [];
 

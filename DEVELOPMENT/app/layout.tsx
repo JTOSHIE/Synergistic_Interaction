@@ -12,8 +12,10 @@ const inter = Inter({
 });
 
 // V7 §6: CJK font for Mandarin localization
+// next/font does not support a 'chinese-simplified' subset — latin covers ASCII fallback;
+// full CJK glyphs load via the Noto Sans SC font file automatically
 const notoSansSC = Noto_Sans_SC({
-  subsets: ['chinese-simplified'],
+  subsets: ['latin'],
   weight: ['400', '500', '700'],
   display: 'swap',
   variable: '--font-noto-sans-sc',
@@ -40,15 +42,12 @@ export const metadata: Metadata = {
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  params: { lang?: string };
 }
 
-export default function RootLayout({ children, params }: RootLayoutProps) {
-  const lang = params.lang ?? 'en';
-
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
-      lang={lang}
+      lang="en"
       className={`${inter.variable} ${notoSansSC.variable}`}
     >
       <head>

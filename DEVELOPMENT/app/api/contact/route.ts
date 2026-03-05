@@ -1,5 +1,5 @@
 // V7 §11: Contact form API route
-// Handles Get Started form submissions securely
+// Handles Get Started form submissions — categories field added for product category selection
 import { NextRequest, NextResponse } from 'next/server';
 
 interface ContactFormData {
@@ -9,6 +9,7 @@ interface ContactFormData {
   email: string;
   phone?: string;
   message: string;
+  categories?: string[];
   referralSource?: string;
 }
 
@@ -44,13 +45,23 @@ export async function POST(request: NextRequest) {
       email: sanitise(body.email),
       phone: body.phone ? sanitise(body.phone) : undefined,
       message: sanitise(body.message),
+      categories: Array.isArray(body.categories)
+        ? body.categories.map((c: string) => sanitise(String(c))).slice(0, 20)
+        : [],
       referralSource: body.referralSource ? sanitise(body.referralSource) : undefined,
     };
 
-    // TODO: Implement email notification (e.g., Resend, SendGrid, or AWS SES)
-    // Send confirmation email to submitter
-    // Notify Joshua Thompson at principal contact email
-    console.log('[contact] New enquiry from:', sanitised.email);
+    // TODO: Implement email notification via Resend or AWS SES
+    // Example body:
+    // Subject: New SI Enquiry — ${sanitised.organisation}
+    // From: ${sanitised.name} <${sanitised.email}>
+    // Role: ${sanitised.role}
+    // Phone: ${sanitised.phone ?? 'Not provided'}
+    // Categories: ${sanitised.categories?.join(', ') ?? 'None selected'}
+    // Referral: ${sanitised.referralSource ?? 'Not provided'}
+    // ---
+    // ${sanitised.message}
+    console.log('[contact] New enquiry from:', sanitised.email, '| Org:', sanitised.organisation);
 
     return NextResponse.json({ success: true });
   } catch {

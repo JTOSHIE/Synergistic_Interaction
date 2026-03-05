@@ -10,14 +10,18 @@ interface ComponentAccordionProps {
   components: ComplianceComponentData[];
   showViewAll?: boolean;
   defaultOpen?: number | null;
+  expandFirst?: boolean;  // If true, first component starts expanded
 }
 
 export default function ComponentAccordion({
   components,
   showViewAll = false,
   defaultOpen = null,
+  expandFirst = false,
 }: ComponentAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpen);
+  const [openIndex, setOpenIndex] = useState<number | null>(
+    expandFirst && components.length > 0 ? 0 : defaultOpen
+  );
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

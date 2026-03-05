@@ -8,6 +8,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
+import type * as THREE from 'three'; // type-only — runtime THREE loaded dynamically
 
 export default function ComplianceVisualization() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -32,8 +33,8 @@ export default function ComplianceVisualization() {
       const { MeshBVH, acceleratedRaycast } = await import('three-mesh-bvh');
 
       // V7 §5.3: Augment Three.js with BVH raycasting for touch device performance
-      // @ts-expect-error — three-mesh-bvh augmentation
-      THREE.Mesh.prototype.raycast = acceleratedRaycast;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (THREE.Mesh.prototype as any).raycast = acceleratedRaycast;
 
       if (cancelled || !canvasRef.current) return;
 
