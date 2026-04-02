@@ -9,6 +9,9 @@ import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/category-expertise', label: 'Category Expertise' },
   { href: '/our-approach', label: 'Our Approach' },
   { href: '/why-compliance-matters', label: 'Why Compliance Matters' },
   { href: '/get-started', label: 'Get Started' },
@@ -55,14 +58,14 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-0.5">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal ${
+                className={`px-2.5 py-2 rounded-lg text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal ${
                   isActive
                     ? 'text-si-teal bg-si-teal/10'
                     : 'text-si-white-muted hover:text-si-white hover:bg-white/5'
@@ -100,7 +103,7 @@ export default function Header() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-lg text-si-white-muted hover:text-si-white hover:bg-white/5 transition-colors"
+            className="lg:hidden p-2 rounded-lg text-si-white-muted hover:text-si-white hover:bg-white/5 transition-colors"
             onClick={() => setMobileOpen((o) => !o)}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -120,7 +123,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/10 bg-si-bg/98 backdrop-blur-md" role="dialog" aria-label="Mobile navigation">
+        <div className="lg:hidden border-t border-white/10 bg-si-bg/98 backdrop-blur-md" role="dialog" aria-label="Mobile navigation">
           <div className="max-w-6xl mx-auto px-4 py-4 space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;

@@ -4,6 +4,9 @@ import Image from 'next/image';
 
 const footerLinks = {
   Services: [
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Category Expertise', href: '/category-expertise' },
     { label: 'Our Approach', href: '/our-approach' },
     { label: 'Why Compliance Matters', href: '/why-compliance-matters' },
     { label: 'Get Started', href: '/get-started' },
