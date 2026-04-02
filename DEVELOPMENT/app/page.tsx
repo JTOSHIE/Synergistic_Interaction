@@ -17,8 +17,17 @@ export default function HomePage() {
   return (
     <>
       {/* Section 1: Hero */}
-      <section className="relative min-h-screen flex items-center py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative min-h-[90vh] flex items-center py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-si-bg">
+        {/* Background gradient orb */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 60% at 65% 40%, rgba(0,201,167,0.08) 0%, transparent 70%)',
+          }}
+        />
+        <div className="relative max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in-up">
             {/* V7 §8.4: Differentiation headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-si-white leading-tight">

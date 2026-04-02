@@ -1,5 +1,3 @@
-// V7 §5: Client-side wrapper for WebGPU ComplianceVisualization
-// Required because ssr:false with next/dynamic is only allowed in Client Components
 'use client';
 
 import dynamic from 'next/dynamic';
@@ -9,7 +7,12 @@ const ComplianceVisualization = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full aspect-video bg-si-bg-secondary rounded-2xl animate-pulse" />
+      <div
+        className="w-full aspect-video rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <div className="text-si-white-dim text-sm">Loading visualisation...</div>
+      </div>
     ),
   }
 );

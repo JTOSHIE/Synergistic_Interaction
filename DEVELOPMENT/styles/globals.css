@@ -1,90 +1,89 @@
-/* V7 §11: Global styles — Tailwind base + custom properties */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --font-inter: 'Inter', system-ui, sans-serif;
-    --font-noto-sans-sc: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  }
-
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-si-bg-primary text-si-white;
-    font-feature-settings: "kern" 1, "liga" 1;
+    background-color: #060d1a;
+    color: #f0f4f8;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* V7 §6: CJK typography */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  :focus-visible {
+    outline: 2px solid #00c9a7;
+    outline-offset: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
   :lang(zh) {
-    font-family: var(--font-noto-sans-sc);
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
     line-height: 1.8;
     letter-spacing: 0.02em;
   }
 
-  /* Focus styles — WCAG 2.1 AA */
-  :focus-visible {
-    @apply outline-none ring-2 ring-si-teal ring-offset-2 ring-offset-si-bg-primary;
-  }
-
-  /* Remove focus ring for mouse users */
-  :focus:not(:focus-visible) {
-    outline: none;
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
 @layer components {
-  /* V7 §11: Glassmorphism card */
   .glass-card {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
   }
 
-  /* V7 §11: ISO badge */
   .iso-badge {
-    @apply inline-flex items-center px-2.5 py-1 rounded-full
-           bg-si-gold/10 border border-si-gold/30 text-si-gold
-           text-xs font-semibold uppercase tracking-wider;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    background: rgba(0, 201, 167, 0.1);
+    border: 1px solid rgba(0, 201, 167, 0.3);
+    color: #00c9a7;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  /* Page section */
   .section {
-    @apply py-20 px-4 sm:px-6 lg:px-8;
+    padding: 5rem 1rem;
   }
 
-  .section-lg {
-    @apply py-28 px-4 sm:px-6 lg:px-8;
+  @media (min-width: 640px) {
+    .section { padding: 5rem 1.5rem; }
   }
 
-  /* Max width container */
-  .container-xl {
-    @apply max-w-7xl mx-auto w-full;
+  @media (min-width: 1024px) {
+    .section { padding: 5rem 2rem; }
   }
 }
 
 @layer utilities {
-  /* V7 §5: WebGPU canvas full bleed */
-  .canvas-full {
-    @apply w-full h-full block;
-  }
-
-  /* Gradient text */
-  .text-gradient {
-    @apply bg-gradient-to-r from-si-teal to-si-gold bg-clip-text text-transparent;
-  }
-
-  /* Subtle gradient border */
-  .border-gradient {
-    background: linear-gradient(#111827, #111827) padding-box,
-                linear-gradient(135deg, #00C9A7, #F5A623) border-box;
-    border: 1px solid transparent;
-  }
-
-  /* Line clamp utilities — cross-browser */
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -98,19 +97,21 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-}
 
-/* V7 §6: Reduced motion — respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .text-balance {
+    text-wrap: balance;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .canvas-full {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #00c9a7, #f5a623);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

@@ -24,6 +24,10 @@ export default function ComponentAccordion({ components, expandFirst = false, sh
     expandFirst && components[0] ? components[0].id : null
   );
 
+  const toggle = (id: number) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  };
+
   return (
     <>
     <div className="space-y-3" role="list">
@@ -44,7 +48,7 @@ export default function ComponentAccordion({ components, expandFirst = false, sh
             {/* Accordion trigger */}
             <button
               className="w-full flex items-start gap-4 px-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-inset"
-              onClick={() => setOpenId(isOpen ? null : component.id)}
+              onClick={() => toggle(component.id)}
               aria-expanded={isOpen}
               aria-controls={`component-panel-${component.id}`}
             >
@@ -62,12 +66,6 @@ export default function ComponentAccordion({ components, expandFirst = false, sh
                   >
                     {component.riskTier}
                   </span>
-                  {/* Draft indicator */}
-                  {!component.approvedCopy && (
-                    <span className="text-[10px] text-si-white-dim border border-white/10 rounded px-1.5 py-0.5">
-                      Copy pending sign-off
-                    </span>
-                  )}
                 </div>
                 <p className="text-si-white-muted text-sm">{component.tagline}</p>
               </div>
