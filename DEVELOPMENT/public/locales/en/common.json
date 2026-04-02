@@ -3,21 +3,31 @@
     "home": "Home",
     "ourApproach": "Our Approach",
     "whyComplianceMatters": "Why Compliance Matters",
-    "getStarted": "Get Started"
-  },
-  "header": {
-    "languageToggle": "Change Language 中文",
-    "ctaButton": "Get Started"
+    "getStarted": "Get Started",
+    "changeLanguage": "中文",
+    "changeLanguageLabel": "Switch to Mandarin Chinese"
   },
   "footer": {
-    "tagline": "Compliance-first category management consultancy. ISO 37301:2021 aligned.",
-    "copyright": "© {{year}} Synergistic Interaction. All rights reserved.",
-    "contact": "Contact"
+    "tagline": "Compliance-first category management architecture for Australian retailers. ISO 37301:2021 aligned.",
+    "disclaimer": "This website contains general information only. It does not constitute legal, regulatory, or compliance advice.",
+    "copyright": "Synergistic Interaction. All rights reserved."
   },
-  "accessibility": {
-    "skipToContent": "Skip to main content",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "switchToChineseLanguage": "Switch to Chinese language"
+  "proofBar": {
+    "stores": "Stores managed simultaneously",
+    "storesSub": "Australian retail network — Bunnings ANZ",
+    "adv": "Average ADV uplift",
+    "advSub": "Cornell University category management benchmark",
+    "penalty": "Penalty exposure mitigated",
+    "penaltySub": "ACL s.224 — across client category portfolios",
+    "roi": "Minimum compliance ROI",
+    "roiSub": "$50M ACL exposure ÷ consulting investment"
+  },
+  "cta": {
+    "seeArchitecture": "See the Architecture",
+    "whyComplianceMatters": "Why Compliance Matters",
+    "requestConsultation": "Request a Consultation",
+    "getStarted": "Get Started",
+    "bookAssessment": "Book a Compliance Assessment",
+    "startAssessment": "Start a Category Assessment"
   }
 }

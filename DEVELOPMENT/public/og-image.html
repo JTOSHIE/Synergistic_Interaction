@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #060d1a;
+    font-family: 'Inter', system-ui, sans-serif;
+    display: flex; align-items: center;
+  }
+  .bg-glow {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(0,201,167,0.12) 0%, transparent 60%);
+  }
+  .content { position: relative; padding: 60px; max-width: 700px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    border: 1px solid rgba(0,201,167,0.3); background: rgba(0,201,167,0.08);
+    color: #00c9a7; font-size: 13px; font-weight: 500; margin-bottom: 32px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #00c9a7; }
+  h1 { font-size: 52px; font-weight: 700; line-height: 1.1; color: #f0f4f8; margin-bottom: 20px; }
+  h1 span { color: #00c9a7; }
+  p { font-size: 20px; color: #8fa3ba; line-height: 1.5; margin-bottom: 32px; }
+  .stats { display: flex; gap: 32px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #00c9a7; }
+  .stat-label { font-size: 12px; color: #4a6080; margin-top: 2px; }
+  .right-panel {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    text-align: right;
+  }
+  .iso-badge {
+    display: inline-block; padding: 8px 16px; border-radius: 8px;
+    border: 1px solid rgba(0,201,167,0.2); background: rgba(0,201,167,0.05);
+    color: #00c9a7; font-size: 12px; font-family: monospace;
+    margin-bottom: 12px;
+  }
+  .domain { color: #4a6080; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="content">
+  <div class="badge"><div class="dot"></div> Nine-Component Compliance Architecture</div>
+  <h1>Category Architecture<br>Built on <span>Compliance</span></h1>
+  <p>The structural foundation that gives Australian retailers the licence to go faster.</p>
+  <div class="stats">
+    <div><div class="stat-value">330+</div><div class="stat-label">Stores managed</div></div>
+    <div><div class="stat-value">1,736×</div><div class="stat-label">Compliance ROI</div></div>
+    <div><div class="stat-value">$50M+</div><div class="stat-label">Exposure mitigated</div></div>
+  </div>
+</div>
+<div class="right-panel">
+  <div class="iso-badge">ISO 37301:2021</div>
+  <div class="domain">synergisticinteraction.com.au</div>
+</div>
+</body>
+</html>

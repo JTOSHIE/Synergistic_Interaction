@@ -1,93 +1,96 @@
-// V7 §4.2: Regulatory feed source configuration — official Australian sources
-// V7 LAUNCH RECOMMENDATION: Free official RSS/API sources only at launch
-// Evaluate commercial intelligence (Thomson Reuters, LexisNexis) after 6 months
+// V7 §4.2: All six official regulatory sources + AI parsing configuration
+// FREE tier only at launch — commercial sources (Thomson Reuters, LexisNexis) for post-launch
 
 export interface RegulatorySource {
   id: string;
-  name: string;
   acronym: 'ACCC' | 'CAV' | 'TGA' | 'ESV' | 'LEGISLATION';
-  feedUrls: string[];      // Multiple feeds per source
-  feedType: 'rss' | 'atom' | 'api';
-  updateFrequency: 'daily' | 'weekly';
-  categories: string[];
-  relevanceNote: string;
+  name: string;
+  website: string;
+  feedUrls: string[];
+  feedType: 'rss' | 'api';
+  relevance: string;
+  cost: 'free' | 'paid';
 }
 
-// V7 §4.2: All six official Australian regulatory feed sources
+// V7 §4.2: All five primary Australian regulatory sources
 export const regulatorySources: RegulatorySource[] = [
   {
-    id: 'accc-media',
-    name: 'Australian Competition and Consumer Commission — Media Releases',
+    id: 'accc',
     acronym: 'ACCC',
-    // V7 §4.2: Exact feed URLs from brief
+    name: 'Australian Competition & Consumer Commission',
+    website: 'https://www.accc.gov.au',
     feedUrls: [
       'https://www.accc.gov.au/media-release/rss.xml',
       'https://www.accc.gov.au/consumers/product-safety/rss.xml',
       'https://www.productsafety.gov.au/recalls/rss.xml',
     ],
     feedType: 'rss',
-    updateFrequency: 'daily',
-    categories: ['Product Safety', 'Pricing', 'Supplier Conduct', 'Consumer Protection', 'Recalls'],
-    relevanceNote: 'Primary enforcement authority. Covers all ACCC enforcement actions and product safety recalls.',
+    relevance: 'Enforcement actions, product safety alerts, recall alerts — primary compliance signal source',
+    cost: 'free',
   },
   {
     id: 'cav',
-    name: 'Consumer Affairs Victoria',
     acronym: 'CAV',
+    name: 'Consumer Affairs Victoria',
+    website: 'https://www.consumer.vic.gov.au',
     feedUrls: ['https://www.consumer.vic.gov.au/rss.xml'],
     feedType: 'rss',
-    updateFrequency: 'weekly',
-    categories: ['Product Safety', 'Labelling', 'Consumer Rights', 'Product Safety Warnings'],
-    relevanceNote: 'Victoria-specific enforcement actions — most relevant to Panda Mart\'s Victorian operations.',
+    relevance: 'Victoria-specific enforcement actions — directly relevant to Panda Mart and Melbourne market context',
+    cost: 'free',
   },
   {
     id: 'tga',
-    name: 'Therapeutic Goods Administration',
     acronym: 'TGA',
-    feedUrls: ['https://www.tga.gov.au/safety-alerts/rss.xml'],
+    name: 'Therapeutic Goods Administration',
+    website: 'https://www.tga.gov.au',
+    feedUrls: [
+      'https://www.tga.gov.au/safety-alerts/rss.xml',
+      'https://www.tga.gov.au/recall-alerts/rss.xml',
+    ],
     feedType: 'rss',
-    updateFrequency: 'weekly',
-    categories: ['Product Safety', 'Baby Products', 'Personal Care', 'Recalls', 'Healthcare-adjacent'],
-    relevanceNote: 'Safety alerts and recalls relevant to baby skincare, personal care, and healthcare-adjacent product categories.',
+    relevance: 'Baby skincare, personal care, healthcare-adjacent categories — sunscreen and therapeutic good classification',
+    cost: 'free',
   },
   {
     id: 'esv',
-    name: 'Energy Safe Victoria',
     acronym: 'ESV',
-    // V7 §4.2: ESV — specifically covers RCM and EESS electrical compliance
+    name: 'Energy Safe Victoria',
+    website: 'https://www.esv.vic.gov.au',
     feedUrls: ['https://www.esv.vic.gov.au/news/rss.xml'],
     feedType: 'rss',
-    updateFrequency: 'weekly',
-    categories: ['Electrical Goods', 'Product Safety', 'RCM', 'EESS'],
-    relevanceNote: 'Electrical safety enforcement and compliance guidance. Directly relevant to the 130 ESV charges context. Covers RCM and EESS electrical compliance.',
+    relevance: 'Electrical safety enforcement, RCM and EESS compliance — directly relevant to 130 ESV charges context',
+    cost: 'free',
   },
   {
     id: 'legislation',
-    name: 'Federal Register of Legislation',
     acronym: 'LEGISLATION',
-    // V7 §4.2: Catches new mandatory standards before ACCC enforcement commentary
-    feedUrls: ['https://www.legislation.gov.au/api/'], // API endpoint — see legislation.gov.au for current API docs
+    name: 'Federal Register of Legislation',
+    website: 'https://www.legislation.gov.au',
+    feedUrls: ['https://www.legislation.gov.au/atom.xml'],
     feedType: 'api',
-    updateFrequency: 'daily',
-    categories: ['Regulatory Framework', 'Mandatory Standards', 'Consumer Goods Safety Standards'],
-    relevanceNote: 'New and amended legislation including Consumer Goods Safety Standards. Catches new mandatory standards before ACCC enforcement commentary.',
+    relevance: 'New and amended Consumer Goods Safety Standards — catches new mandatory standards before ACCC commentary',
+    cost: 'free',
   },
 ];
 
-// V7 §4.3: OpenAI model for AI parsing — use GPT-4o-mini for cost efficiency
+// V7 §4.3: AI parsing model — GPT-4o-mini (~$0.01-0.05/item, ~$3/month at launch volume)
 export const AI_PARSING_MODEL = 'gpt-4o-mini';
 
 // V7 §4.3: System prompt for regulatory intelligence parsing
 export const REGULATORY_AI_SYSTEM_PROMPT = `You are a regulatory intelligence analyst for an Australian retail compliance consultancy. Assess the following regulatory update:
 
 1. RELEVANCE: Is this relevant to Australian consumer goods retail compliance?
-   (Exclude: energy regulation, financial services, telecommunications.)
-   (Include: product safety standards, ACCC enforcement, consumer goods recall, electrical safety, children's product safety, baby product compliance.)
+   (Exclude: energy regulation, financial services, telecommunications, pharmaceuticals)
+   (Include: product safety standards, ACCC enforcement, consumer goods recall, electrical safety, children's product safety, baby product compliance, toy safety, labelling requirements)
 
 2. If RELEVANT: Summarise in 50-100 words. Neutral tone. State what changed, what it means for retailers, and whether immediate action is required.
 
-3. RISK TIER: Critical | High | Medium | Low
+3. RISK TIER:
+   - Critical: Immediate action required (active recall, enforcement action, imminent compliance deadline)
+   - High: Action required within 30 days (new standard, enforcement priority announced)
+   - Medium: Monitor (consultation, guidance update, non-urgent amendment)
+   - Low: Awareness only (minor update, long-term change)
 
-4. CATEGORY TAGS: Children's Products | Electrical Goods | Baby Products | Personal Care | Household Chemicals | General Consumer Goods | Regulatory Framework
+4. CATEGORY TAGS (select all that apply): Children's Products | Electrical Goods | Baby Products | Personal Care | Household Chemicals | General Consumer Goods | Regulatory Framework
 
-Return JSON: { relevant: boolean, headline: string, description: string, urgency: "Critical" | "High" | "Medium" | "Low", categories: string[], sourceUrl: string }`;
+Return JSON only: { "relevant": boolean, "headline": string, "description": string, "urgency": "Critical"|"High"|"Medium"|"Low", "categories": string[], "sourceUrl": string }`;

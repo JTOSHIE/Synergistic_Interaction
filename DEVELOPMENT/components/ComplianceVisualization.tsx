@@ -1,248 +1,273 @@
-// V7 §5: WebGPU 3D Compliance-by-Exception Network Visualisation
-// Three.js r171 — WebGPURenderer with automatic WebGL fallback
-// Visualisation: Retail supply chain network (Supplier → DC → Retail Store)
-// Compliance exception animation shows non-compliant nodes intercepted before DC
-// Performance target: 60fps on Samsung Galaxy A54 (2023 mid-range Android)
-// IMPORTANT: Load with dynamic import ssr:false — browser-only component
+// V7 §5: Compliance-by-exception network visualisation
+// Primary: Canvas 2D animation (works in all browsers, no WebGL required)
+// Accessibility: prefers-reduced-motion → static description
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
-import type * as THREE from 'three'; // type-only — runtime THREE loaded dynamically
+import { useEffect, useRef, useState } from 'react';
+
+interface Node {
+  id: string;
+  type: 'supplier' | 'dc' | 'store';
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  compliant: boolean;
+  label: string;
+  pulsePhase: number;
+}
+
+interface Particle {
+  nodeFrom: number;
+  nodeTo: number;
+  t: number; // 0..1 progress along edge
+  speed: number;
+  blocked: boolean;
+}
+
+const NODE_DEFS: Omit<Node, 'vx' | 'vy' | 'pulsePhase'>[] = [
+  // Suppliers
+  { id: 's1', type: 'supplier', x: 0.08, y: 0.20, compliant: true, label: 'Supplier A' },
+  { id: 's2', type: 'supplier', x: 0.08, y: 0.40, compliant: true, label: 'Supplier B' },
+  { id: 's3', type: 'supplier', x: 0.08, y: 0.60, compliant: false, label: 'Supplier C' }, // non-compliant
+  { id: 's4', type: 'supplier', x: 0.08, y: 0.80, compliant: true, label: 'Supplier D' },
+  { id: 's5', type: 'supplier', x: 0.22, y: 0.12, compliant: false, label: 'Supplier E' }, // non-compliant
+  // Distribution centres
+  { id: 'd1', type: 'dc', x: 0.45, y: 0.35, compliant: true, label: 'DC East' },
+  { id: 'd2', type: 'dc', x: 0.45, y: 0.65, compliant: true, label: 'DC West' },
+  // Retail stores
+  { id: 'r1', type: 'store', x: 0.80, y: 0.20, compliant: true, label: 'Store 1' },
+  { id: 'r2', type: 'store', x: 0.80, y: 0.40, compliant: true, label: 'Store 2' },
+  { id: 'r3', type: 'store', x: 0.80, y: 0.60, compliant: true, label: 'Store 3' },
+  { id: 'r4', type: 'store', x: 0.80, y: 0.80, compliant: true, label: 'Store 4' },
+];
+
+const EDGES: [string, string][] = [
+  ['s1', 'd1'], ['s2', 'd1'], ['s3', 'd1'], // s3 non-compliant → intercepted
+  ['s4', 'd2'], ['s5', 'd2'], // s5 non-compliant → intercepted
+  ['d1', 'r1'], ['d1', 'r2'],
+  ['d2', 'r3'], ['d2', 'r4'],
+];
 
 export default function ComplianceVisualization() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rendererRef = useRef<unknown>(null);
-  const animationRef = useRef<number | null>(null);
-  const { ref: inViewRef, inView } = useInView({ threshold: 0.1, triggerOnce: false });
+  const animRef = useRef<number>(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (!inView || !canvasRef.current) return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    if (mq.matches) return;
 
-    // V7 §5.2: Reduced motion accessibility — render static diagram instead
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      renderStaticFallback(canvasRef.current);
-      return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // DPI-aware canvas sizing
+    function resize() {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx!.scale(dpr, dpr);
     }
+    resize();
+    window.addEventListener('resize', resize);
 
-    let cancelled = false;
+    // Initialise nodes
+    const nodes: Node[] = NODE_DEFS.map((n) => ({
+      ...n,
+      vx: (Math.random() - 0.5) * 0.0003,
+      vy: (Math.random() - 0.5) * 0.0003,
+      pulsePhase: Math.random() * Math.PI * 2,
+    }));
 
-    async function init() {
-      const THREE = await import('three');
-      const { MeshBVH, acceleratedRaycast } = await import('three-mesh-bvh');
+    // Initialise particles
+    const particles: Particle[] = [];
+    const edgeObjects = EDGES.map(([fromId, toId]) => ({
+      from: nodes.findIndex((n) => n.id === fromId),
+      to: nodes.findIndex((n) => n.id === toId),
+    }));
 
-      // V7 §5.3: Augment Three.js with BVH raycasting for touch device performance
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (THREE.Mesh.prototype as any).raycast = acceleratedRaycast;
-
-      if (cancelled || !canvasRef.current) return;
-
-      // V7 §5.3: WebGPU renderer with automatic WebGL fallback
-      // Three.js r171 WebGPURenderer handles the fallback chain transparently
-      let renderer: InstanceType<typeof THREE.WebGLRenderer>;
-
-      try {
-        // Attempt WebGPU renderer
-        const { default: WebGPURenderer } = await import(
-          // @ts-expect-error — three/addons path
-          'three/addons/renderers/webgpu/WebGPURenderer.js'
-        );
-        renderer = new WebGPURenderer({
-          canvas: canvasRef.current,
-          antialias: !isMobile(),
-          alpha: true,
-          powerPreference: 'high-performance',
+    edgeObjects.forEach((edge) => {
+      if (edge.from >= 0 && edge.to >= 0) {
+        particles.push({
+          nodeFrom: edge.from,
+          nodeTo: edge.to,
+          t: Math.random(),
+          speed: 0.003 + Math.random() * 0.002,
+          blocked: !(nodes[edge.from]?.compliant ?? true),
         });
-        // V7 §5.3: WebGPU async initialisation
-        await (renderer as unknown as { init: () => Promise<void> }).init();
-        console.log('[visualization] Backend: WebGPU');
-      } catch {
-        // V7 §5.1: WebGL fallback for Safari, Firefox <141
-        renderer = new THREE.WebGLRenderer({
-          canvas: canvasRef.current,
-          antialias: !isMobile(),
-          alpha: true,
-        });
-        console.log('[visualization] Backend: WebGL (fallback)');
       }
+    });
 
-      if (cancelled) { renderer.dispose(); return; }
-      rendererRef.current = renderer;
+    let time = 0;
 
-      // V7 §5.2: Performance — cap pixel ratio, disable shadows on mobile
-      const mobile = isMobile();
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2));
-      renderer.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
-      renderer.setClearColor(0x000000, 0);
-      if (mobile) renderer.shadowMap.enabled = false;
+    function draw() {
+      if (!canvas || !ctx) return;
+      const W = canvas.getBoundingClientRect().width;
+      const H = canvas.getBoundingClientRect().height;
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        55,
-        canvasRef.current.clientWidth / canvasRef.current.clientHeight,
-        0.1,
-        100
-      );
-      camera.position.set(0, 2, 12);
-      camera.lookAt(0, 0, 0);
+      ctx.clearRect(0, 0, W, H);
 
-      // V7 §5.2: Network node counts — 20-30 for visual clarity (reduced to 15 on mobile)
-      const nodeConfig = {
-        suppliers: mobile ? 5 : 8,
-        distributionCentres: mobile ? 2 : 3,
-        retailStores: mobile ? 5 : 10,
-      };
+      time += 0.016;
 
-      // V7 §5.2: Node colours — Supplier (teal), DC (navy), Retail (white)
-      const supplierMat = new THREE.MeshBasicMaterial({ color: 0x00c9a7 });
-      const dcMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6 });
-      const retailMat = new THREE.MeshBasicMaterial({ color: 0xf8f9fa });
-      const nonCompliantMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
-
-      const nodes: { mesh: THREE.Mesh; type: 'supplier' | 'dc' | 'retail'; index: number }[] = [];
-
-      // V7 §5.2: Supplier nodes — hexagonal prism shape (use cylinder as approximation)
-      const supplierGeo = new THREE.CylinderGeometry(0.25, 0.25, 0.3, 6, 1);
-      for (let i = 0; i < nodeConfig.suppliers; i++) {
-        const angle = (i / nodeConfig.suppliers) * Math.PI * 2;
-        const mesh = new THREE.Mesh(supplierGeo, supplierMat.clone());
-        mesh.position.set(Math.cos(angle) * 5, 0, Math.sin(angle) * 5 - 2);
-        scene.add(mesh);
-        nodes.push({ mesh, type: 'supplier', index: i });
-      }
-
-      // V7 §5.2: Distribution Centre nodes — cube
-      const dcGeo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-      for (let i = 0; i < nodeConfig.distributionCentres; i++) {
-        const x = (i - (nodeConfig.distributionCentres - 1) / 2) * 3;
-        const mesh = new THREE.Mesh(dcGeo, dcMat.clone());
-        mesh.position.set(x, 0, 0);
-        scene.add(mesh);
-        nodes.push({ mesh, type: 'dc', index: i });
-      }
-
-      // V7 §5.2: Retail Store nodes — sphere
-      const storeGeo = new THREE.SphereGeometry(0.2, mobile ? 8 : 16, mobile ? 8 : 16);
-      for (let i = 0; i < nodeConfig.retailStores; i++) {
-        const angle = (i / nodeConfig.retailStores) * Math.PI * 2;
-        const mesh = new THREE.Mesh(storeGeo, retailMat.clone());
-        mesh.position.set(Math.cos(angle) * 4, 0, Math.sin(angle) * 4 + 3);
-        scene.add(mesh);
-        nodes.push({ mesh, type: 'retail', index: i });
-      }
-
-      // V7 §5.2: Connection lines — teal compliant flows
-      const lineMat = new THREE.LineBasicMaterial({
-        color: 0x00c9a7,
-        opacity: 0.3,
-        transparent: true,
+      // Update node micro-drift
+      nodes.forEach((node) => {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < 0.05 || node.x > 0.95) node.vx *= -1;
+        if (node.y < 0.05 || node.y > 0.95) node.vy *= -1;
       });
 
-      // Connect suppliers to nearest DC
-      const supplierNodes = nodes.filter((n) => n.type === 'supplier');
-      const dcNodes = nodes.filter((n) => n.type === 'dc');
-      for (const supplier of supplierNodes) {
-        const nearestDC = dcNodes[Math.floor(Math.random() * dcNodes.length)];
-        if (!nearestDC) continue;
-        const points = [supplier.mesh.position, nearestDC.mesh.position];
-        scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), lineMat.clone()));
-      }
+      // Draw edges
+      edgeObjects.forEach((edge) => {
+        if (edge.from < 0 || edge.to < 0) return;
+        const from = nodes[edge.from];
+        const to = nodes[edge.to];
+        if (!from || !to) return;
+        const isBlocked = !from.compliant;
 
-      // Connect DCs to stores
-      const storeNodes = nodes.filter((n) => n.type === 'retail');
-      for (const dc of dcNodes) {
-        const connectedStores = storeNodes.slice(0, Math.ceil(storeNodes.length / dcNodes.length));
-        for (const store of connectedStores) {
-          const points = [dc.mesh.position, store.mesh.position];
-          scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), lineMat.clone()));
-        }
-      }
+        ctx.beginPath();
+        ctx.moveTo(from.x * W, from.y * H);
+        ctx.lineTo(to.x * W, to.y * H);
+        ctx.strokeStyle = isBlocked
+          ? 'rgba(239, 68, 68, 0.15)'
+          : 'rgba(0, 201, 167, 0.12)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
 
-      // V7 §5.2: Compliance exception — mark 2-3 supplier nodes as non-compliant (red)
-      // These are "intercepted" before reaching DC (line turns red, visually blocked)
-      const nonCompliantCount = mobile ? 1 : 2;
-      for (let i = 0; i < nonCompliantCount; i++) {
-        const node = supplierNodes[i];
-        if (node) {
-          (node.mesh.material as THREE.MeshBasicMaterial).color.setHex(0xef4444);
-        }
-      }
+      // Draw particles
+      particles.forEach((p) => {
+        const from = nodes[p.nodeFrom];
+        const to = nodes[p.nodeTo];
+        if (!from || !to) return;
 
-      // V7 §5: Slow rotation animation
-      let time = 0;
-      function animate() {
-        if (cancelled) return;
-        animationRef.current = requestAnimationFrame(animate);
-        time += 0.005;
+        // Blocked particles only travel to midpoint (interception)
+        const maxT = p.blocked ? 0.5 : 1;
+        p.t += p.speed;
+        if (p.t > maxT) p.t = 0;
 
-        // Gentle rotation of the entire scene
-        scene.rotation.y = time * 0.3;
+        const px = from.x * W + (to.x - from.x) * W * p.t;
+        const py = from.y * H + (to.y - from.y) * H * p.t;
 
-        // Pulse non-compliant nodes
-        for (let i = 0; i < nonCompliantCount; i++) {
-          const node = supplierNodes[i];
-          if (node) {
-            const pulse = 0.8 + Math.sin(time * 3 + i) * 0.2;
-            node.mesh.scale.setScalar(pulse);
+        const alpha = p.blocked
+          ? (p.t > 0.45 ? 1 - (p.t - 0.45) / 0.05 : 1)
+          : 0.85;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.fillStyle = p.blocked
+          ? `rgba(239, 68, 68, ${alpha})`
+          : `rgba(0, 201, 167, ${alpha * 0.8})`;
+        ctx.fill();
+      });
+
+      // Draw nodes
+      nodes.forEach((node) => {
+        const nx = node.x * W;
+        const ny = node.y * H;
+        const isNonCompliant = !node.compliant;
+        const pulse = Math.sin(time * 3 + node.pulsePhase);
+
+        const nodeRadius = node.type === 'dc' ? 10 : node.type === 'store' ? 7 : 6;
+        const glowRadius = nodeRadius + (isNonCompliant ? 8 + pulse * 5 : 3 + pulse * 2);
+
+        // Glow
+        const grd = ctx.createRadialGradient(nx, ny, nodeRadius * 0.5, nx, ny, glowRadius);
+        grd.addColorStop(0, isNonCompliant ? 'rgba(239,68,68,0.25)' : 'rgba(0,201,167,0.2)');
+        grd.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(nx, ny, glowRadius, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+
+        // Node body
+        ctx.beginPath();
+        if (node.type === 'dc') {
+          // Square for DC
+          ctx.rect(nx - nodeRadius, ny - nodeRadius, nodeRadius * 2, nodeRadius * 2);
+        } else if (node.type === 'store') {
+          // Circle for store
+          ctx.arc(nx, ny, nodeRadius, 0, Math.PI * 2);
+        } else {
+          // Hexagon for supplier
+          for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i - Math.PI / 6;
+            const hx = nx + nodeRadius * Math.cos(angle);
+            const hy = ny + nodeRadius * Math.sin(angle);
+            i === 0 ? ctx.moveTo(hx, hy) : ctx.lineTo(hx, hy);
           }
+          ctx.closePath();
         }
 
-        renderer.render(scene, camera);
-      }
+        ctx.fillStyle = isNonCompliant
+          ? 'rgba(30, 10, 10, 0.95)'
+          : node.type === 'dc'
+          ? 'rgba(10, 22, 40, 0.95)'
+          : 'rgba(6, 13, 26, 0.95)';
+        ctx.strokeStyle = isNonCompliant ? 'rgba(239, 68, 68, 0.9)' : 'rgba(0, 201, 167, 0.6)';
+        ctx.lineWidth = isNonCompliant ? 1.5 : 1;
+        ctx.fill();
+        ctx.stroke();
 
-      animate();
+        // Interception indicator for blocked nodes
+        if (isNonCompliant) {
+          ctx.font = `bold ${nodeRadius + 2}px monospace`;
+          ctx.fillStyle = 'rgba(239, 68, 68, 0.9)';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('✕', nx, ny);
+        }
+      });
+
+      // Legend
+      ctx.font = '10px system-ui';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      const legendItems = [
+        { colour: 'rgba(0,201,167,0.8)', label: 'Compliant — flow active' },
+        { colour: 'rgba(239,68,68,0.8)', label: 'Non-compliant — intercepted' },
+      ];
+      legendItems.forEach((item, i) => {
+        ctx.fillStyle = item.colour;
+        ctx.fillRect(8, 8 + i * 18, 8, 8);
+        ctx.fillStyle = 'rgba(143,163,186,0.8)';
+        ctx.fillText(item.label, 22, 8 + i * 18);
+      });
+
+      animRef.current = requestAnimationFrame(draw);
     }
 
-    init();
+    animRef.current = requestAnimationFrame(draw);
 
     return () => {
-      cancelled = true;
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-      const r = rendererRef.current as { dispose?: () => void } | null;
-      if (r?.dispose) r.dispose();
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener('resize', resize);
     };
-  }, [inView]);
+  }, [prefersReducedMotion]);
 
-  return (
-    <div
-      ref={inViewRef}
-      className="w-full aspect-video relative"
-      role="img"
-      aria-label="Live compliance-by-exception network: supplier nodes (teal) flow product through distribution centres to retail stores. Non-compliant supplier nodes (red) are intercepted before reaching the supply chain."
-    >
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full rounded-2xl"
-        style={{ background: 'transparent' }}
-      />
-      {/* V7 §5.2: Legend overlay */}
-      <div className="absolute bottom-4 left-4 flex gap-3 text-xs text-si-white-muted">
-        <span className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-sm bg-si-teal inline-block" />
-          Compliant supplier
-        </span>
-        <span className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-sm bg-red-500 inline-block" />
-          Non-compliant — intercepted
-        </span>
+  if (prefersReducedMotion) {
+    return (
+      <div className="w-full aspect-video rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
+        <p className="text-si-white-muted text-sm text-center px-6">
+          Compliance-by-exception network — nine-component architecture.
+          Non-compliant supplier nodes intercepted before reaching distribution.
+        </p>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-function isMobile(): boolean {
   return (
-    typeof window !== 'undefined' &&
-    (/Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 768)
+    <canvas
+      ref={canvasRef}
+      className="w-full aspect-video rounded-2xl border border-white/10 bg-si-bg"
+      aria-label="Animated compliance network visualisation showing compliant product flows in teal and non-compliant supplier nodes intercepted before reaching distribution centres"
+      role="img"
+    />
   );
-}
-
-// V7 §5.2: Static fallback for prefers-reduced-motion
-function renderStaticFallback(canvas: HTMLCanvasElement) {
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-  ctx.fillStyle = 'transparent';
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // Static SVG network diagram would be rendered here in production
 }

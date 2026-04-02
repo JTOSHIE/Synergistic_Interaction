@@ -1,149 +1,161 @@
-// V7 §2 + §3: ComponentAccordion — nine-component compliance framework display
-// V7 §11: Progressive disclosure pattern with glassmorphism accents
+// V7 §11.2: Component accordion with progressive disclosure + ISO 37301 badges
+// Clicking ISO badge navigates to /why-compliance-matters#iso-37301
 'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
-import type { ComplianceComponentData } from '@/lib/compliance-data';
+import { ComplianceComponentData } from '@/lib/compliance-data';
 
 interface ComponentAccordionProps {
   components: ComplianceComponentData[];
+  expandFirst?: boolean;
   showViewAll?: boolean;
-  defaultOpen?: number | null;
-  expandFirst?: boolean;  // If true, first component starts expanded
 }
 
-export default function ComponentAccordion({
-  components,
-  showViewAll = false,
-  defaultOpen = null,
-  expandFirst = false,
-}: ComponentAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(
-    expandFirst && components.length > 0 ? 0 : defaultOpen
+const RISK_TIER_COLOURS: Record<ComplianceComponentData['riskTier'], string> = {
+  'Hard Gate': 'bg-red-500/15 text-red-400 border-red-500/20',
+  'Preventative': 'bg-orange-500/15 text-orange-400 border-orange-500/20',
+  'Monitoring': 'bg-blue-500/15 text-blue-400 border-blue-500/20',
+  'Cultural': 'bg-purple-500/15 text-purple-400 border-purple-500/20',
+};
+
+export default function ComponentAccordion({ components, expandFirst = false, showViewAll = false }: ComponentAccordionProps) {
+  const [openId, setOpenId] = useState<number | null>(
+    expandFirst && components[0] ? components[0].id : null
   );
 
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <div className="space-y-3">
-      {components.map((component, index) => {
-        const isOpen = openIndex === index;
+    <>
+    <div className="space-y-3" role="list">
+      {components.map((component) => {
+        const isOpen = openId === component.id;
+        const componentNumber = String(component.id).padStart(2, '0');
 
         return (
           <div
             key={component.id}
-            // V7 §11: Glassmorphism card design
-            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden
-                       transition-colors hover:border-white/20"
+            className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+              isOpen
+                ? 'border-si-teal/30 bg-white/[0.06]'
+                : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+            }`}
+            role="listitem"
           >
+            {/* Accordion trigger */}
             <button
-              onClick={() => toggle(index)}
-              className="w-full flex items-center justify-between p-5 text-left"
+              className="w-full flex items-start gap-4 px-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-inset"
+              onClick={() => setOpenId(isOpen ? null : component.id)}
               aria-expanded={isOpen}
-              aria-controls={`component-${component.id}-content`}
+              aria-controls={`component-panel-${component.id}`}
             >
-              <div className="flex items-center gap-4 min-w-0">
-                {/* Component number */}
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-si-teal/10 border border-si-teal/30
-                                 flex items-center justify-center text-si-teal text-sm font-bold">
-                  {component.id}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-si-white truncate">{component.name}</h3>
-                  {!isOpen && (
-                    <p className="text-sm text-si-white-muted mt-0.5 truncate">{component.tagline}</p>
+              {/* Number */}
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-si-teal/10 border border-si-teal/20 flex items-center justify-center text-si-teal text-xs font-mono font-bold">
+                {componentNumber}
+              </span>
+
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="text-si-white font-semibold">{component.name}</span>
+                  {/* Risk tier badge */}
+                  <span
+                    className={`text-[10px] font-medium px-2 py-0.5 rounded border ${RISK_TIER_COLOURS[component.riskTier]}`}
+                  >
+                    {component.riskTier}
+                  </span>
+                  {/* Draft indicator */}
+                  {!component.approvedCopy && (
+                    <span className="text-[10px] text-si-white-dim border border-white/10 rounded px-1.5 py-0.5">
+                      Copy pending sign-off
+                    </span>
                   )}
                 </div>
+                <p className="text-si-white-muted text-sm">{component.tagline}</p>
               </div>
-              <div className="flex items-center gap-3 flex-shrink-0 ml-4">
-                {/* V7 §11: ISO 37301 badge — links to /why-compliance-matters */}
+
+              {/* ISO badge + chevron */}
+              <div className="flex-shrink-0 flex items-center gap-2 ml-2">
                 <Link
                   href="/why-compliance-matters#iso-37301"
                   onClick={(e) => e.stopPropagation()}
-                  className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full
-                             bg-si-gold/10 border border-si-gold/30 text-si-gold
-                             text-xs font-semibold uppercase tracking-wider
-                             hover:bg-si-gold/20 transition-colors"
-                  aria-label={`ISO 37301 Clause ${component.isoClause} — ${component.isoDescription}`}
+                  className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-si-teal/10 text-si-teal border border-si-teal/15 hover:bg-si-teal/20 transition-colors"
+                  title={`ISO 37301 ${component.isoClause}: ${component.isoTitle}`}
                 >
-                  ISO §{component.isoClause}
+                  {component.isoClause}
                 </Link>
-                {/* Chevron */}
                 <svg
-                  className={`w-5 h-5 text-si-white-muted transition-transform duration-300 ${
-                    isOpen ? 'rotate-180' : ''
-                  }`}
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
                   fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
                   aria-hidden="true"
+                  className={`text-si-white-dim transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </button>
 
-            {/* Expandable content */}
-            {isOpen && (
-              <div
-                id={`component-${component.id}-content`}
-                className="px-5 pb-5 border-t border-white/5"
-              >
-                {/* ISO 37301 alignment callout */}
-                <div className="mt-4 flex items-center gap-2">
-                  <Link
-                    href="/why-compliance-matters#iso-37301"
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
-                               bg-si-gold/10 border border-si-gold/30 text-si-gold
-                               text-xs font-semibold uppercase tracking-wider
-                               hover:bg-si-gold/20 transition-colors"
-                  >
-                    ISO 37301:{component.isoClause} — {component.isoDescription}
-                  </Link>
-                </div>
-
-                {/* V7 §3.3: Website copy — replace placeholder with actual brief copy */}
-                <p className="mt-4 text-si-white-muted leading-relaxed">
-                  {component.websiteCopy}
-                </p>
+            {/* Accordion panel */}
+            <div
+              id={`component-panel-${component.id}`}
+              role="region"
+              hidden={!isOpen}
+              aria-labelledby={`component-trigger-${component.id}`}
+            >
+              <div className="px-6 pb-6 border-t border-white/5 pt-5">
+                {/* Website copy */}
+                <p className="text-si-white-muted leading-relaxed mb-6">{component.websiteCopy}</p>
 
                 {/* Sub-components */}
-                <div className="mt-4">
-                  <h4 className="text-xs font-semibold text-si-white uppercase tracking-wider mb-2">
-                    Framework Elements
-                  </h4>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                    {component.subComponents.map((sub) => (
-                      <li key={sub} className="flex items-center gap-2 text-sm text-si-white-muted">
-                        <span className="w-1.5 h-1.5 rounded-full bg-si-teal flex-shrink-0" aria-hidden="true" />
-                        {sub}
-                      </li>
-                    ))}
-                  </ul>
+                <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                  {component.subComponents.map((sub) => (
+                    <div
+                      key={sub.id}
+                      className="p-4 rounded-xl bg-white/5 border border-white/5"
+                    >
+                      <p className="text-si-white text-sm font-medium mb-1">{sub.title}</p>
+                      <p className="text-si-white-dim text-xs leading-relaxed">{sub.description}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Prevention example */}
+                {component.preventionExample && (
+                  <div className="p-4 rounded-xl bg-si-teal/5 border border-si-teal/10">
+                    <p className="text-si-teal text-xs font-semibold uppercase tracking-wide mb-2">
+                      Prevention architecture
+                    </p>
+                    <p className="text-si-white-muted text-sm leading-relaxed italic">
+                      {component.preventionExample}
+                    </p>
+                  </div>
+                )}
+
+                {/* ISO alignment footer */}
+                <div className="mt-4 flex items-center gap-2 text-xs text-si-white-dim">
+                  <span className="font-mono text-si-teal">{component.isoClause}</span>
+                  <span>—</span>
+                  <span>{component.isoTitle}</span>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         );
       })}
-
-      {showViewAll && (
-        <div className="text-center pt-4">
-          <Link
-            href="/our-approach#nine-components"
-            className="inline-flex items-center gap-2 text-si-teal hover:text-si-teal-light
-                       transition-colors font-medium"
-          >
-            Explore All Nine Components
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      )}
     </div>
+    {showViewAll && (
+      <div className="text-center mt-6">
+        <Link
+          href="/our-approach"
+          className="inline-flex items-center gap-2 text-si-teal hover:text-si-teal-light transition-colors text-sm font-medium"
+        >
+          View all nine components
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+      </div>
+    )}
+    </>
   );
 }

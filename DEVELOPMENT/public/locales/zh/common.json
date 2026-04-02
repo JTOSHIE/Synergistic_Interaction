@@ -3,21 +3,31 @@
     "home": "首页",
     "ourApproach": "我们的方法",
     "whyComplianceMatters": "为何合规至关重要",
-    "getStarted": "立即开始"
-  },
-  "header": {
-    "languageToggle": "Change Language English",
-    "ctaButton": "立即开始"
+    "getStarted": "开始咨询",
+    "changeLanguage": "English",
+    "changeLanguageLabel": "切换至英文"
   },
   "footer": {
-    "tagline": "合规优先的品类管理咨询公司。符合ISO 37301:2021标准。",
-    "copyright": "© {{year}} Synergistic Interaction. 版权所有。",
-    "contact": "联系我们"
+    "tagline": "专业澳大利亚零售合规架构顾问。符合ISO 37301:2021国际标准。",
+    "disclaimer": "本网站仅提供一般性信息，不构成法律、监管或合规建议。",
+    "copyright": "协同互动保留所有权利。"
   },
-  "accessibility": {
-    "skipToContent": "跳至主要内容",
-    "openMenu": "打开菜单",
-    "closeMenu": "关闭菜单",
-    "switchToChineseLanguage": "切换至英文"
+  "proofBar": {
+    "stores": "同时管理门店数量",
+    "storesSub": "澳大利亚零售网络 — 澳新百宁",
+    "adv": "平均ADV提升",
+    "advSub": "康奈尔大学品类管理基准",
+    "penalty": "已规避处罚风险敞口",
+    "penaltySub": "澳大利亚消费者法 s.224",
+    "roi": "最低合规投资回报率",
+    "roiSub": "5000万澳元风险敞口 ÷ 咨询投资"
+  },
+  "cta": {
+    "seeArchitecture": "了解合规架构",
+    "whyComplianceMatters": "为何合规至关重要",
+    "requestConsultation": "申请咨询",
+    "getStarted": "开始咨询",
+    "bookAssessment": "预约合规评估",
+    "startAssessment": "申请品类评估"
   }
 }
