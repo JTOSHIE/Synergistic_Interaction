@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import AboutVisual from '@/components/AboutVisual';
 
 export const metadata: Metadata = {
   title: 'About — Synergistic Interaction',
@@ -103,6 +104,13 @@ export default function AboutPage() {
             Australia&apos;s most demanding retail networks. Cornell-validated methodology.
             In-field execution. Compliance integrated at every stage.
           </p>
+        </div>
+      </section>
+
+      {/* Global footprint visual */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <AboutVisual />
         </div>
       </section>
 

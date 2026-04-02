@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ProofBar from '@/components/ProofBar';
 import ComponentAccordion from '@/components/ComponentAccordion';
 import RegulatoryFeed from '@/components/RegulatoryFeed';
-import VisualizationWrapper from '@/components/VisualizationWrapper';
+import HomepageHero from '@/components/HomepageHero';
 import { complianceComponents } from '@/lib/compliance-data';
 
 export const metadata: Metadata = {
@@ -152,11 +152,7 @@ export default function HomePage() {
           </div>
 
           <div className="relative">
-            <VisualizationWrapper />
-            <p className="text-xs text-si-white-dim text-center mt-3">
-              Compliance-by-exception supply chain network — non-compliant nodes
-              intercepted before distribution
-            </p>
+            <HomepageHero />
           </div>
         </div>
       </section>

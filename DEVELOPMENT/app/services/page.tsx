@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ServicesVisual from '@/components/ServicesVisual';
 
 export const metadata: Metadata = {
   title: 'Services — Synergistic Interaction',
@@ -135,6 +136,13 @@ export default function ServicesPage() {
             seeking market access. Four service lines covering every stage of the
             retailer-supplier commercial relationship.
           </p>
+        </div>
+      </section>
+
+      {/* Services visual */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-si-bg-secondary">
+        <div className="max-w-4xl mx-auto">
+          <ServicesVisual />
         </div>
       </section>
 

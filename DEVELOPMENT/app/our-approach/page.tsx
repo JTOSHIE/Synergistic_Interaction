@@ -1,8 +1,7 @@
-// V7 §7 + §8: Our Approach page — nine-component architecture + competitive differentiation
-// §7.2 approved copy integrated verbatim
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ComponentAccordion from '@/components/ComponentAccordion';
+import OurApproachVisual from '@/components/OurApproachVisual';
 import { complianceComponents } from '@/lib/compliance-data';
 
 export const metadata: Metadata = {
@@ -81,6 +80,13 @@ export default function OurApproachPage() {
             It is designed to remove the compliance-related obstacles that slow them down — while competitors
             without compliance infrastructure reach the same obstacles unprepared.
           </p>
+        </div>
+      </section>
+
+      {/* Nine-component architecture visual */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-si-bg-secondary">
+        <div className="max-w-4xl mx-auto">
+          <OurApproachVisual />
         </div>
       </section>
 

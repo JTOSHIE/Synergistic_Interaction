@@ -117,14 +117,14 @@ export default function ComponentAccordion({ components, expandFirst = false, sh
                   ))}
                 </div>
 
-                {/* Prevention example */}
-                {component.preventionExample && (
-                  <div className="p-4 rounded-xl bg-si-teal/5 border border-si-teal/10">
-                    <p className="text-si-teal text-xs font-semibold uppercase tracking-wide mb-2">
-                      Prevention architecture
+                {/* Operational note */}
+                {'operationalNote' in component && (component as any).operationalNote && (
+                  <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                    <p className="text-si-white-dim text-xs font-semibold uppercase tracking-wide mb-2">
+                      How this works in practice
                     </p>
-                    <p className="text-si-white-muted text-sm leading-relaxed italic">
-                      {component.preventionExample}
+                    <p className="text-si-white-muted text-sm leading-relaxed">
+                      {(component as any).operationalNote}
                     </p>
                   </div>
                 )}
