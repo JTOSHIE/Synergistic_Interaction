@@ -334,6 +334,35 @@ export default function GetStartedForm() {
         Joshua Thompson responds personally within one business day.
         The scoping conversation produces a documented output at no cost.
       </p>
+
+      {/* Trust signals */}
+      <div className="flex flex-wrap gap-3 pt-2">
+        {[
+          { label: 'Professional Indemnity Insurance', icon: '✓' },
+          { label: 'ABN Registered', icon: '✓' },
+          { label: 'ISO 37301:2021 Aligned', icon: '✓' },
+        ].map((signal) => (
+          <div
+            key={signal.label}
+            className="flex items-center gap-1.5 text-xs text-si-white-dim border border-white/10 rounded-lg px-3 py-1.5"
+          >
+            <span className="text-si-teal text-xs">{signal.icon}</span>
+            {signal.label}
+          </div>
+        ))}
+      </div>
+
+      <p className="text-xs text-si-white-dim text-center mt-4">
+        Category management methodology reflects experience within programs independently validated by Cornell University.{' '}
+        <a
+          href="https://ideas.repec.org/p/ags/cornwp/185581.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-si-teal hover:underline"
+        >
+          Schmit, Kaiser &amp; Chung (2004), R.B. 2004-02
+        </a>
+      </p>
     </form>
   );
 }

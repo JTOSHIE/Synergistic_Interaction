@@ -5,125 +5,125 @@ import CategoryGridVisual from '@/components/CategoryGridVisual';
 export const metadata: Metadata = {
   title: 'Category Expertise — Synergistic Interaction',
   description:
-    "Category management expertise across ten product categories. Hardware, electrical, gardening, cleaning, furniture, personal care, barbecue, baby products, children's textiles, and beverages.",
+    'Category management expertise across hardware, electrical, gardening, cleaning, furniture, barbecue, baby products, personal care, children\'s products, beverages, and more.',
 };
 
 const categories = [
   {
     number: '01',
-    name: 'Hardware & Home Improvement',
+    name: 'Hardware and Building Products',
     overview:
-      'A category built on supplier relationships and planogram precision. Managing hardware at scale requires store-specific ranging decisions, supplier coordination across 20+ product lines, and compliance verification for electrical tools and chemical products.',
+      'Hardware and building products spans a broader product footprint than the name implies — tools, power equipment, insulation, skylights and roof vents, decking and timber, storage solutions, and the building accessories that make up a significant portion of any hardware category. Managing hardware at scale across Australia and New Zealand required store-specific demographic intelligence: a metropolitan renovation-focused store and a regional trade-focused store require different range architecture from the same category.',
     commercialOpportunity:
-      'DIY home improvement remains a high-frequency category with strong basket correlation. Range architecture that reflects local trade and DIY split drives significantly higher category revenue than generic national planograms.',
+      'Hardware is a high-frequency destination category. Customers who come for one item are customers for adjacent categories. Range architecture that reflects the local trade and DIY demographic split, supported by off-location seasonal displays, bulk stack hero products, and end-cap promotional positions, drives significantly higher category revenue than a generic national planogram.',
     supplierLandscape:
-      "Global brands with established ANZ distribution. Supplier relationships across paint, tools, storage, lighting, and seasonal hardware developed over a 13-year operational period in Australia's largest hardware retail network.",
+      'Global brands with established Australia and New Zealand distribution. Direct supplier experience across paint, tools, storage, lighting, insulation, skylights, decking, and building accessories developed over 13 years across the network. Optimal hardware ranges almost always draw from multiple suppliers — the strongest hardware category is never a single-supplier solution.',
     complianceNote:
-      'Power tools and electrical equipment require RCM compliance. Chemical products require SDS documentation and labelling compliance under Australian Dangerous Goods requirements.',
+      'Power tools and electrical equipment require RCM compliance. Insulation products require compliance with applicable building codes. Chemical products require SDS documentation and labelling compliance under Dangerous Goods requirements.',
   },
   {
     number: '02',
-    name: 'Electrical & Power Tools',
+    name: 'Electrical, Batteries, and Power',
     overview:
-      'The highest enforcement activity category in the current ACCC and Energy Safe Victoria enforcement priorities. Every electrical product must be registered on the EESS database and display the RCM mark. Direct-import electrical goods without Australian distributor of record create 100% retailer liability.',
+      'A category spanning power tools, small appliances, lighting, and batteries — all requiring specific compliance documentation. Batteries as a standalone sub-category represent a significant opportunity that is frequently underserved. A customer who finds their full battery format range — AA, AAA, C, D, 9V — reliably in stock becomes a repeat destination buyer in a category that otherwise goes to the supermarket.',
     commercialOpportunity:
-      'Power tools and small electrical appliances have high attachment to renovation activity and seasonal gifting. The compliance barrier creates market differentiation — retailers with clean compliance architecture can range confidently where competitors cannot.',
+      'Off-location battery placement near products that use them drives impulse purchase reliably. Power tools and small appliances have strong attachment to renovation activity and seasonal gifting. The compliance documentation requirement creates a market differentiation — retailers with clean EESS and RCM records can range confidently where others face constraints.',
     supplierLandscape:
-      'Strong Australian distributor networks for global brands. EESS registration and RCM compliance is a pre-condition for any distributor engagement and filters the supplier landscape before commercial conversations begin.',
+      'Strong Australia and New Zealand distributor networks for global electrical brands. EESS registration and RCM compliance is a pre-condition for any distributor engagement. Electrical ranges draw from multiple suppliers — tools, accessories, safety equipment, and consumables each have optimal supply relationships.',
     complianceNote:
-      'EESS registration mandatory. RCM mark required on all electrical articles. Energy Safe Victoria enforcement activity highest in this category. Third-party test reports from NATA-accredited laboratories required.',
+      'EESS registration mandatory for all electrical articles. RCM mark required. Third-party test reports from NATA-accredited laboratories required for applicable product types. Button battery products carry specific mandatory child-safety requirements.',
   },
   {
     number: '03',
-    name: 'Gardening & Outdoor',
+    name: 'Gardening, Outdoor, and Seasonal',
     overview:
-      'A strongly seasonal category requiring quarterly planogram rotations and supplier coordination timed to planting seasons. The local sourcing story is strong — Australian-grown plants and locally formulated soils and fertilisers have genuine provenance advantage.',
+      'The full gardening range extends well beyond seasonal plants and potting mix. Garden chemicals and pesticides, worm farms and garden accessories, outdoor furniture and entertaining, fire pit and heating products, and the consumable items that bring customers back repeatedly across the growing season each require separate supplier relationships and compliance understanding.',
     commercialOpportunity:
-      'Seasonal peaks (spring, Easter) drive disproportionate category revenue. Retailers who execute the spring transition at the right time with the right range consistently outperform those with generic year-round setups.',
+      'The customer who buys a worm farm is a customer for worm castings, potting mix, garden tools, and watering equipment. Adjacencies that support the gardening customer\'s full journey through the category outperform a shelf organised by product type. Seasonal off-location activation — spring planting walls, summer entertaining displays — drives category revenue significantly above main-shelf performance.',
     supplierLandscape:
-      'Mix of national distributors for branded chemicals and tools, and regional suppliers for growing media. Local sourcing targets achievable above 40% in most sub-categories.',
+      'Mix of national distributors and regional suppliers. Local sourcing achievable above 40% in most sub-categories. Optimal garden ranges require multiple supplier relationships to cover the full category correctly.',
     complianceNote:
-      'Pesticides and herbicides require APVMA registration. Chemical products require correct labelling and Safety Data Sheets. Garden tools with electrical components require RCM compliance.',
+      'Pesticides and herbicides require APVMA registration. Chemical products require Safety Data Sheets and correct labelling. Electrical garden products require RCM compliance.',
   },
   {
     number: '04',
-    name: 'Cleaning & Household Chemicals',
+    name: 'Cleaning, Household, and Storage',
     overview:
-      'A compliance-intensive category with chemical hazard labelling, Safety Data Sheet, and Dangerous Goods transport requirements layered on top of standard consumer goods obligations. The category has strong private label opportunity alongside established brand ranging.',
+      'Cleaning, mops and buckets, storage containers, and household chemicals managed as a unified home maintenance destination reflect how the customer actually shops this area. In-stock consistency is the primary retention driver here — a customer who cannot find their regular product twice will go elsewhere permanently and is unlikely to return.',
     commercialOpportunity:
-      'Cleaning products are high-frequency, high-repeat purchase. Category management that gets the range architecture right — the right SKU count, the right format mix, the right price ladder — drives consistent basket attachment.',
+      'Range rationalization — cutting underperforming SKUs through GMROI analysis and deepening inventory on proven performers — reliably improves both sell-through and in-stock consistency simultaneously. Storage containers benefit strongly from seasonal display activation, particularly approaching winter and at the start of the year.',
     supplierLandscape:
-      'Major Australian and global distributors cover the branded segment. Australian manufacturers are accessible for white-label and local brand ranging.',
+      'Major Australia and New Zealand distributors for branded cleaning. Australian manufacturers accessible for private label and local brand ranging. Storage draws from multiple suppliers across format and material types.',
     complianceNote:
       'GHS chemical labelling mandatory. Safety Data Sheets required for all hazardous substances. Dangerous Goods classification affects transport and storage requirements.',
   },
   {
     number: '05',
-    name: 'Furniture & Homewares',
+    name: 'Furniture, Homewares, and Flat-Pack',
     overview:
-      "A category with significant direct-import activity and corresponding compliance liability concentration. Furniture with structural load requirements, children's furniture with safety standards, and electrical homewares each carry specific compliance frameworks.",
+      'Furniture and homewares includes not just ranging and planogram work but the physical implementation capability — new store setups, flat-pack cabinet installation, melamine storage assembly, and store refit coordination. This dimension of category management expertise goes beyond selecting the range into executing it at scale under real operational conditions.',
     commercialOpportunity:
-      'The category has strong attachment to home improvement activity and gifting occasions. Range curation — a focused selection of high sell-through items rather than broad ranging — drives significantly better category returns.',
+      'Range curation outperforms broad ranging in furniture. Hero pieces positioned in high-traffic off-location displays drive category awareness and destination shopping. Gifting season proximity placement — near checkout during key periods — lifts category revenue above what the main aisle achieves alone.',
     supplierLandscape:
-      'Mix of Australian importers and direct-import suppliers. The Australian distributor network for furniture is thinner than other categories — making importer-of-record verification more critical.',
+      'Mix of Australian importers and direct-import suppliers. The distributor network for furniture is thinner than most categories — importer-of-record verification and compliance documentation are more consequential here.',
     complianceNote:
-      "Children's furniture subject to mandatory safety standards. Electrical homewares require RCM compliance. Upholstered furniture subject to flammability requirements. Structural furniture should carry load rating documentation.",
+      'Children\'s furniture subject to mandatory safety standards. Electrical homewares require RCM compliance. Upholstered furniture subject to flammability requirements. Structural furniture should carry load rating documentation.',
   },
   {
     number: '06',
-    name: 'Personal Care & Cosmetics',
+    name: 'Personal Care and Cosmetics',
     overview:
-      'A category that spans consumer goods and therapeutic goods depending on product claims. Sunscreen, medicated products, and therapeutic-claim items require TGA compliance. The category benefits from brand recognition and local sourcing credentials.',
+      'A category where demographic profiling determines range architecture more than almost any other factor. The personal care customer in a high-density multicultural urban area and the customer in a regional suburban store have genuinely different requirements. Getting this right requires store-specific demographic intelligence, not a national average planogram applied uniformly.',
     commercialOpportunity:
-      'Personal care has consistent year-round demand with seasonal peaks in sun care and gifting periods. Australian-made products carry genuine consumer confidence advantage in skin care sub-categories.',
+      'Consistent year-round demand with seasonal peaks in sun care and gifting. Australian-made products carry genuine consumer confidence in skincare sub-categories. Proximity to complementary categories — baby care, health accessories — drives basket attachment.',
     supplierLandscape:
-      'Strong Australian manufacturing base for skincare (particularly Queensland and Victoria). TGA-listed products available through established pharmaceutical distributors.',
+      'Strong Australian manufacturing base for skincare. TGA-listed products available through established pharmaceutical distributors.',
     complianceNote:
-      'Products making therapeutic claims require TGA listing (AUST L or AUST R). Sunscreen SPF 15+ classified as therapeutic goods. Cosmetic-only products require ingredient labelling compliance under NICNAS.',
+      'Products making therapeutic claims require TGA listing. Sunscreen SPF 15+ classified as therapeutic goods. Ingredient labelling compliance required for cosmetic products.',
   },
   {
     number: '07',
-    name: 'Barbecue & Gas Products',
+    name: 'Barbecue, Pizza Ovens, and Outdoor Fuel',
     overview:
-      'A safety-critical category with specific Australian Standards compliance requirements for gas appliances and connections. The category rewards depth of range in the premium segment and tight compliance management in the entry segment.',
+      'The outdoor cooking category in Australia and New Zealand is more than barbecues. Pizza ovens, outdoor entertaining accessories, and a full fuel sub-category — eco logs, firelighters, fire starters, matches, and kindling — represent significant repeat-purchase revenue that many retailers treat as an afterthought. The customer who buys a barbecue or pizza oven is a customer for fuel, accessories, covers, and tools for the life of the product.',
     commercialOpportunity:
-      'Australian outdoor living culture sustains year-round demand with a clear summer peak. The category has strong accessory and consumable attachment — charcoal, gas cylinders, covers, and tools drive repeat purchase from a hardware barbecue sale.',
+      'Off-location activation during peak season — a full outdoor cooking display in a high-traffic entrance position — significantly amplifies sell-through across the whole category. Eco logs and fuel products benefit from seasonal bulk stack displays. Loss leaders in the entry barbecue segment can initiate a multi-year accessory and fuel purchasing relationship.',
     supplierLandscape:
-      'Mix of global brands with Australian distribution and local manufacturers. Gas appliance compliance (AS/NZS 5601) is the primary market entry requirement for international suppliers.',
+      'Mix of global brands with Australia and New Zealand distribution and local manufacturers. Gas appliance compliance is the primary market entry requirement for international suppliers. Fuel and consumable products require separate supplier relationships from the appliances.',
     complianceNote:
-      'Gas appliances require compliance with AS/NZS 5601 and must be certified to Australian Standards before supply. RCM compliance required for electrical barbecue products.',
+      'Gas appliances require compliance with AS/NZS 5601 and must be certified before supply. RCM compliance required for electrical outdoor cooking products.',
   },
   {
     number: '08',
     name: 'Baby Products',
     overview:
-      "The highest compliance complexity category in Australian retail. Mandatory safety standards covering infant sleep products, button battery safety, and children's product requirements create an obligation landscape that requires specific architecture before any product is ranged.",
+      'A category with strong brand loyalty, specific mandatory safety requirements, and well-established Australia and New Zealand distributor networks across all major sub-categories. In-stock consistency in baby products is non-negotiable — parents who find their preferred product reliably available return automatically. Two out-of-stock events in a row is typically enough to permanently redirect their purchasing to a competitor.',
     commercialOpportunity:
-      'Cost-of-living pressures are driving parents from specialist retailers toward value-oriented discount channels. The category rewards compliance confidence — retailers who can demonstrate verified, locally-distributed ranges capture loyalty that competitors without documentation cannot sustain.',
+      'Value-oriented retail channels are attracting parents responding to cost-of-living pressures who are unwilling to compromise on product quality. Retailers who provide recognised, locally-distributed brands at competitive pricing with consistent in-stock position build category loyalty that is difficult to displace.',
     supplierLandscape:
-      'Established Australian distributor networks exist for all major sub-categories. Nappies and wipes, feeding accessories, baby skincare, health and safety products, and dummies all have accessible Australian distributor pathways that transfer compliance liability and accelerate onboarding.',
+      'Established Australia and New Zealand distributor networks across nappies and wipes, feeding accessories, baby skincare, health and safety products, and soothers. Optimal baby ranges draw from multiple supplier relationships — no single supplier covers every sub-category with equal strength.',
     complianceNote:
-      'Consumer Goods (Infant Sleep Products) Safety Standard 2024 — mandatory. Button battery accessibility requirements — mandatory. All baby products require verified compliance documentation before ranging.',
+      'Consumer Goods Infant Sleep Products Safety Standard 2024 — mandatory. Specific mandatory standards apply across all baby product sub-categories. Third-party test reports required for higher-risk product types.',
   },
   {
     number: '09',
-    name: "Children's Textiles & Clothing",
+    name: "Children's Products and Textiles",
     overview:
-      "A category with specific mandatory flammability and size labelling requirements under Australian Consumer Law. The children's apparel category requires age-appropriate sizing standards and textile content labelling compliance.",
+      'A category spanning children\'s clothing, toys, and accessories — each with its own compliance framework. The mandatory standards framework for children\'s products is demanding, and the consequences of sourcing non-compliant products are significant. Compliance documentation requirements here are among the most intensive on this list.',
     commercialOpportunity:
-      "Value-oriented children's clothing has strong demand in demographics served by discount and variety retailers. The category benefits from seasonal transitions and back-to-school activation.",
+      'Seasonal transitions — back to school, end of summer, winter layering — drive concentrated purchase activity. Off-location seasonal displays at high-traffic positions during peak transition periods significantly increase sell-through. Toy and game sub-categories benefit from gifting season activation.',
     supplierLandscape:
-      'Mix of Australian importers representing global brands and direct-import suppliers. Australian distributor arrangements provide compliance buffer for the mandatory standards framework.',
+      'Mix of Australian importers and direct-import suppliers. Suppliers who cannot provide current, accredited test reports are not suitable for this category.',
     complianceNote:
-      "Consumer Goods (Children's Nightwear and Limited Daywear) Safety Standard — flammability requirements mandatory. Textile content labelling required under ACL. Size labelling per AS/NZS 1182.",
+      'Children\'s nightwear flammability requirements mandatory. Toy safety standards applicable across the range. Textile content labelling and size labelling required.',
   },
   {
     number: '10',
-    name: 'Water & Beverages',
+    name: 'Water, Beverages, and Consumables',
     overview:
-      'A category requiring Food Standards Australia New Zealand (FSANZ) compliance for labelling, health claims, and ingredient declarations. The category has strong private label potential and local sourcing advantage for water products.',
+      'High-frequency, high-repurchase categories where in-stock consistency is the primary retention driver. A customer who finds their preferred product reliably in stock returns automatically. GMROI in beverages is highly sensitive to in-stock position — an out-of-stock product produces a distorted return reading and obscures the true category potential.',
     commercialOpportunity:
-      'Convenience beverages and functional water have strong growth trajectory. Discount retailers can compete effectively in this category with the right range architecture and shelf placement.',
+      'The adjacency opportunity — positioning beverages near snack, personal care, or cleaning based on the actual shopper flow in the specific store — is reliably overlooked and reliably profitable. Functional water and convenience beverages have a strong growth trajectory in value-oriented retail channels.',
     supplierLandscape:
       'Australian water distributors and beverage manufacturers accessible for local sourcing. Imported beverages require importer-of-record identification and FSANZ label compliance.',
     complianceNote:
@@ -134,21 +134,19 @@ const categories = [
 export default function CategoryExpertisePage() {
   return (
     <main>
-      {/* Header */}
-      <section className="pt-28 pb-16 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+      <section className="pt-28 pb-12 px-4 sm:px-6 lg:px-8 border-b border-white/5">
         <div className="max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-6">
-            Ten Categories · Retail &amp; Supplier Perspectives
+            Ten Categories · Retail and Supplier Perspectives
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-si-white mb-6 leading-tight">
-            Category Management Across{' '}
-            <span className="text-si-teal">Ten Product Areas</span>
+            Category Management Across the{' '}
+            <span className="text-si-teal">Full Product Spectrum</span>
           </h1>
           <p className="text-xl text-si-white-muted max-w-2xl leading-relaxed">
-            Each category has its own compliance framework, supplier landscape, and
-            commercial dynamics. What follows is what category management actually looks
-            like in each one — for retailers building the category and suppliers seeking
-            to place products into it.
+            The expertise built across 13 years managing the full product range across Australia and New
+            Zealand — and 25 years across global retail markets — spans a broader product footprint than a
+            standard category list conveys. Right product, right location, in-stock all day every day.
           </p>
         </div>
       </section>
@@ -160,20 +158,18 @@ export default function CategoryExpertisePage() {
         </div>
       </section>
 
-      {/* Jump navigation */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+      {/* Jump nav */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 border-b border-white/5">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             {categories.map((cat) => (
               <a
                 key={cat.number}
                 href={`#cat-${cat.number}`}
-                className="p-3 rounded-xl border border-white/10 bg-white/5 hover:border-si-teal/30 hover:bg-white/[0.08] transition-all text-center"
+                className="p-3 rounded-xl border border-white/10 bg-white/5 hover:border-si-teal/30 hover:bg-white/8 transition-all text-center"
               >
                 <p className="text-xs font-mono text-si-teal mb-1">{cat.number}</p>
-                <p className="text-si-white text-xs font-medium leading-tight">
-                  {cat.name}
-                </p>
+                <p className="text-si-white text-xs font-medium leading-tight">{cat.name}</p>
               </a>
             ))}
           </div>
@@ -185,58 +181,62 @@ export default function CategoryExpertisePage() {
         <section
           key={cat.number}
           id={`cat-${cat.number}`}
-          className="py-16 px-4 sm:px-6 lg:px-8 border-b border-white/5 scroll-mt-20"
+          className="py-14 px-4 sm:px-6 lg:px-8 border-b border-white/5 scroll-mt-20"
         >
           <div className="max-w-4xl mx-auto">
             <div className="flex items-start gap-4 mb-8">
-              <span className="text-4xl font-bold text-si-teal/20 font-mono flex-shrink-0">
-                {cat.number}
-              </span>
+              <span className="text-4xl font-bold text-si-teal/20 font-mono flex-shrink-0">{cat.number}</span>
               <div>
-                <h2 className="text-2xl font-bold text-si-white mb-1">{cat.name}</h2>
-                <p className="text-si-white-muted leading-relaxed">{cat.overview}</p>
+                <h2 className="text-2xl font-bold text-si-white mb-2">{cat.name}</h2>
+                <p className="text-si-white-muted text-sm leading-relaxed">{cat.overview}</p>
               </div>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-3 gap-4">
               <div className="p-5 rounded-xl border border-white/10 bg-white/5">
-                <p className="text-si-white text-xs font-semibold uppercase tracking-wide mb-3">
-                  Commercial Opportunity
-                </p>
-                <p className="text-si-white-muted text-sm leading-relaxed">
-                  {cat.commercialOpportunity}
-                </p>
+                <p className="text-si-white text-xs font-semibold uppercase tracking-wide mb-3">Commercial Opportunity</p>
+                <p className="text-si-white-muted text-xs leading-relaxed">{cat.commercialOpportunity}</p>
               </div>
               <div className="p-5 rounded-xl border border-white/10 bg-white/5">
-                <p className="text-si-white text-xs font-semibold uppercase tracking-wide mb-3">
-                  Supplier Landscape
-                </p>
-                <p className="text-si-white-muted text-sm leading-relaxed">
-                  {cat.supplierLandscape}
-                </p>
+                <p className="text-si-white text-xs font-semibold uppercase tracking-wide mb-3">Supplier Landscape</p>
+                <p className="text-si-white-muted text-xs leading-relaxed">{cat.supplierLandscape}</p>
               </div>
               <div className="p-5 rounded-xl border border-si-teal/20 bg-si-teal/5">
-                <p className="text-si-teal text-xs font-semibold uppercase tracking-wide mb-3">
-                  Compliance Notes
-                </p>
-                <p className="text-si-white-muted text-sm leading-relaxed">
-                  {cat.complianceNote}
-                </p>
+                <p className="text-si-teal text-xs font-semibold uppercase tracking-wide mb-3">Compliance Notes</p>
+                <p className="text-si-white-muted text-xs leading-relaxed">{cat.complianceNote}</p>
               </div>
             </div>
           </div>
         </section>
       ))}
 
-      {/* CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Assembly and fitout */}
+      <section className="py-14 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-si-bg-secondary">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-start gap-4">
+            <span className="text-4xl font-bold text-si-teal/20 font-mono flex-shrink-0">+</span>
+            <div>
+              <h2 className="text-2xl font-bold text-si-white mb-4">Store Setup and Fitout Experience</h2>
+              <p className="text-si-white-muted text-sm leading-relaxed max-w-2xl">
+                Approximately 25% of the G-Force Australia and New Zealand operation was dedicated to new store
+                setups, store refits, and fitout coordination across the hardware retail network. This meant
+                physically representing every supplier in the range during a new store setup — assembling,
+                positioning, and merchandising every product category simultaneously, to planogram specification,
+                in a live construction environment with a go-live deadline. The assembly division also covered
+                flat-pack cabinet and melamine storage installation across the network. This experience — understanding
+                what category implementation looks like at scale under real operational pressure — informs every
+                engagement Synergistic Interaction takes on.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-si-white mb-4">
-            Your category is on this list
-          </h2>
-          <p className="text-si-white-muted mb-8">
-            The first conversation identifies the compliance requirements, the supplier
-            landscape, and the commercial opportunity specific to your situation.
+          <h2 className="text-2xl font-bold text-si-white mb-4">Your category is on this list</h2>
+          <p className="text-si-white-muted mb-8 text-sm">
+            The first conversation identifies the compliance requirements, the supplier landscape, and the
+            commercial opportunity specific to your situation.
           </p>
           <Link
             href="/get-started"

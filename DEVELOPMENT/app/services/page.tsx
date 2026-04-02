@@ -29,6 +29,8 @@ This service is appropriate for retailers launching a new category from scratch,
       'Planogram drawn to store bay dimensions — executable by store staff',
       'Post-launch performance report within 48 hours of launch day',
       'Ongoing KPI dashboard with weekly tracking',
+      'GMROI analysis framework — identifying which products are earning their shelf space and which are candidates for range rationalization.',
+      'Off-location display strategy — bulk stacks, side stacks, seasonal drops, and hero product positioning.',
     ],
     kpis: [
       '>97% on-shelf availability',
@@ -80,7 +82,7 @@ For smaller independent retailers, this may mean a structured Notion or Airtable
       'Current systems assessment and gap analysis',
       'Platform recommendation by retailer scale (from structured spreadsheet to enterprise GRC)',
       'Compliance documentation file structure and template design',
-      'Power BI dashboard framework for category KPI tracking',
+      'Power BI dashboard framework — OSA, GMROI, sell-through, margin, supplier fill rate, demographic performance.',
       'Field data collection process design',
       'Staff training on system use and ongoing maintenance',
     ],
@@ -96,7 +98,7 @@ For smaller independent retailers, this may mean a structured Notion or Airtable
     title: 'New Market & Product Launch Strategy',
     audience: ['For global suppliers'],
     tagline: 'Entering the Australian retail market with the right strategy, the right channel, and the right compliance foundation.',
-    body: `The Australian retail market has specific structural characteristics that international suppliers regularly underestimate. Retail buying structures differ significantly from European and North American equivalents. Compliance requirements — mandatory safety standards, RCM registration for electrical goods, ACCC consumer protection obligations — are materially different from other markets and carry penalties that can be existential for a brand without proper preparation.
+    body: `The Australian and New Zealand retail market has specific structural characteristics that international suppliers regularly underestimate. Retail buying structures differ significantly from European and North American equivalents. Compliance requirements — mandatory safety standards, RCM registration for electrical goods, ACCC consumer protection obligations — are materially different from other markets and carry penalties that can be existential for a brand without proper preparation.
 
 Synergistic Interaction provides international suppliers with a complete market entry capability: understanding the Australian retail landscape, identifying the right retail channel for the product category, building the compliance documentation foundation required before the first buyer meeting, and facilitating the commercial introductions that a cold approach cannot achieve.
 

@@ -29,7 +29,7 @@ const faqs: FAQItem[] = [
   {
     question: 'What if our products turn out to be non-compliant during the assessment?',
     answer:
-      'This is precisely the scenario we are designed for. Products identified as non-compliant during Phase 2 are removed from purchase orders before any regulatory exposure is created. We identify the compliance gap before the product is on the shelf — not after the enforcement action. Non-compliance discovered during a professional compliance assessment is a managed risk. Non-compliance discovered during an ACCC enforcement visit is not.',
+      'This is precisely the scenario we are designed for. Products identified as non-compliant during Phase 2 are removed from purchase orders before any regulatory exposure is created. We identify the compliance gap before the product is on the shelf — not after the enforcement action. Non-compliance discovered during a professional compliance assessment is a managed risk. Non-compliance discovered during a regulator\'s visit is a fundamentally different situation — one the compliance assessment is specifically designed to prevent.',
   },
 ];
 

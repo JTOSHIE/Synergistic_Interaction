@@ -137,6 +137,41 @@ export default function OurApproachPage() {
         </div>
       </section>
 
+      {/* GMROI — Analytical Foundation */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-si-bg-secondary">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-4">
+              Analytical Methodology
+            </div>
+            <h2 className="text-2xl font-bold text-si-white mb-4">
+              GMROI — Measuring What the Category Actually Delivers
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                heading: 'What GMROI Measures',
+                body: 'Gross Margin Return on Investment incorporates stock on hand, weeks of stock on hand, inventory turns, and gross margin generated into a single return measurement. For every dollar invested in category inventory, what gross margin is being returned? This is the metric that confirms whether the category architecture is working commercially.',
+              },
+              {
+                heading: 'Why In-Stock Integrity Matters',
+                body: 'GMROI is only accurate when the product is in a consistent in-stock position. An out-of-stock product produces a distorted reading — it appears to be a lower performer than it is, because you are measuring sales against inventory that was not available to sell. This is the analytical foundation of the in-stock all day every day principle.',
+              },
+              {
+                heading: 'Range Rationalization',
+                body: 'GMROI analysis surfaces the products consuming inventory investment without returning proportionate gross margin. Removing these and reallocating investment to higher-performing items is one of the most reliable routes to improving category profitability — without increasing the total range size or shelf space.',
+              },
+            ].map((item) => (
+              <div key={item.heading} className="p-5 rounded-xl border border-white/10 bg-white/5">
+                <p className="text-si-white text-sm font-semibold mb-3">{item.heading}</p>
+                <p className="text-si-white-muted text-xs leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Competitive differentiation — V7 §8.4 */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-si-bg-secondary">
         <div className="max-w-4xl mx-auto">

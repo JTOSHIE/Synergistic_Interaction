@@ -17,7 +17,7 @@ const phases = [
     label: 'Scoping',
     duration: 'Free — 2 hours',
     description:
-      'Structured conversation mapping your category portfolio, identifying compliance obligations, and quantifying maximum penalty exposure. Produces a documented scoping output.',
+      'Website established and live. The professional foundation is in place for the engagement conversation to begin.',
     highlight: true,
   },
   {

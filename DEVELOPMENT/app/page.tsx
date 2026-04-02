@@ -20,14 +20,14 @@ const credentials = [
     detail: 'Stores managed simultaneously across ANZ',
   },
   {
-    stat: '2,800+',
-    description: "USA tri-state retail network",
-    detail: "World's largest retailer + major pharmacy chains",
+    stat: '4',
+    description: 'International retail markets',
+    detail: 'USA · UK · Australia · New Zealand — across three continents',
   },
   {
     stat: '3,500+',
     description: 'American national dairy program',
-    detail: 'Cornell University independently validated 4% ADV uplift',
+    detail: 'Experience within programs independently validated by Cornell University research',
   },
   {
     stat: '13 yrs',
@@ -90,7 +90,7 @@ const servicesSummary = [
     title: 'New Market Entry',
     audience: 'For global suppliers',
     description:
-      'For international brands entering the ANZ retail market. Channel strategy, compliance preparation, range architecture, and retailer buyer engagement from an operator who has done it across three countries.',
+      'For international brands entering the ANZ retail market. Channel strategy, compliance preparation, range architecture, and retailer buyer engagement from an operator with experience across four international retail markets.',
     href: '/services#market-entry',
   },
 ];
@@ -112,7 +112,7 @@ export default function HomePage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-si-teal" />
-              25 Years · Three Markets · Ten Categories
+              25 Years · Global Retail Markets · Ten Categories
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-si-white leading-tight mb-6">
@@ -294,10 +294,10 @@ export default function HomePage() {
               </div>
               <h2 className="text-3xl font-bold text-si-white mb-6">
                 4% Average Daily Volume Uplift.{' '}
-                <span className="text-si-teal">61 Stores. Cornell University.</span>
+                <span className="text-si-teal">Cornell University Research.</span>
               </h2>
               <p className="text-si-white-muted leading-relaxed mb-4">
-                The category management methodology used by Synergistic Interaction was
+                The category management programs Synergistic Interaction&apos;s principal worked within were
                 independently evaluated by Cornell University researchers. The published
                 finding: a 4% average daily volume increase across 61 retail stores in a
                 competitive US market — covering 85% of all stores in that market and 91%
@@ -397,7 +397,7 @@ export default function HomePage() {
           </h2>
           <p className="text-si-white-muted mb-8 leading-relaxed">
             Whether you are a retailer launching a new category or a supplier seeking
-            access to the Australian retail market — the first conversation maps the
+            access to the Australian and New Zealand retail market — the first conversation maps the
             opportunity and the path to it.
           </p>
           <Link
