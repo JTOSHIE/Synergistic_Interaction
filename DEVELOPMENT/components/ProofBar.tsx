@@ -34,9 +34,9 @@ const stats = [
   {
     prefix: '',
     value: 13,
-    suffix: 'yrs',
+    suffix: ' Yrs',
     label: 'First client retained',
-    sublabel: 'G-Force founding client — full 13-year tenure',
+    sublabel: 'G-Force founding client — full 13-year engagement',
     decimals: 0,
     href: null,
   },
