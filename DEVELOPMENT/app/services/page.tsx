@@ -35,7 +35,6 @@ This service is appropriate for retailers launching a new category from scratch,
     kpis: [
       '>97% on-shelf availability',
       '<3% stockout incidents per week',
-      '≥30% locally-sourced product mix',
       '100% compliance verification before ranging',
       '4% ADV uplift target (Cornell-validated benchmark)',
     ],

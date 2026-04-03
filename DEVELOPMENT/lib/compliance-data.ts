@@ -28,7 +28,7 @@ export const complianceComponents: ComplianceComponentData[] = [
     isoTitle: 'Operational Controls',
     riskTier: 'Hard Gate',
     websiteCopy:
-      'A purchase order is a legal commitment. Before that commitment is made, every product passes a structured verification process against the applicable mandatory safety standards, labelling requirements, and documentation obligations. Component 1 is the hard gate at the front of the supply chain — a structured pre-commitment verification that happens before a single unit is ordered, not a review process that happens after products arrive in the warehouse.',
+      'Every product is verified against the applicable mandatory safety standard before any purchase order is placed. The compliance file is initiated before commercial commitment — not after delivery. A supplier who cannot provide current, verifiable compliance documentation does not pass the verification gate, regardless of price or relationship history. This is the hard gate that prevents non-compliant product from entering the supply chain.',
     subComponents: [
       { id: '1a', title: 'Mandatory Standard Identification', description: 'Every product category is mapped to the applicable Australian mandatory safety standards before procurement begins.' },
       { id: '1b', title: 'Documentation Checklist', description: 'Each product requires a defined documentation set before PO issuance — certificates of compliance, test reports, labelling verification.' },
@@ -45,7 +45,7 @@ export const complianceComponents: ComplianceComponentData[] = [
     isoTitle: 'Operational Controls + Understanding Interested Parties',
     riskTier: 'Hard Gate',
     websiteCopy:
-      'Compliance exposure does not begin when a product reaches the shelf. It begins when the supplier relationship is formed. Component 2 treats every new supplier as a compliance entity — not merely a commercial partner — and requires a structured assessment before any purchase order is issued. The length of a supplier relationship is not a substitute for documented compliance capability.',
+      'Every supplier is assessed before engagement. Documentation capability is verified — certificates of compliance, third-party test reports, EESS registrations where applicable — not assumed. The audit establishes whether the supplier can sustain compliance documentation across the product lifecycle, not just at the point of first order. Suppliers who pass the audit become part of a verified supplier pool that accelerates subsequent category expansions.',
     subComponents: [
       { id: '2a', title: 'Supplier Pre-Qualification', description: 'New suppliers complete a structured compliance capability assessment before their first purchase order is issued.' },
       { id: '2b', title: 'Documentation Capacity Assessment', description: 'The assessment determines whether the supplier can produce the compliance documentation their product categories require.' },
@@ -79,7 +79,7 @@ export const complianceComponents: ComplianceComponentData[] = [
     isoTitle: 'Context + Planning',
     riskTier: 'Preventative',
     websiteCopy:
-      'Compliance risk is a quantifiable commercial exposure. Under the Australian Consumer Law, maximum civil penalties for corporations are $50 million or more per contravention. Component 4 translates this statutory framework into a precise risk profile for a specific product range — calculating penalty exposure by category, identifying the highest-priority compliance gaps, and producing the prioritised action plan that allocates compliance investment proportionately to actual exposure.',
+      'Quantified regulatory exposure is the foundational input to every category and supplier decision. Before any category is ranged, the maximum penalty exposure for non-compliant product in that category is calculated and documented. This converts compliance from a qualitative concern into a commercial number — one that makes the investment in a professional compliance architecture arithmetically obvious.',
     subComponents: [
       { id: '4a', title: 'Penalty Exposure Calculation', description: 'For each product category: applicable standard, maximum penalty per contravention under ACL s.224, and estimated range-level exposure.' },
       { id: '4b', title: 'Enforcement Priority Mapping', description: 'Annual review of ACCC and state consumer affairs enforcement priorities — which categories and practices are under active scrutiny in the current year.' },
@@ -96,7 +96,7 @@ export const complianceComponents: ComplianceComponentData[] = [
     isoTitle: 'Documented Information',
     riskTier: 'Monitoring',
     websiteCopy:
-      'When compliance documentation is requested — by a regulator, a buyer, or an auditor — the question is not whether the products are compliant. It is whether compliance can be demonstrated. Component 5 ensures every ranged product has a complete, current, and retrievable digital compliance file. Structured documentation that produces the evidentiary record for any product, any supplier, and any category within minutes of a request.',
+      'A complete digital compliance file exists for every ranged product — certificates of compliance, third-party test reports, importer documentation, and standard verification records. The file is maintained as a live document, not a one-time audit artefact. When a certificate approaches expiry, when a standard is updated, when a supplier changes a formulation — the compliance file is what allows the category to respond in days rather than weeks. This is the commercial value of documentation management: operational confidence and business continuity, audit-ready from day one.',
     subComponents: [
       { id: '5a', title: 'Digital Compliance File Structure', description: 'Standardised file structure for every SKU: applicable standard, certificate of compliance, test report, labelling verification, importer-of-record documentation, and audit history.' },
       { id: '5b', title: 'Expiry Tracking', description: 'Test reports and compliance certificates have defined validity periods. Component 5 tracks expiry dates and triggers renewal 90 days before expiry.' },
@@ -113,7 +113,7 @@ export const complianceComponents: ComplianceComponentData[] = [
     isoTitle: 'Performance Evaluation + Internal Audit',
     riskTier: 'Monitoring',
     websiteCopy:
-      'Compliance is not a point-in-time event. Regulatory updates, product reformulations, supplier changes, and new mandatory standards create ongoing compliance considerations for products that were fully verified at the time of ranging. Component 6 implements exception-based monitoring — the system is quiet when everything is in order, and immediately active when it is not. Exceptions are visible before they become commercial problems.',
+      'Compliance monitoring operates on an exception-based model — the system flags what requires attention rather than requiring a full audit to find what has changed. Regulatory updates from ACCC, Consumer Affairs Victoria, Energy Safe Victoria, and the TGA are ingested, AI-triaged for retail relevance, and reviewed weekly. Any update affecting ranged categories triggers a compliance file review within 48 hours. GMROI and OSA data is monitored alongside compliance status — performance and compliance are not separate workstreams. The monitoring infrastructure means neither ever becomes stale between formal review cycles.',
     subComponents: [
       { id: '6a', title: 'Regulatory Change Alerts', description: 'Integration with the regulatory intelligence pipeline triggers compliance file review for affected categories within 48 hours of a relevant update.' },
       { id: '6b', title: 'Product Recall Monitoring', description: 'Monitoring of the ACCC product safety recall database for products matching ranged categories or active suppliers.' },
@@ -130,7 +130,7 @@ export const complianceComponents: ComplianceComponentData[] = [
     isoTitle: 'Operational Controls',
     riskTier: 'Hard Gate',
     websiteCopy:
-      'A supplier\'s own certificate of compliance is a representation, not independent evidence. For higher-risk product categories, the compliance architecture requires independent verification from accredited testing laboratories. Component 7 mandates third-party test reports for applicable categories, tracks report validity periods, and ensures no product remains in the range with expired or absent independent verification.',
+      'For Tier 1 categories — baby products, electrical goods, children\'s toys — independent test reports from accredited laboratories are mandatory, not optional. Distributor certificates are confirmed against current standards, not accepted at face value. Test report expiry dates are tracked and renewal is initiated before lapse. The test report is the evidentiary foundation that makes a compliance claim defensible — not just an internal declaration that a product meets a standard.',
     subComponents: [
       { id: '7a', title: 'Accredited Laboratory Requirement', description: 'Test reports must be issued by a NATA-accredited laboratory or internationally recognised equivalent. Supplier-provided reports from non-accredited sources are not accepted for higher-risk categories.' },
       { id: '7b', title: 'Test Report Validity Tracking', description: 'Test reports have defined validity periods. Component 7 tracks expiry dates across the range and triggers renewal 90 days before expiry.' },

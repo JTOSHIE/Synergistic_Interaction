@@ -53,7 +53,7 @@ ${sanitise(body.message)}
 Reply to: ${sanitise(body.email)}
     `.trim();
 
-    const destinationEmail = process.env.CONTACT_DESTINATION_EMAIL ?? 'joshua@synergisticinteraction.com.au';
+    const destinationEmail = process.env.CONTACT_DESTINATION_EMAIL ?? 'jt@synergisticinteraction.com.au';
 
     // OPTION A: Resend (recommended — uncomment after adding RESEND_API_KEY to env vars)
     // npm install resend

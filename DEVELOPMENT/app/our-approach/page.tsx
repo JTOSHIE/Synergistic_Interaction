@@ -129,10 +129,22 @@ export default function OurApproachPage() {
       <section id="nine-components" className="pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-si-white mb-2">The Nine-Component Framework</h2>
-          <p className="text-si-white-muted mb-8">
+          <p className="text-si-white-muted mb-6">
             Each component addresses a specific compliance failure vector. All nine are required for a complete
             compliance architecture.
           </p>
+          <div className="mb-8 p-5 rounded-xl border border-white/10 bg-white/5">
+            <p className="text-si-white-muted text-sm leading-relaxed">
+              Sourcing through established Australian distributors is the structural decision that determines
+              the compliance position for the entire category. These distributors are already supplying major
+              Australian retailers and already carry their own compliance obligations — they have already
+              verified their products against Australian mandatory safety standards. The nine-component
+              architecture verifies and documents that, creating a complete compliance file for every ranged
+              product: the evidentiary record of professional category management that demonstrates proactive
+              intent to regulators, protects business continuity, and gives the retailer operational
+              confidence to move fast.
+            </p>
+          </div>
           <ComponentAccordion components={complianceComponents} expandFirst />
         </div>
       </section>
@@ -168,6 +180,79 @@ export default function OurApproachPage() {
                 <p className="text-si-white-muted text-xs leading-relaxed">{item.body}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consultant market reach and systems */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-4">
+              25 Years · Four Markets · Three Systems
+            </div>
+            <h2 className="text-2xl font-bold text-si-white mb-4">
+              Systems Deployed. Markets Operated. Relationships Active.
+            </h2>
+            <p className="text-si-white-muted leading-relaxed mb-8">
+              The consultant leading every engagement has spent 25 years building, deploying, and operating
+              category management systems across four international retail markets — with active distributor
+              and supplier relationships in Australian retail right now.
+            </p>
+          </div>
+
+          <div className="space-y-5 mb-12">
+            {[
+              {
+                label: '01',
+                title: 'World-First Real-Time Planogram Platform — ProCorp (2003)',
+                body: 'Replaced paper-based planogramming with live PDA field entry, real-time compliance-by-exception monitoring, and store-specific digital planogram generation. Deployed across 3,500+ US retail stores. Independently validated by Cornell University — 4% average daily volume increase across 61 evaluated stores.',
+              },
+              {
+                label: '02',
+                title: 'G-Force Mobile & Power BI Analytics — ANZ',
+                body: 'Bespoke Android application managing real-time data collection from 250+ field representatives across 330+ Bunnings stores. Fed directly into custom Power BI dashboards generating store-specific, demographic-specific, and supplier-specific performance insights for 20 global clients.',
+              },
+              {
+                label: '03',
+                title: 'Category Performance Dashboard — Current Engagements',
+                body: 'Weekly GMROI and OSA tracking, compliance file monitoring, supplier performance data, and sell-through analysis — live from launch day. Built specifically for each client engagement on the same analytics platform used to manage $100M+ in annual portfolio value.',
+              },
+            ].map((item) => (
+              <div key={item.label} className="flex gap-5 p-6 rounded-xl border border-white/10 bg-white/5">
+                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-si-teal/10 border border-si-teal/20 flex items-center justify-center text-si-teal text-xs font-mono font-bold">
+                  {item.label}
+                </span>
+                <div>
+                  <p className="text-si-white font-semibold mb-2">{item.title}</p>
+                  <p className="text-si-white-muted text-sm leading-relaxed">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-3 pr-6 text-si-white-dim font-medium text-xs uppercase tracking-wider">Market</th>
+                  <th className="text-left py-3 text-si-white-dim font-medium text-xs uppercase tracking-wider">Scale</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {[
+                  { market: 'USA — Tri-State & National', scale: '3,500+ stores across all major US retail formats — Walmart, CVS, Rite Aid, supermarkets, convenience and drug stores' },
+                  { market: 'Australia & New Zealand', scale: '330+ Bunnings stores simultaneously, 2,000+ product lines, 20 global suppliers, 13 years' },
+                  { market: 'United Kingdom', scale: 'Sainsbury\'s & Tesco — category management and merchandising strategy' },
+                  { market: 'Australia — Current', scale: '50+ active supplier and distributor relationships. Current clients include major ANZ retailers' },
+                ].map((row) => (
+                  <tr key={row.market}>
+                    <td className="py-4 pr-6 text-si-white font-medium whitespace-nowrap">{row.market}</td>
+                    <td className="py-4 text-si-white-muted">{row.scale}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -219,6 +304,47 @@ export default function OurApproachPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Multi-site rollout capability */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-si-bg-secondary border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-si-teal/5 to-transparent border border-si-teal/20 rounded-2xl p-8 sm:p-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-6">
+              Multi-Site Engagement Model
+            </div>
+            <h2 className="text-2xl font-bold text-si-white mb-6">
+              Built Once. Deployed Across Your Network.
+            </h2>
+            <p className="text-si-white-muted leading-relaxed">
+              The framework built in the pilot store — supplier agreements, compliance documentation,
+              planogram standards, and reporting infrastructure — is designed for direct replication
+              across every subsequent location. Each additional store receives the same professional
+              category management at a fraction of the pilot investment, because the methodology,
+              supplier relationships, and compliance files already exist. The second store implementation
+              takes half the time of the pilot. The third takes less again. This is the commercial logic
+              of the multi-store engagement model: the pilot is not the cost of one category. It is the
+              foundation cost of every category, across every store, that follows.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* GMROI and OSA tracking */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="p-6 rounded-2xl border border-si-teal/20 bg-si-teal/5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-4">
+              Performance Monitoring
+            </div>
+            <p className="text-si-white-muted leading-relaxed">
+              Weekly GMROI and OSA tracking are live from launch day — not established after a stabilisation
+              period. Management has real-time visibility of category performance from the first week of
+              trading. The investment is sized relative to the penalty exposure and margin opportunity in
+              your category.
+            </p>
           </div>
         </div>
       </section>

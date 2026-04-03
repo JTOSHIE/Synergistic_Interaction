@@ -10,43 +10,50 @@ export const metadata: Metadata = {
     'Start with a structured scoping conversation. Identify your category compliance obligations, quantify penalty exposure, and receive a documented Phase 0 output.',
 };
 
-// V7 §3: Five-phase engagement overview
+// V7 §3: Five-phase engagement overview — two days per week, thirteen weeks, 208 hours
 const phases = [
   {
     n: '0',
     label: 'Scoping',
-    duration: 'Free — 2 hours',
+    duration: 'Free — structured conversation',
     description:
       'Website established and live. The professional foundation is in place for the engagement conversation to begin.',
     highlight: true,
   },
   {
     n: '1',
-    label: 'Assessment',
+    label: 'Market & Supplier Intelligence',
     duration: 'Weeks 1–2',
     description:
-      'Systematic assessment of current compliance status across all product categories. Gap identification against mandatory standards and ISO 37301:2021 requirements.',
+      'Market research, competitive benchmarking, regulatory mapping, and supplier landscape assessment. The factual foundation every category decision is built on.',
   },
   {
     n: '2',
-    label: 'Architecture Design',
-    duration: 'Weeks 3–4',
+    label: 'Range Architecture',
+    duration: 'Weeks 3–5',
     description:
-      'Design of the nine-component compliance architecture specific to your category portfolio, supplier base, and operational structure.',
+      'SKU selection using sell-through data, margin analysis, and compliance scoring. Range structure, category map, and supplier shortlist produced.',
   },
   {
     n: '3',
-    label: 'Implementation',
-    duration: 'Weeks 5–10',
+    label: 'Commercial Negotiation & Compliance Verification',
+    duration: 'Weeks 6–9',
     description:
-      'Systematic implementation of all nine components. Compliance files built, supplier assessments completed, monitoring systems activated.',
+      'Supplier negotiation, contract terms, compliance file initiation, and full nine-component verification for every ranged product.',
   },
   {
     n: '4',
-    label: 'Training & Handover',
-    duration: 'Weeks 11–14',
+    label: 'Planogram, Reporting & Merchandising',
+    duration: 'Weeks 10–11',
     description:
-      'Role-specific training for procurement, merchandising, receiving, and management teams. Formal handover of the compliance architecture to your team.',
+      'Bay layout, product placement, planogram production, GMROI and OSA reporting infrastructure activated. Staff training materials prepared.',
+  },
+  {
+    n: '5',
+    label: 'Launch, Monitoring & Stabilisation',
+    duration: 'Weeks 12–13',
+    description:
+      'Consultant on-site for launch day. Planogram installed correctly. Stock rotated. Weekly GMROI and OSA monitoring live from week one.',
   },
 ];
 
@@ -76,7 +83,8 @@ export default function GetStartedPage() {
 
           {/* Phase overview */}
           <div>
-            <h2 className="text-xl font-bold text-si-white mb-6">The Five-Phase Engagement</h2>
+            <h2 className="text-xl font-bold text-si-white mb-2">The Five-Phase Engagement</h2>
+            <p className="text-sm text-si-white-muted mb-6">Two days per week · Thirteen weeks · 208 hours total</p>
             <div className="space-y-4">
               {phases.map((phase) => (
                 <div
@@ -119,13 +127,16 @@ export default function GetStartedPage() {
               ))}
             </div>
 
-            {/* Scale note */}
+            {/* Investment + scale note */}
             <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-si-white mb-2">Scales to any retail size</h3>
+              <h3 className="text-sm font-semibold text-si-white mb-2">Investment and scale</h3>
+              <p className="text-sm text-si-white-muted leading-relaxed mb-3">
+                The investment is sized relative to the penalty exposure and margin opportunity in your category.
+              </p>
               <p className="text-sm text-si-white-muted leading-relaxed">
-                For a single store with 40–60 SKUs, implementation takes 40–80 hours across five phases.
-                For a 330-store network, it takes proportionally more. The methodology is identical. The
-                nine-component architecture scales from one store to any size.
+                The nine-component architecture scales from a single store with 40–60 SKUs to a 330-store
+                network. The methodology is identical. Each subsequent store implementation takes a fraction
+                of the pilot investment.
               </p>
             </div>
           </div>

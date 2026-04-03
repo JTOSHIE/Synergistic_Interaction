@@ -88,6 +88,24 @@ export default function WhyComplianceMattersPage() {
         </div>
       </section>
 
+      {/* Distributor-first structural framing */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="p-6 rounded-xl border border-white/10 bg-white/5">
+            <p className="text-si-white-muted leading-relaxed">
+              Sourcing through established Australian distributors is the structural decision that determines
+              the compliance position for the entire category. These distributors are already supplying
+              major Australian retailers and already carry their own compliance obligations — they have
+              already verified their products against Australian mandatory safety standards. The
+              nine-component architecture verifies and documents that, creating a complete compliance file
+              for every ranged product: the evidentiary record of professional category management that
+              demonstrates proactive intent to regulators, protects business continuity, and gives the
+              retailer operational confidence to move fast.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Five enforcement catalysts */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-si-bg-secondary">
         <div className="max-w-4xl mx-auto">
@@ -197,6 +215,24 @@ export default function WhyComplianceMattersPage() {
             </p>
           </div>
           <RegulatoryFeed maxItems={8} showFilter limit={8} />
+        </div>
+      </section>
+
+      {/* GMROI and OSA — performance metrics */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="p-6 rounded-2xl border border-si-teal/20 bg-si-teal/5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-4">
+              Primary Performance Metrics
+            </div>
+            <p className="text-si-white-muted leading-relaxed">
+              GMROI and On-Shelf Availability (OSA) are the two headline metrics tracked weekly from
+              launch day. GMROI measures the gross profit generated per dollar invested in inventory.
+              OSA measures whether the right product is on the shelf, in stock, all day — the
+              foundational requirement for accurate GMROI and for converting shopper intent into a
+              completed sale.
+            </p>
+          </div>
         </div>
       </section>
 

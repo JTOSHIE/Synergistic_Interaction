@@ -15,11 +15,11 @@ const stats = [
   },
   {
     prefix: '',
-    value: 4.4,
+    value: 4,
     suffix: '%',
-    label: 'Average ADV uplift',
-    sublabel: 'Cornell University category management benchmark',
-    decimals: 1,
+    label: 'Cornell-validated ADV uplift',
+    sublabel: 'Independent peer-reviewed validation — 61 stores',
+    decimals: 0,
     href: null,
   },
   {
@@ -33,12 +33,12 @@ const stats = [
   },
   {
     prefix: '',
-    value: 1736,
-    suffix: '×',
-    label: 'Minimum compliance ROI',
-    sublabel: '$50M ACL exposure ÷ consulting investment',
+    value: 13,
+    suffix: 'yrs',
+    label: 'First client retained',
+    sublabel: 'G-Force founding client — full 13-year tenure',
     decimals: 0,
-    href: '/why-compliance-matters',
+    href: null,
   },
 ];
 
