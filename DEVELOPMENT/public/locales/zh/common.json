@@ -14,13 +14,13 @@
   },
   "proofBar": {
     "stores": "同时管理门店数量",
-    "storesSub": "澳大利亚零售网络 — 澳新百宁",
-    "adv": "平均ADV提升",
-    "advSub": "康奈尔大学品类管理基准",
-    "penalty": "已规避处罚风险敞口",
-    "penaltySub": "澳大利亚消费者法 s.224",
-    "roi": "最低合规投资回报率",
-    "roiSub": "5000万澳元风险敞口 ÷ 咨询投资"
+    "storesSub": "澳大利亚及新西兰零售网络 — 澳新百宁",
+    "adv": "康奈尔大学验证的销量增长",
+    "advSub": "独立同行评审验证 — 61家门店",
+    "portfolio": "年度管理组合价值",
+    "portfolioSub": "G-Force澳新业务巅峰期组合",
+    "tenure": "首位客户留存年限",
+    "tenureSub": "G-Force创始客户 — 完整13年合作期"
   },
   "cta": {
     "seeArchitecture": "了解合规架构",

@@ -115,7 +115,7 @@ export default function ZhHomePage() {
           <div className="grid sm:grid-cols-3 gap-6">
             {[
               { value: '5000万澳元+', label: '单项违规最高处罚', sub: '澳大利亚消费者法 s.224 条' },
-              { value: '1,736×', label: '最低合规投资回报率', sub: '咨询投资 vs 法律风险敞口' },
+              { value: '13年', label: '首位客户留存年限', sub: 'G-Force创始客户 — 完整13年合作期' },
               { value: '25年', label: '零售合规方法论积累', sub: '澳大利亚、美国、英国零售经验' },
             ].map((item) => (
               <div key={item.value} className="text-center p-6 rounded-xl border border-white/10 bg-white/5">
