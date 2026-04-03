@@ -1,51 +1,52 @@
 # SYNERGISTIC INTERACTION — PROJECT STATUS
 
-## CURRENT STATE: DEPLOYED AND FUNCTIONAL — VISUAL REVIEW PENDING
-Live URL: https://synergistic-interaction.vercel.app
-Build: Passing
-Last deployment: Session 11 (canvas component rebuild)
-Last content update: Session 5 (proposal v10 sync)
+## CURRENT STATE: DEPLOYED — LIVE AT https://synergistic-interaction.vercel.app
+
+The website is built and deployed on Vercel. Session 13 corrects three visual regressions
+(canvas colours, planogram shapes, ProofBar stat) introduced when Session 5 inserted new
+page sections after Sessions 8–11 had built the visual components.
+
+### Pages — all live
+| Page | Route | Status |
+|------|-------|--------|
+| Home | `/` | ✅ Live |
+| About | `/about` | ✅ Live |
+| Services | `/services` | ✅ Live |
+| Category Expertise | `/category-expertise` | ✅ Live |
+| Our Approach | `/our-approach` | ✅ Live |
+| Why Compliance Matters | `/why-compliance-matters` | ✅ Live |
+| Get Started | `/get-started` | ✅ Live |
+| Mandarin Home | `/zh` | ✅ Live |
+| Mandarin Contact | `/zh/get-started` | ✅ Live |
+| 404 | `/not-found` | ✅ Live |
+
+### Known remaining gaps (post Session 13)
+| Gap | Status |
+|-----|--------|
+| ABN number | Still shows [pending registration] in footer |
+| Logo | Placeholder SVG — acceptable or replace |
+| OG image PNG | Screenshot public/og-image.html at 1200×630 |
+| Baidu Webmaster Tools | Domain is live — can be done now |
+| Mandarin native review | Native speaker review of transcreated copy |
+| Resend email wiring | Contact form logs to console only — uncomment 7 lines in api/contact/route.ts after adding RESEND_API_KEY to Vercel |
+| OpenAI + Vercel KV | Regulatory feed shows placeholders until these are provisioned |
 
 ---
 
 ## SESSIONS LOG
 
-| Session | Work | Files changed |
-|---------|------|---------------|
-| Session 4 (Mac) | Built all four pages, all nine components, API routes, Mandarin pages, layout, config | ~30 files |
-| Session 5 (Mac) | Local verification, Vercel deployment, env vars set | 2 files + deploy |
-| Session 6 (Mac) | Fixed Tailwind CSS, ProofBar, accordion, regulatory feed, visualisation, redeployed | ~10 files |
-| Session 10 | CLAUDE.md, copyright fix, ProofBar stat 3, 7 homepage changes, about/page.tsx rewrite, category-expertise rewrite, GMROI section, services updates, FAQ, trust signals, LinkedIn footer | ~12 files |
-| Session 11 | Canvas components rebuilt: HomepageHero (planogram), AboutVisual (4 markets), OurApproachVisual (ISO clauses), ServicesVisual (custom icons), CategoryGridVisual (custom icons) | 5 files |
-| Session 5 (v10) | Proposal v10 content alignment — email, ProofBar, sourcing narrative, GMROI, component copy, consultant framing, multi-site model | 8 files |
-| Session 12 | Fix CategoryGridVisual category icon colours (canvas context regression — currentColor overriding baseColor), HomepageHero planogram render confirmed working, Mandarin locale Change 13 applied | 3 files |
-
----
-
-## REMAINING GAPS (requires human action)
-
-1. **Resend API key** → contact form sends emails (resend.com free tier)
-2. **OpenAI API key** → regulatory feed goes live
-3. **Vercel KV** → feed stores approved items (Vercel dashboard → Storage → KV)
-4. **Domain DNS** → synergisticinteraction.com.au points to Vercel
-5. ✅ **Component copy sign-off** → All 9 component descriptions written and approved — Session 5
-6. **ABN number** → replace [pending registration] in components/Footer.tsx
-7. **Logo final approval** → public/logo.svg is a placeholder network motif
-8. **OG image PNG** → generate public/og-image.png from public/og-image.html
-9. ✅ **Contact email** → `jt@synergisticinteraction.com.au` confirmed and applied globally — Session 5
-10. ✅ **CategoryGridVisual canvas colours** → fixed Session 12 (currentColor regression resolved)
-11. ✅ **Mandarin locale (Change 13)** → ProofBar stats updated, zh/page.tsx ROI stat corrected — Session 12
-
----
-
-## NEXT CLAUDE CODE SESSION PROMPT TOPICS
-
-1. Local preview — run `npm run dev`, open http://localhost:3000, confirm all pages render correctly
-2. Visual QA — check ProofBar, ComponentAccordion, new callout sections, GMROI additions
-3. Vercel deployment — connect repo, configure project settings
-4. Environment variables — add all 7 variables listed in ENVIRONMENT VARIABLES NEEDED section
-5. Domain DNS — add CNAME after Vercel deployment confirmed
-6. Post-deploy: contact form test (Resend), regulatory feed test (OpenAI + KV)
+| Session | What was done | Files changed |
+|---------|--------------|---------------|
+| Session 1 | Project structure, 42 files, initial build | 42 new files |
+| Session 2 | Brief corrections — actual V7 content replacing placeholders | 10 files |
+| Session 3 (Windows) | Three pages built, FAQ, feed, forms, component updates | 19 files |
+| Session 4 (Mac) | All 30 tasks — complete components, logo, header, footer, Mandarin, sitemap, robots, admin, build fixes, push | 28 files |
+| Session 5 | Proposal v10 website alignment — 13 changes (email, ProofBar, sourcing language, GMROI, components 1/2/4/5/6/7 copy, multi-site rollout, distributor framing, Mandarin locale partial) | TBC files |
+| Session 8+9 | Full visual rebuild — HomepageHero, CategoryGridVisual, AboutVisual, ServicesVisual, OurApproachVisual, PlanogramVisual created. compliance-data.ts enforcement language removed. Category order updated. | TBC files |
+| Session 10 | 15 content changes from TTS review — copyright year, ProofBar stat 3 label, homepage credentials, about page full rewrite, our-approach rewrite, why-compliance-matters rewrite, get-started rewrite, category-expertise full rebuild, CLAUDE.md created | TBC files |
+| Session 11 | Category expertise condensed (three-panel → single paragraph per category), HomepageHero realistic product shapes, AboutVisual NZ added (4 markets), OurApproachVisual polished, ServicesVisual custom icons, CategoryGridVisual custom drawn icons | TBC files |
+| Session 12 | SKIPPED — prompt prepared but not executed |  |
+| Session 13 | Canvas colour fix (CategoryGridVisual + HomepageHero), ProofBar 1736× → 13 Yrs, Mandarin locale ProofBar alignment, status doc rebuild | TBC files |
 
 ---
 
