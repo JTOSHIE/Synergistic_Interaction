@@ -18,6 +18,7 @@ Last content update: Session 5 (proposal v10 sync)
 | Session 10 | CLAUDE.md, copyright fix, ProofBar stat 3, 7 homepage changes, about/page.tsx rewrite, category-expertise rewrite, GMROI section, services updates, FAQ, trust signals, LinkedIn footer | ~12 files |
 | Session 11 | Canvas components rebuilt: HomepageHero (planogram), AboutVisual (4 markets), OurApproachVisual (ISO clauses), ServicesVisual (custom icons), CategoryGridVisual (custom icons) | 5 files |
 | Session 5 (v10) | Proposal v10 content alignment — email, ProofBar, sourcing narrative, GMROI, component copy, consultant framing, multi-site model | 8 files |
+| Session 12 | Fix CategoryGridVisual category icon colours (canvas context regression — currentColor overriding baseColor), HomepageHero planogram render confirmed working, Mandarin locale Change 13 applied | 3 files |
 
 ---
 
@@ -32,6 +33,8 @@ Last content update: Session 5 (proposal v10 sync)
 7. **Logo final approval** → public/logo.svg is a placeholder network motif
 8. **OG image PNG** → generate public/og-image.png from public/og-image.html
 9. ✅ **Contact email** → `jt@synergisticinteraction.com.au` confirmed and applied globally — Session 5
+10. ✅ **CategoryGridVisual canvas colours** → fixed Session 12 (currentColor regression resolved)
+11. ✅ **Mandarin locale (Change 13)** → ProofBar stats updated, zh/page.tsx ROI stat corrected — Session 12
 
 ---
 
