@@ -1,4 +1,4 @@
-// Footer — V7 brief: four pages, language toggle, compliance disclaimer
+// Footer — compliance disclaimer
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -39,22 +39,9 @@ export default function Footer() {
               Compliance-first category management architecture for Australian retailers. ISO 37301:2021 aligned.
               Nine-component framework.
             </p>
-            <div className="flex items-center gap-3">
-              <Link
-                href="/zh"
-                className="inline-flex items-center gap-1.5 text-xs text-si-white-dim hover:text-si-teal transition-colors border border-white/10 rounded px-2.5 py-1.5 hover:border-si-teal/30"
-                lang="zh-Hans"
-              >
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="0.75"/>
-                  <path d="M6 1c-1.5 1.5-2 3-2 5s.5 3.5 2 5M6 1c1.5 1.5 2 3 2 5s-.5 3.5-2 5M1 6h10" stroke="currentColor" strokeWidth="0.75"/>
-                </svg>
-                中文版本
-              </Link>
-              <span className="text-si-white-dim text-xs px-2.5 py-1.5 border border-white/10 rounded">
-                ISO 37301:2021
-              </span>
-            </div>
+            <span className="text-si-white-dim text-xs px-2.5 py-1.5 border border-white/10 rounded">
+              ISO 37301:2021
+            </span>
           </div>
 
           {/* Link columns */}
