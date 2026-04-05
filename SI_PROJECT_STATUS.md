@@ -1,10 +1,10 @@
 # SYNERGISTIC INTERACTION — PROJECT STATUS
 
-## CURRENT STATE: DEPLOYED — LIVE AT https://synergistic-interaction.vercel.app
+## CURRENT STATE: DEPLOYED — LIVE AT https://synergisticinteraction.com.au
 
-The website is built and deployed on Vercel. Session 13 corrects three visual regressions
-(canvas colours, planogram shapes, ProofBar stat) introduced when Session 5 inserted new
-page sections after Sessions 8–11 had built the visual components.
+The website is built, deployed on Vercel, and aliased to the real domain. Session 14 connected
+the custom domain, added the confirmed ABN, replaced placeholder regulatory feeds with real
+government RSS sources, and wired the contact form with Resend email sending.
 
 ### Pages — all live
 | Page | Route | Status |
@@ -20,16 +20,18 @@ page sections after Sessions 8–11 had built the visual components.
 | Mandarin Contact | `/zh/get-started` | ✅ Live |
 | 404 | `/not-found` | ✅ Live |
 
-### Known remaining gaps (post Session 13)
+### Known remaining gaps (post Session 14)
 | Gap | Status |
 |-----|--------|
-| ABN number | Still shows [pending registration] in footer |
+| ✅ ABN number | Resolved — 33 686 618 397 live in footer |
 | Logo | Placeholder SVG — acceptable or replace |
 | OG image PNG | Screenshot public/og-image.html at 1200×630 |
 | Baidu Webmaster Tools | Domain is live — can be done now |
 | Mandarin native review | Native speaker review of transcreated copy |
-| Resend email wiring | Contact form logs to console only — uncomment 7 lines in api/contact/route.ts after adding RESEND_API_KEY to Vercel |
-| OpenAI + Vercel KV | Regulatory feed shows placeholders until these are provisioned |
+| ⚠️ Resend email wiring | Code wired — RESEND_API_KEY still needed. 1) Sign up resend.com 2) Verify domain 3) `echo "re_xxxx" \| vercel env add RESEND_API_KEY production` 4) `vercel --prod` |
+| ✅ Regulatory feed | Real ACCC + Consumer Affairs Victoria RSS feeds wired — live data after first Vercel Cron ingest |
+| OpenAI + Vercel KV | Regulatory feed pipeline requires OPENAI_API_KEY + KV provisioning for AI triage |
+| DNS propagation | A record `76.76.21.21` set at Crazy Domains — may take up to 24hrs to fully propagate |
 
 ---
 
@@ -47,6 +49,7 @@ page sections after Sessions 8–11 had built the visual components.
 | Session 11 | Category expertise condensed (three-panel → single paragraph per category), HomepageHero realistic product shapes, AboutVisual NZ added (4 markets), OurApproachVisual polished, ServicesVisual custom icons, CategoryGridVisual custom drawn icons | TBC files |
 | Session 12 | SKIPPED — prompt prepared but not executed |  |
 | Session 13 | Canvas colour fix (CategoryGridVisual + HomepageHero), ProofBar 1736× → 13 Yrs, Mandarin locale ProofBar alignment, status doc rebuild | TBC files |
+| Session 14 | Domain synergisticinteraction.com.au + www added to Vercel, ABN 33 686 618 397 in footer, 14 real ACCC + Consumer Affairs Victoria RSS feeds wired (all placeholders removed), Resend contact form email wired, NEXT_PUBLIC_SITE_URL updated to real domain, sitemap + robots confirmed using env var | 4 files |
 
 ---
 
@@ -54,5 +57,6 @@ page sections after Sessions 8–11 had built the visual components.
 - Next.js 15.5.14 (App Router)
 - Tailwind CSS 3.4
 - TypeScript
+- Resend (contact form email)
 - Vercel (hosting)
 - ISO 37301:2021 compliance framework
