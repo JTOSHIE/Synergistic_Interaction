@@ -41,7 +41,7 @@ const categories = [
     number: '05',
     name: 'Furniture, Homewares, and Flat-Pack',
     summary:
-      'Category management experience that extends into physical implementation — new store setups, flat-pack cabinet installation, and store refit coordination. Range curation, planogram design, and the fitout capability to execute at scale under real operational conditions.',
+      'Category management experience across furniture, homewares, and self-assembly storage products. Range curation, planogram design, and supplier coordination at scale across Australia and New Zealand. Strong distributor relationships across the full product spectrum from storage solutions to upholstered furniture.',
     compliance: 'Mandatory safety standards for children\'s furniture. RCM compliance for electrical homewares. Flammability requirements for upholstered furniture.',
   },
   {
@@ -166,28 +166,6 @@ export default function CategoryExpertisePage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Store Setup and Fitout */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-si-bg-secondary">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-12 gap-6 items-start">
-            <div className="md:col-span-4">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl font-bold text-si-teal/25 font-mono flex-shrink-0 w-10">+</span>
-                <h2 className="text-si-white font-semibold">Store Setup and Fitout</h2>
-              </div>
-            </div>
-            <div className="md:col-span-8">
-              <p className="text-si-white-muted text-sm leading-relaxed">
-                Approximately 25% of the G-Force Australia and New Zealand operation covered new store setups,
-                store refits, and fitout coordination — physically representing every supplier in the range during
-                a new store setup, to planogram specification, with a live go-live deadline. The assembly division
-                also covered flat-pack cabinet and melamine storage installation across the network.
-              </p>
-            </div>
           </div>
         </div>
       </section>

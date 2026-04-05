@@ -303,7 +303,7 @@ export default function GetStartedForm() {
           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-si-white placeholder-si-white-dim
                      focus:outline-none focus:ring-2 focus:ring-si-teal focus:border-transparent
                      hover:border-white/20 transition-colors"
-          placeholder="e.g. LinkedIn, referral, ACCC website, search engine"
+          placeholder="e.g. referral, ACCC website, search engine, industry event"
           {...register('referralSource')}
         />
       </div>

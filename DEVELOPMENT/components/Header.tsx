@@ -1,5 +1,4 @@
-// Header with logo, desktop nav, mobile hamburger, language toggle
-// V7 Non-Negotiable Absolute #2: "Change Language 中文" always visible in English header
+// Header with logo, desktop nav, mobile hamburger
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -21,7 +20,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isZh = pathname?.startsWith('/zh');
 
   useEffect(() => {
     function handleScroll() {
@@ -78,22 +76,8 @@ export default function Header() {
           })}
         </div>
 
-        {/* Right side: language toggle + CTA */}
+        {/* Right side: CTA */}
         <div className="flex items-center gap-3">
-          {/* V7 Non-Negotiable Absolute #2 — ALWAYS visible */}
-          <Link
-            href={isZh ? '/' : '/zh'}
-            className="hidden sm:flex items-center gap-1.5 text-xs text-si-white-muted hover:text-si-teal transition-colors border border-white/10 rounded px-2.5 py-1.5 hover:border-si-teal/30"
-            lang={isZh ? 'en' : 'zh-Hans'}
-            aria-label={isZh ? 'Switch to English' : 'Switch to Mandarin Chinese'}
-          >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="0.75"/>
-              <path d="M6 1c-1.5 1.5-2 3-2 5s.5 3.5 2 5M6 1c1.5 1.5 2 3 2 5s-.5 3.5-2 5M1 6h10" stroke="currentColor" strokeWidth="0.75"/>
-            </svg>
-            {isZh ? 'English' : '中文'}
-          </Link>
-
           <Link
             href="/get-started"
             className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-si-teal text-si-bg text-sm font-semibold rounded-lg hover:bg-si-teal-light transition-colors"
@@ -141,16 +125,6 @@ export default function Header() {
               );
             })}
             <div className="pt-3 flex items-center gap-3 border-t border-white/5 mt-3">
-              <Link
-                href={isZh ? '/' : '/zh'}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm text-si-white-muted border border-white/10 rounded-xl"
-              >
-                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="0.75"/>
-                  <path d="M6 1c-1.5 1.5-2 3-2 5s.5 3.5 2 5M6 1c1.5 1.5 2 3 2 5s-.5 3.5-2 5M1 6h10" stroke="currentColor" strokeWidth="0.75"/>
-                </svg>
-                {isZh ? 'English' : '中文'}
-              </Link>
               <Link
                 href="/get-started"
                 className="flex-1 flex items-center justify-center py-2.5 bg-si-teal text-si-bg text-sm font-semibold rounded-xl"

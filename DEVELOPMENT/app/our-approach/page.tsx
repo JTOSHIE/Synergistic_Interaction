@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import ComponentAccordion from '@/components/ComponentAccordion';
 import OurApproachVisual from '@/components/OurApproachVisual';
+import CategoryDashboard from '@/components/CategoryDashboard';
 import { complianceComponents } from '@/lib/compliance-data';
 
 export const metadata: Metadata = {
@@ -346,6 +347,22 @@ export default function OurApproachPage() {
               your category.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Sample category performance dashboard */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-si-bg-secondary">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-4">
+            Sample Reporting Output
+          </div>
+          <h2 className="text-2xl font-bold text-si-white mb-2">
+            What the Data Looks Like
+          </h2>
+          <p className="text-si-white-muted text-sm mb-6 max-w-2xl leading-relaxed">
+            Every engagement produces a live performance dashboard — GMROI, on-shelf availability, sell-through rate, and supplier compliance tracked weekly from launch day. The data drives ranging decisions, not intuition.
+          </p>
+          <CategoryDashboard />
         </div>
       </section>
 

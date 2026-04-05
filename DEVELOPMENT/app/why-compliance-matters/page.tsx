@@ -60,31 +60,6 @@ export default function WhyComplianceMattersPage() {
             </p>
           </div>
 
-          {/* $50M equation panel */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 sm:p-10">
-            <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 items-center text-center">
-              <div>
-                <div className="text-4xl font-bold text-si-error mb-2">$50M+</div>
-                <div className="text-sm text-si-white-muted">Maximum civil penalty per contravention</div>
-                <div className="text-xs text-si-white-dim mt-1">Australian Consumer Law s.224</div>
-              </div>
-              <div className="hidden sm:flex items-center justify-center">
-                <div className="text-3xl text-si-white-dim font-light">vs</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-si-teal mb-2">1,736×</div>
-                <div className="text-sm text-si-white-muted">Return on compliance investment</div>
-                <div className="text-xs text-si-white-dim mt-1">Based on $21,600–$28,800 engagement investment</div>
-              </div>
-            </div>
-            <div className="mt-8 pt-6 border-t border-white/10">
-              {/* V7 §7.2: Approved copy */}
-              <p className="text-si-white-muted leading-relaxed text-center">
-                We calculate it, by category, before implementation begins — then reduce it systematically
-                across all nine components. The compliance investment decision becomes arithmetic rather than abstract.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
