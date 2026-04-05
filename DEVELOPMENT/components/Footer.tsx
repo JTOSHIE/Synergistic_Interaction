@@ -95,8 +95,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-white/5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <p className="text-si-white-dim text-xs">
-              © 2025 Synergistic Interaction. ABN: [pending registration].
-              All rights reserved. synergisticinteraction.com.au
+              © 2025 Synergistic Interaction Pty Ltd — ABN 33 686 618 397. All rights reserved.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-3">
               <a
@@ -117,7 +116,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-xs text-si-white-dim hover:text-si-teal transition-colors"
               >
-                ABN: [pending registration]
+                ABN: 33 686 618 397
               </a>
             </div>
             <p className="text-si-white-dim text-xs max-w-sm">

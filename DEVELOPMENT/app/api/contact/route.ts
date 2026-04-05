@@ -1,6 +1,7 @@
-// Contact form API — Resend integration ready (uncomment after adding RESEND_API_KEY)
+// Contact form API — Resend integration
 // V7 §11.3: Captures: name, org, role, email, phone, categories, message, referral
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
 interface ContactFormData {
   name: string;
@@ -33,7 +34,9 @@ export async function POST(request: NextRequest) {
     if (!body.message?.trim()) return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     if (!body.categories?.length) return NextResponse.json({ error: 'At least one product category is required' }, { status: 400 });
 
-    const emailBody = `
+    const destinationEmail = process.env.CONTACT_DESTINATION_EMAIL ?? 'jt@synergisticinteraction.com.au';
+
+    const emailText = `
 NEW CATEGORY ASSESSMENT REQUEST
 ================================
 Submitted: ${new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })} AEST
@@ -53,30 +56,37 @@ ${sanitise(body.message)}
 Reply to: ${sanitise(body.email)}
     `.trim();
 
-    const destinationEmail = process.env.CONTACT_DESTINATION_EMAIL ?? 'jt@synergisticinteraction.com.au';
+    if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const { error: emailError } = await resend.emails.send({
+        from: 'Website <noreply@synergisticinteraction.com.au>',
+        to: [destinationEmail],
+        replyTo: body.email,
+        subject: `Category Assessment Request — ${sanitise(body.organisation)}`,
+        html: `
+          <h2>New Category Assessment Request</h2>
+          <p><strong>Name:</strong> ${sanitise(body.name)}</p>
+          <p><strong>Organisation:</strong> ${sanitise(body.organisation)}</p>
+          <p><strong>Role:</strong> ${sanitise(body.role)}</p>
+          <p><strong>Email:</strong> ${sanitise(body.email)}</p>
+          <p><strong>Phone:</strong> ${body.phone ? sanitise(body.phone) : '—'}</p>
+          <p><strong>Categories:</strong> ${body.categories.map(sanitise).join(', ')}</p>
+          <p><strong>Message:</strong><br>${sanitise(body.message)}</p>
+          <p><strong>Referral:</strong> ${body.referral ? sanitise(body.referral) : '—'}</p>
+          <hr>
+          <p style="color:#888;font-size:12px;">Submitted via synergisticinteraction.com.au/get-started</p>
+        `,
+        text: emailText,
+      });
 
-    // OPTION A: Resend (recommended — uncomment after adding RESEND_API_KEY to env vars)
-    // npm install resend
-    // import { Resend } from 'resend';
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: 'Synergistic Interaction <noreply@synergisticinteraction.com.au>',
-    //   to: destinationEmail,
-    //   replyTo: body.email,
-    //   subject: `Category Assessment Request — ${sanitise(body.organisation)}`,
-    //   text: emailBody,
-    // });
-
-    // OPTION B: Log to console until email service is configured
-    console.log(`[contact] New submission from ${body.email}:\n${emailBody}`);
-
-    // TODO: Remove this log and uncomment Resend before go-live
-    if (!process.env.RESEND_API_KEY) {
+      if (emailError) {
+        console.error('[contact] Resend error:', emailError);
+      }
+    } else {
+      // RESEND_API_KEY not set — log to console only
+      console.log(`[contact] New submission from ${body.email}:\n${emailText}`);
       console.warn('[contact] RESEND_API_KEY not set — form submission logged only, no email sent');
     }
-
-    // Suppress unused variable warning
-    void destinationEmail;
 
     return NextResponse.json({ success: true, message: 'Assessment request received.' }, { status: 200 });
   } catch (error) {

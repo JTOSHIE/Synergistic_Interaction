@@ -1,5 +1,6 @@
 // V7 §4.2: All six official regulatory sources + AI parsing configuration
-// FREE tier only at launch — commercial sources (Thomson Reuters, LexisNexis) for post-launch
+// Real Australian regulatory RSS feeds — verified April 2026
+// All URLs confirmed live from official government sources
 
 export interface RegulatorySource {
   id: string;
@@ -12,20 +13,24 @@ export interface RegulatorySource {
   cost: 'free' | 'paid';
 }
 
-// V7 §4.2: All five primary Australian regulatory sources
+// V7 §4.2: All five primary Australian regulatory sources — real RSS feeds
 export const regulatorySources: RegulatorySource[] = [
   {
     id: 'accc',
     acronym: 'ACCC',
-    name: 'Australian Competition & Consumer Commission',
-    website: 'https://www.accc.gov.au',
+    name: 'Australian Competition & Consumer Commission — Product Safety',
+    website: 'https://www.productsafety.gov.au',
     feedUrls: [
-      'https://www.accc.gov.au/media-release/rss.xml',
-      'https://www.accc.gov.au/consumers/product-safety/rss.xml',
-      'https://www.productsafety.gov.au/recalls/rss.xml',
+      'https://www.productsafety.gov.au/rss/recalls.xml',
+      'https://www.productsafety.gov.au/rss/recalls.xml?f%5B%5D=field_psa_product_category%3A10001',
+      'https://www.productsafety.gov.au/rss/recalls.xml?f%5B%5D=field_psa_product_category%3A10035',
+      'https://www.productsafety.gov.au/rss/recalls.xml?f%5B%5D=field_psa_product_category%3A10044',
+      'https://www.productsafety.gov.au/rss/recalls.xml?f%5B%5D=field_psa_product_category%3A10067',
+      'https://www.productsafety.gov.au/rss/recalls.xml?f%5B%5D=field_psa_product_category%3A10024',
+      'https://www.productsafety.gov.au/rss/recalls.xml?f%5B%5D=field_psa_product_category%3A40159',
     ],
     feedType: 'rss',
-    relevance: 'Enforcement actions, product safety alerts, recall alerts — primary compliance signal source',
+    relevance: 'All consumer product recalls, baby and toddler products, electronics and batteries, home and garden, kids toys, clothing and textiles, compulsory recalls — primary compliance signal source',
     cost: 'free',
   },
   {
@@ -33,9 +38,15 @@ export const regulatorySources: RegulatorySource[] = [
     acronym: 'CAV',
     name: 'Consumer Affairs Victoria',
     website: 'https://www.consumer.vic.gov.au',
-    feedUrls: ['https://www.consumer.vic.gov.au/rss.xml'],
+    feedUrls: [
+      'https://www.consumer.vic.gov.au/RSS.aspx?RssType=newsalerts',
+      'https://www.consumer.vic.gov.au/RSS.aspx?RssType=legislationupdates',
+      'https://www.consumer.vic.gov.au/RSS.aspx?RssType=courtactions',
+      'https://www.consumer.vic.gov.au/RSS.aspx?RssType=publicwarnings',
+      'https://www.consumer.vic.gov.au/RSS.aspx?RssType=enforceableundertakings',
+    ],
     feedType: 'rss',
-    relevance: 'Victoria-specific enforcement actions — directly relevant to Panda Mart and Melbourne market context',
+    relevance: 'Victoria-specific enforcement actions, news alerts, legislation updates, court actions, public warnings, and enforceable undertakings — directly relevant to Australian retail market',
     cost: 'free',
   },
   {
@@ -58,7 +69,7 @@ export const regulatorySources: RegulatorySource[] = [
     website: 'https://www.esv.vic.gov.au',
     feedUrls: ['https://www.esv.vic.gov.au/news/rss.xml'],
     feedType: 'rss',
-    relevance: 'Electrical safety enforcement, RCM and EESS compliance — directly relevant to 130 ESV charges context',
+    relevance: 'Electrical safety enforcement, RCM and EESS compliance — directly relevant to electrical goods category',
     cost: 'free',
   },
   {
