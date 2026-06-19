@@ -34,9 +34,17 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
 
-  // V7 §6.1 Option C: Redirect zh locale scripts away from blocked services
+  // Permanent redirects from retired compliance-era routes to the new AI-led structure
   async redirects() {
-    return [];
+    return [
+      { source: '/services', destination: '/capabilities', permanent: true },
+      { source: '/category-expertise', destination: '/industries', permanent: true },
+      { source: '/our-approach', destination: '/approach', permanent: true },
+      { source: '/why-compliance-matters', destination: '/approach', permanent: true },
+      { source: '/get-started', destination: '/contact', permanent: true },
+      { source: '/zh', destination: '/', permanent: true },
+      { source: '/zh/get-started', destination: '/contact', permanent: true },
+    ];
   },
 
   // Strict mode for React 19
