@@ -8,7 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import JsonLd from '@/components/JsonLd';
-import { organizationJsonLd } from '@/lib/site';
+import { BASE_URL, organizationJsonLd } from '@/lib/site';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -16,8 +16,6 @@ const inter = Inter({
   display: 'swap',
   variable: '--font-inter',
 });
-
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://synergisticinteraction.com.au';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

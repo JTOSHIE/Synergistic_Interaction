@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
-          // CSP removed — was blocking Tailwind inline styles and canvas
+          // CSP removed, it was blocking Tailwind inline styles and canvas
         ],
       },
     ];
@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
   // Compression
   compress: true,
 
-  // Output — default (Vercel handles this)
+  // Output, default (Vercel handles this)
   // output: 'standalone', // Uncomment for Docker deployment
 };
 
