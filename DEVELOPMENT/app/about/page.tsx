@@ -90,18 +90,30 @@ export default function AboutPage() {
 
       {/* The story */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto space-y-12">
-          {acts.map((a, i) => (
-            <Reveal key={a.era} delay={i * 80}>
-              <div className="border-l-2 border-si-teal/40 pl-6 sm:pl-8">
-                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
-                  {a.era}
-                </span>
-                <h2 className="text-2xl font-bold text-si-white mt-2 mb-3">{a.title}</h2>
-                <p className="text-si-white-muted leading-relaxed">{a.body}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="max-w-3xl mx-auto relative">
+          {/* Vertical connector line */}
+          <div
+            className="absolute left-[7px] top-2 bottom-2 w-px bg-si-teal/30"
+            aria-hidden="true"
+          />
+          <div className="space-y-12">
+            {acts.map((a, i) => (
+              <Reveal key={a.era} delay={i * 80}>
+                <div className="relative pl-10">
+                  {/* Marker */}
+                  <span
+                    className="absolute left-0 top-1.5 h-4 w-4 rounded-full bg-si-bg border-2 border-si-teal"
+                    aria-hidden="true"
+                  />
+                  <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                    {a.era}
+                  </span>
+                  <h2 className="text-2xl font-bold text-si-white mt-2 mb-3">{a.title}</h2>
+                  <p className="text-si-white-muted leading-relaxed">{a.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

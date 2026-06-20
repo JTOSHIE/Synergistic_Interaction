@@ -5,6 +5,15 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import {
+  Brain,
+  FileText,
+  FolderSearch,
+  ShieldCheck,
+  ClipboardList,
+  Wrench,
+  LifeBuoy,
+} from 'lucide-react';
 import Reveal from '@/components/motion/Reveal';
 import CountUp from '@/components/motion/CountUp';
 import HeroNetwork from '@/components/motion/HeroNetwork';
@@ -38,18 +47,22 @@ const capabilities = [
   {
     title: 'Bespoke AI knowledge systems',
     body: 'Your house style, language and rules captured once, so AI stays consistent across your team and over time.',
+    Icon: Brain,
   },
   {
     title: 'Document production at scale',
     body: 'Reports, proposals, board papers and templates produced to your standard, with the quality checks built in.',
+    Icon: FileText,
   },
   {
     title: 'Review and investigation at scale',
     body: 'Large volumes of email, documents and records read, indexed and made searchable.',
+    Icon: FolderSearch,
   },
   {
     title: 'Research, analysis and verification',
     body: 'Deep research cross-checked across more than one AI, with sources you can trust.',
+    Icon: ShieldCheck,
   },
 ];
 
@@ -58,16 +71,19 @@ const steps = [
     number: '01',
     title: 'Assess',
     body: 'A fixed-price AI Readiness Assessment. We map how you work, what you already have, and where the quick wins are, then hand back a plain roadmap.',
+    Icon: ClipboardList,
   },
   {
     number: '02',
     title: 'Integrate and train',
     body: 'We set up the right tools and workflows for your business and budget, and train your people to use them with confidence.',
+    Icon: Wrench,
   },
   {
     number: '03',
     title: 'Support',
     body: 'Light-touch support as the tools change, so you stay current without hiring anyone.',
+    Icon: LifeBuoy,
   },
 ];
 
@@ -186,6 +202,9 @@ export default function HomePage() {
             {capabilities.map((c, i) => (
               <Reveal key={c.title} className="h-full" delay={i * 80}>
                 <div className={cardClass}>
+                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-si-teal/10 border border-si-teal/20 text-si-teal">
+                    <c.Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+                  </div>
                   <h3 className="text-si-white font-semibold mb-2">{c.title}</h3>
                   <p className="text-si-white-muted text-sm leading-relaxed">{c.body}</p>
                 </div>
@@ -213,8 +232,13 @@ export default function HomePage() {
             {steps.map((s, i) => (
               <Reveal key={s.number} delay={i * 80}>
                 <div>
-                  <div className="text-si-teal text-sm font-semibold tracking-widest mb-3">
-                    {s.number}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-si-teal/10 border border-si-teal/20 text-si-teal">
+                      <s.Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+                    </div>
+                    <span className="text-si-teal text-sm font-semibold tracking-widest">
+                      {s.number}
+                    </span>
                   </div>
                   <h3 className="text-si-white font-semibold text-lg mb-2">{s.title}</h3>
                   <p className="text-si-white-muted text-sm leading-relaxed">{s.body}</p>
@@ -230,6 +254,30 @@ export default function HomePage() {
               See our approach &rarr;
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Readiness self-check band */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <Reveal>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 p-7 sm:p-8 rounded-2xl border border-si-teal/20 bg-si-teal/5">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-si-white mb-1">
+                  Not sure where you stand?
+                </h2>
+                <p className="text-si-white-muted text-sm leading-relaxed">
+                  Take the two minute AI Readiness self-check.
+                </p>
+              </div>
+              <Link
+                href="/readiness"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
+              >
+                Start the self-check
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 

@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Brain, FileText, FolderSearch, ShieldCheck, Workflow } from 'lucide-react';
 import Reveal from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
@@ -19,30 +20,35 @@ const capabilities = [
     body: 'The difference between using AI and using it well is configuration. We build instruction sets that capture your domain language, your people and accounts, your fixed figures, your house style and your rules. AI then works to your standard, consistently, across every member of your team and over time, instead of starting from scratch and drifting every session.',
     where:
       'Any business where consistency of language, figures and standards is the value. Long-running projects, multi-person teams, and regulated work.',
+    Icon: Brain,
   },
   {
     title: 'Document production at scale',
     body: 'Reports, proposals, board papers, templates and customer-facing documents produced to your standard, with the quality checks built in. Custom dictionaries, brand terminology and formatting applied automatically. One source of content, output as Word, PDF, spreadsheet or plain text, and ready for audio review or translation where you need it.',
     where:
       'Professional services, board and regulatory documents, technical documentation, branded reports and contract templates.',
+    Icon: FileText,
   },
   {
     title: 'Review and investigation at scale',
     body: 'Large volumes of email, documents and records read, indexed and made searchable. Every item catalogued with its date, type, the people involved, a key extract and its source, with related items cross-referenced. An unmanageable pile becomes a working record you can actually use.',
     where:
       'Due diligence, audits and reviews, investigations, archive and knowledge migration, and account and contract verification.',
+    Icon: FolderSearch,
   },
   {
     title: 'Research, analysis and verification',
     body: 'Deep research and analysis across many sources, synthesised into clear, citation-backed deliverables. Claims and figures cross-checked across more than one AI, so you are not relying on a single model, and primary sources verified rather than assumed.',
     where:
       'Market and competitor research, regulatory mapping, opportunity assessment, technical due diligence and scenario planning.',
+    Icon: ShieldCheck,
   },
   {
     title: 'Governed automation and AI agents',
     body: 'Where it makes sense, we automate the repetitive work and connect AI into your existing systems. The difference is governance. Nothing important runs unsupervised. High-stakes actions pause for a person to approve, which is exactly the pattern now expected of responsible AI in business. You get the speed of automation without handing over the steering wheel.',
     where:
       'High-volume processing, repetitive admin, and multi-step workflows that span several systems.',
+    Icon: Workflow,
   },
 ];
 
@@ -82,6 +88,9 @@ export default function CapabilitiesPage() {
           {capabilities.map((c, i) => (
             <Reveal key={c.title} delay={i * 70}>
               <div className="p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1">
+                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-si-teal/10 border border-si-teal/20 text-si-teal">
+                  <c.Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+                </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-si-white mb-3">{c.title}</h2>
                 <p className="text-si-white-muted leading-relaxed mb-5">{c.body}</p>
                 <div className="pt-4 border-t border-white/10">
