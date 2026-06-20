@@ -8,13 +8,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: ['/api/'],
       },
       {
         // V7 §6.2: Baidu crawler — allow full access for Mandarin indexing
         userAgent: 'Baiduspider',
         allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: ['/api/'],
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,

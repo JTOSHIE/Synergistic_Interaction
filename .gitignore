@@ -5,6 +5,7 @@
 # Next.js
 DEVELOPMENT/.next/
 DEVELOPMENT/node_modules/
+DEVELOPMENT/tsconfig.tsbuildinfo
 DEVELOPMENT/.env
 DEVELOPMENT/.env.local
 DEVELOPMENT/.env.production

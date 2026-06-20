@@ -8,12 +8,11 @@ import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/capabilities', label: 'Capabilities' },
+  { href: '/approach', label: 'Approach' },
+  { href: '/industries', label: 'Industries' },
   { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/category-expertise', label: 'Category Expertise' },
-  { href: '/our-approach', label: 'Our Approach' },
-  { href: '/why-compliance-matters', label: 'Why Compliance Matters' },
-  { href: '/get-started', label: 'Get Started' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -79,10 +78,10 @@ export default function Header() {
         {/* Right side: CTA */}
         <div className="flex items-center gap-3">
           <Link
-            href="/get-started"
+            href="/contact"
             className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-si-teal text-si-bg text-sm font-semibold rounded-lg hover:bg-si-teal-light transition-colors"
           >
-            Get Started
+            Book an Assessment
           </Link>
 
           {/* Mobile hamburger */}
@@ -126,10 +125,10 @@ export default function Header() {
             })}
             <div className="pt-3 flex items-center gap-3 border-t border-white/5 mt-3">
               <Link
-                href="/get-started"
+                href="/contact"
                 className="flex-1 flex items-center justify-center py-2.5 bg-si-teal text-si-bg text-sm font-semibold rounded-xl"
               >
-                Get Started
+                Book an Assessment
               </Link>
             </div>
           </div>

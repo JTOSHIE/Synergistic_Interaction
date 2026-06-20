@@ -1,413 +1,301 @@
+// Target path in repo: app/page.tsx
+// Synergistic Interaction — Home (AI-led repositioning)
+// Server component. Uses the existing design tokens: si-bg, si-teal, si-teal-light, si-white, si-white-muted, si-gradient.
+// No client-side state, so no 'use client' needed.
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import ProofBar from '@/components/ProofBar';
-import ComponentAccordion from '@/components/ComponentAccordion';
-import RegulatoryFeed from '@/components/RegulatoryFeed';
-import HomepageHero from '@/components/HomepageHero';
-import { complianceComponents } from '@/lib/compliance-data';
 
 export const metadata: Metadata = {
-  title: 'Synergistic Interaction — Category Management Consultancy',
+  title: { absolute: 'Synergistic Interaction: Practical AI Adoption for Australian Business' },
   description:
-    'End-to-end category management for Australian retailers and global suppliers. Range architecture, supplier negotiation, planogram design, compliance, and in-store execution. Cornell-validated methodology.',
+    'We help established Australian businesses and practices adopt AI the practical way. A fixed-price readiness assessment, the right tools and workflows, staff training, and a human always in the loop. Weeks, not years.',
 };
 
-// Retailer credentials — described by scale, not brand name
-const credentials = [
+const pains = [
   {
-    stat: '330+',
-    description: "Australia's largest hardware retailer",
-    detail: 'Stores managed simultaneously across ANZ',
+    title: 'Licences nobody uses',
+    body: 'You are paying for Copilot or a similar tool, and real adoption never happened.',
   },
   {
-    stat: '4',
-    description: 'International retail markets',
-    detail: 'USA · UK · Australia · New Zealand — across three continents',
+    title: 'Tools that do not talk to each other',
+    body: 'A patchwork of apps that takes more work to manage than it saves.',
   },
   {
-    stat: '3,500+',
-    description: 'American national dairy program',
-    detail: 'Experience within programs independently validated by Cornell University research',
-  },
-  {
-    stat: '13 yrs',
-    description: 'First client retained',
-    detail: 'The only meaningful measure of sustained delivery',
+    title: 'Staff left guessing',
+    body: 'Your people want to use AI well, but they have had no guidance and worry about getting it wrong.',
   },
 ];
 
-// Five-phase methodology summary
-const methodology = [
+const capabilities = [
   {
-    phase: '01',
-    title: 'Discovery & Analysis',
-    description:
-      'Market research, competitive benchmarking, compliance requirements, store audit, POS data analysis. The factual foundation every category decision is built on.',
+    title: 'Bespoke AI knowledge systems',
+    body: 'Your house style, language and rules captured once, so AI stays consistent across your team and over time.',
   },
   {
-    phase: '02',
-    title: 'Range Architecture',
-    description:
-      'SKU selection using sell-through data, margin analysis, and compliance scoring. The right 10–15 products at launch beats 50 wrong ones every time.',
+    title: 'Document production at scale',
+    body: 'Reports, proposals, board papers and templates produced to your standard, with the quality checks built in.',
   },
   {
-    phase: '03',
-    title: 'Supplier Negotiation',
-    description:
-      'Established distributor relationships across ten product categories. Faster timelines, better initial terms, and trade marketing support a new entrant cannot access cold.',
+    title: 'Review and investigation at scale',
+    body: 'Large volumes of email, documents and records read, indexed and made searchable.',
   },
   {
-    phase: '04',
-    title: 'Planogram & Merchandising',
-    description:
-      'Bay layout, product placement, cross-merchandising, signage, and staff training materials. Every placement decision made for a commercial reason.',
-  },
-  {
-    phase: '05',
-    title: 'Implementation & Launch',
-    description:
-      'Consultant on-site for launch day. Planogram installed correctly. Staff trained. Stock rotated. Performance monitored from week one.',
+    title: 'Research, analysis and verification',
+    body: 'Deep research cross-checked across more than one AI, with sources you can trust.',
   },
 ];
 
-// Services overview — three panels
-const servicesSummary = [
+const steps = [
   {
-    title: 'Strategic Category Transformation',
-    audience: 'For retailers',
-    description:
-      'End-to-end category implementation from discovery through to in-store launch. Range architecture, supplier sourcing, planogram design, compliance, and ongoing performance monitoring.',
-    href: '/services#category-transformation',
+    number: '01',
+    title: 'Assess',
+    body: 'A fixed-price AI Readiness Assessment. We map how you work, what you already have, and where the quick wins are, then hand back a plain roadmap.',
   },
   {
-    title: 'Supplier & Retailer Partnership',
-    audience: 'For suppliers & retailers',
-    description:
-      'Acting as the expert conduit between major retailers and their suppliers. Navigating buying structures, negotiating terms, building the commercial relationships that produce long-term results.',
-    href: '/services#supplier-retailer',
+    number: '02',
+    title: 'Integrate and train',
+    body: 'We set up the right tools and workflows for your business and budget, and train your people to use them with confidence.',
   },
   {
-    title: 'New Market Entry',
-    audience: 'For global suppliers',
-    description:
-      'For international brands entering the ANZ retail market. Channel strategy, compliance preparation, range architecture, and retailer buyer engagement from an operator with experience across four international retail markets.',
-    href: '/services#market-entry',
+    number: '03',
+    title: 'Support',
+    body: 'Light-touch support as the tools change, so you stay current without hiring anyone.',
   },
+];
+
+const industries = [
+  'Retail, wholesale and category management',
+  'Accounting and bookkeeping',
+  'Builders and trades',
+  'Manufacturing and supply chain',
+  'Government and not-for-profit',
+  'Medical and allied health',
+  'Law firms and practices',
+];
+
+const outcomes = [
+  { title: 'Capability', body: 'Higher-quality output at greater volume than before.' },
+  { title: 'Consistency', body: 'Your standard, held across every person and every document.' },
+  { title: 'Speed', body: 'Work that took days delivered in hours.' },
+  { title: 'Resilience', body: 'Knowledge captured in the system, not stuck in one person.' },
+  { title: 'Cost discipline', body: 'Your experts spend their time where it actually counts.' },
 ];
 
 export default function HomePage() {
   return (
     <main>
-      {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] flex items-center py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-si-bg">
+      {/* Hero */}
+      <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-si-gradient" aria-hidden="true" />
         <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
+          className="absolute inset-0 opacity-20"
           style={{
             background:
-              'radial-gradient(ellipse 80% 60% at 65% 40%, rgba(0,201,167,0.07) 0%, transparent 70%)',
+              'radial-gradient(ellipse at 60% 30%, rgba(0,201,167,0.15) 0%, transparent 60%)',
           }}
+          aria-hidden="true"
         />
-        <div className="relative max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-si-teal" />
-              25 Years · Global Retail Markets · Ten Categories
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-si-white leading-tight mb-6">
-              Category Management{' '}
-              <span className="text-si-teal">That Delivers.</span>
-            </h1>
-
-            <p className="text-xl text-si-white-muted leading-relaxed mb-4 max-w-xl">
-              From range architecture and supplier negotiation to planogram installation
-              and compliance — Synergistic Interaction delivers end-to-end category
-              management across Australia, the USA, and the UK.
-            </p>
-
-            <p className="text-base text-si-white-muted leading-relaxed mb-8 max-w-xl">
-              We work with retailers building new categories and suppliers seeking access
-              to the retail network. The methodology is Cornell-validated. The relationships
-              are established. The execution is in-field, not in a presentation.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors"
-              >
-                Our Services
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-              <Link
-                href="/category-expertise"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-white/20 text-si-white rounded-xl hover:border-si-teal hover:text-si-teal transition-colors"
-              >
-                Category Expertise
-              </Link>
-            </div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-si-teal" />
+            Practical AI adoption for Australian business
           </div>
-
-          <div className="relative">
-            <HomepageHero />
-          </div>
-        </div>
-      </section>
-
-      {/* ── PROOF BAR ────────────────────────────────────────── */}
-      <ProofBar />
-
-      {/* ── CREDENTIALS STRIP ────────────────────────────────── */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 border-b border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-widest text-si-white-dim text-center mb-10">
-            Delivered across the world&apos;s most demanding retail environments
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-si-white mb-6 leading-tight">
+            Get your business genuinely using AI.{' '}
+            <span className="text-si-teal">In weeks, not years.</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-si-white-muted mb-10 leading-relaxed max-w-2xl mx-auto">
+            Most businesses your size are too busy to ignore AI and too small to
+            have anyone to lead it. We work out how you actually run, give your
+            people the right tools and training, and keep a human in the loop the
+            whole way.
           </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {credentials.map((c) => (
-              <div
-                key={c.stat}
-                className="p-5 rounded-xl border border-white/10 bg-white/5 text-center"
-              >
-                <p className="text-3xl font-bold text-si-teal mb-2">{c.stat}</p>
-                <p className="text-si-white text-sm font-medium mb-1">{c.description}</p>
-                <p className="text-si-white-dim text-xs leading-snug">{c.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SERVICES OVERVIEW ────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-si-bg-secondary border-b border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-si-white mb-4">
-              Who We Work With
-            </h2>
-            <p className="text-si-white-muted max-w-2xl leading-relaxed">
-              Synergistic Interaction works on both sides of the retailer-supplier
-              relationship. Retailers building categories. Suppliers entering markets.
-              Both need the same thing — someone who understands the commercial landscape
-              and has the relationships to navigate it.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {servicesSummary.map((s) => (
-              <Link
-                key={s.title}
-                href={s.href}
-                className="group p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-si-teal/30 hover:bg-white/[0.08] transition-all"
-              >
-                <span className="inline-block text-xs font-medium text-si-teal bg-si-teal/10 border border-si-teal/20 rounded px-2 py-0.5 mb-4">
-                  {s.audience}
-                </span>
-                <h3 className="text-si-white font-semibold mb-3 group-hover:text-si-teal transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-si-white-muted text-sm leading-relaxed">
-                  {s.description}
-                </p>
-                <div className="mt-4 flex items-center gap-1 text-si-teal text-xs font-medium">
-                  Learn more
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-si-teal hover:text-si-teal-light transition-colors font-medium text-sm"
+              href="/contact"
+              className="inline-flex items-center justify-center px-6 py-3.5 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
             >
-              View all services
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              Book an AI Readiness Assessment
+            </Link>
+            <Link
+              href="/capabilities"
+              className="inline-flex items-center justify-center px-6 py-3.5 border border-white/20 text-si-white rounded-xl hover:border-si-teal hover:text-si-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
+            >
+              See what we do
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── FIVE-PHASE METHODOLOGY ───────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 border-b border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-si-white mb-4">
-              End-to-End. In-Field. Not a Report.
-            </h2>
-            <p className="text-si-white-muted leading-relaxed max-w-2xl">
-              The five-phase methodology covers every stage of category implementation —
-              from market research to launch day. The consultant is on-site at launch.
-              The planogram is installed correctly. The staff are trained. That is the
-              standard, not the exception.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {methodology.map((m) => (
-              <div
-                key={m.phase}
-                className="flex gap-5 p-5 rounded-xl border border-white/10 bg-white/5"
-              >
-                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-si-teal/10 border border-si-teal/20 flex items-center justify-center text-si-teal text-xs font-mono font-bold">
-                  {m.phase}
-                </span>
-                <div>
-                  <p className="text-si-white font-semibold mb-1">{m.title}</p>
-                  <p className="text-si-white-muted text-sm leading-relaxed">
-                    {m.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href="/our-approach"
-              className="inline-flex items-center gap-2 text-si-teal hover:text-si-teal-light transition-colors font-medium text-sm"
-            >
-              The compliance architecture behind the methodology
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CORNELL PROOF CALLOUT ────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-si-bg-secondary border-b border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-6">
-                Independently Validated
-              </div>
-              <h2 className="text-3xl font-bold text-si-white mb-6">
-                4% Average Daily Volume Uplift.{' '}
-                <span className="text-si-teal">Cornell University Research.</span>
-              </h2>
-              <p className="text-si-white-muted leading-relaxed mb-4">
-                The category management programs Synergistic Interaction&apos;s principal worked within were
-                independently evaluated by Cornell University researchers. The published
-                finding: a 4% average daily volume increase across 61 retail stores in a
-                competitive US market — covering 85% of all stores in that market and 91%
-                of total category sales.
-              </p>
-              <p className="text-si-white-muted leading-relaxed mb-6">
-                This is not a case study produced by the consultant. It is an independent,
-                peer-reviewed academic finding. The same systematic approach applied to
-                every Synergistic Interaction engagement.
-              </p>
-              <p className="text-xs text-si-white-dim">
-                Schmit, T.M., Kaiser, H.M. &amp; Chung, C. (2004). Cornell University,
-                Department of Applied Economics and Management. R.B. 2004-02.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: '4%', label: 'Average daily volume uplift', sub: 'Across all store formats' },
-                { value: '5.3%', label: 'Supermarkets & mass merchants', sub: 'Highest performing format' },
-                { value: '61', label: 'Stores in the study', sub: '85% of the market' },
-                { value: '91%', label: 'Of total category sales', sub: 'Covered by the study' },
-              ].map((item) => (
-                <div
-                  key={item.value}
-                  className="p-5 rounded-xl border border-si-teal/20 bg-si-teal/5 text-center"
-                >
-                  <p className="text-3xl font-bold text-si-teal mb-1">{item.value}</p>
-                  <p className="text-si-white text-xs font-medium mb-1">{item.label}</p>
-                  <p className="text-si-white-dim text-xs">{item.sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── COMPLIANCE ARCHITECTURE PREVIEW ─────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 border-b border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-si-white mb-4">
-              The Architecture Underneath the Growth
-            </h2>
-            <p className="text-si-white-muted max-w-2xl leading-relaxed">
-              Every category Synergistic Interaction manages is built on a nine-component
-              compliance architecture. Not because compliance is the goal — because it is
-              the structural foundation that makes growth sustainable and scalable without
-              regulatory ceiling.
-            </p>
-          </div>
-          <ComponentAccordion
-            components={complianceComponents.slice(0, 3)}
-            expandFirst={false}
-          />
-          <div className="text-center mt-8">
-            <Link
-              href="/our-approach"
-              className="inline-flex items-center gap-2 text-si-teal hover:text-si-teal-light transition-colors font-medium text-sm"
-            >
-              View all nine components
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── REGULATORY FEED PREVIEW ──────────────────────────── */}
+      {/* The problem */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-            <div>
-              <h2 className="text-2xl font-bold text-si-white mb-2">
-                Live Regulatory Intelligence
-              </h2>
-              <p className="text-si-white-muted text-sm">
-                Monitoring ACCC, Consumer Affairs Victoria, TGA, and Energy Safe Victoria daily.
-              </p>
-            </div>
-            <Link
-              href="/why-compliance-matters#regulatory-feed"
-              className="flex-shrink-0 text-si-teal text-sm hover:underline"
-            >
-              View all updates →
-            </Link>
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-5 max-w-2xl">
+            You do not need more AI. You need it working.
+          </h2>
+          <p className="text-si-white-muted leading-relaxed max-w-2xl mb-12">
+            Chances are you already have AI in the building. A licence nobody
+            uses. A few staff quietly pasting work into a chatbot. Tools that
+            promised a lot and delivered a mess. The problem is rarely the
+            technology. It is that nothing has been set up around how your
+            business actually runs, and no one has shown your people how to use it
+            well. The risk is not missing out. It is using AI badly, paying for
+            tools that sit idle, and falling behind the businesses that got it
+            right.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {pains.map((p) => (
+              <div key={p.title} className="p-6 rounded-2xl border border-white/10 bg-white/5">
+                <h3 className="text-si-white font-semibold mb-2">{p.title}</h3>
+                <p className="text-si-white-muted text-sm leading-relaxed">{p.body}</p>
+              </div>
+            ))}
           </div>
-          <RegulatoryFeed showFilter={false} maxItems={3} />
         </div>
       </section>
 
-      {/* ── FINAL CTA ────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-si-bg-secondary border-t border-white/5">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-si-white mb-4">
-            Ready to build the category?
+      {/* What we build */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-3">What we build</h2>
+          <p className="text-si-white-muted leading-relaxed max-w-2xl mb-12">
+            Bespoke AI built around the work you actually do, not generic tools bolted on.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {capabilities.map((c) => (
+              <div key={c.title} className="p-6 rounded-2xl border border-white/10 bg-white/5">
+                <h3 className="text-si-white font-semibold mb-2">{c.title}</h3>
+                <p className="text-si-white-muted text-sm leading-relaxed">{c.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8">
+            <Link
+              href="/capabilities"
+              className="text-si-teal hover:text-si-teal-light font-medium transition-colors"
+            >
+              Explore our capabilities &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How we work */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-12">How we work</h2>
+          <div className="grid sm:grid-cols-3 gap-8">
+            {steps.map((s) => (
+              <div key={s.number}>
+                <div className="text-si-teal text-sm font-semibold tracking-widest mb-3">
+                  {s.number}
+                </div>
+                <h3 className="text-si-white font-semibold text-lg mb-2">{s.title}</h3>
+                <p className="text-si-white-muted text-sm leading-relaxed">{s.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/approach"
+              className="text-si-teal hover:text-si-teal-light font-medium transition-colors"
+            >
+              See our approach &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Human in the loop */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-5">
+            AI does the work. Your people stay in charge.
           </h2>
-          <p className="text-si-white-muted mb-8 leading-relaxed">
-            Whether you are a retailer launching a new category or a supplier seeking
-            access to the Australian and New Zealand retail market — the first conversation maps the
-            opportunity and the path to it.
+          <p className="text-si-white-muted leading-relaxed">
+            Every output that matters is built by AI and then reviewed and
+            approved by the person accountable for it. AI carries the volume, your
+            expert keeps the judgement, and only approved work goes out the door.
+            It is also the direction Australia is setting. Human oversight is a
+            core principle of the national AI ethics framework, and it is built
+            into everything we set up.
+          </p>
+        </div>
+      </section>
+
+      {/* Industries */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-3">
+            Industries we work across
+          </h2>
+          <p className="text-si-white-muted leading-relaxed max-w-2xl mb-10">
+            The same discipline, shaped to your sector.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {industries.map((name) => (
+              <span
+                key={name}
+                className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-si-white-muted text-sm"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/industries"
+              className="text-si-teal hover:text-si-teal-light font-medium transition-colors"
+            >
+              See your industry &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Proof */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-5 max-w-2xl">
+            Experience that earns its keep
+          </h2>
+          <p className="text-si-white-muted leading-relaxed max-w-2xl mb-12">
+            This is not a new venture chasing a trend. Behind Synergistic
+            Interaction is 25 years of turning new technology into real business
+            change, including building one of the first web-based category
+            management systems in the world, independently validated by Cornell
+            University, and running category management across one of the largest
+            retail networks in Australia and New Zealand. AI is simply the current
+            chapter.
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
+            {outcomes.map((o) => (
+              <div key={o.title} className="p-5 rounded-2xl border border-white/10 bg-white/5">
+                <h3 className="text-si-white font-semibold text-sm mb-2">{o.title}</h3>
+                <p className="text-si-white-muted text-xs leading-relaxed">{o.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-si-white mb-5">
+            Start with a clear, honest look at where you are.
+          </h2>
+          <p className="text-si-white-muted leading-relaxed mb-10">
+            The AI Readiness Assessment is a fixed-price first step. No jargon, no
+            lock-in, no pressure. You come away knowing exactly where AI can help
+            your business and what it will take.
           </p>
           <Link
-            href="/get-started"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors"
+            href="/contact"
+            className="inline-flex items-center justify-center px-7 py-4 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
           >
-            Start the Conversation
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            Book an AI Readiness Assessment
           </Link>
         </div>
       </section>
