@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Insights',
   description:
     'Short, practical perspectives on using AI well in a real business, without the hype and without the jargon.',
+  alternates: { canonical: '/insights' },
 };
 
 const articles = [

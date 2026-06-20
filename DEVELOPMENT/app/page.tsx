@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Synergistic Interaction: Practical AI Adoption for Australian Business' },
   description:
     'We help established Australian businesses and practices adopt AI the practical way. A fixed-price readiness assessment, the right tools and workflows, staff training, and a human always in the loop. Weeks, not years.',
+  alternates: { canonical: '/' },
 };
 
 const cardClass =

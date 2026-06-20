@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Industries',
   description:
     'Practical AI adoption across retail and wholesale, accounting, trades, manufacturing, government and not-for-profit, health, and law. The same discipline, shaped to your sector.',
+  alternates: { canonical: '/industries' },
 };
 
 const sectors = [

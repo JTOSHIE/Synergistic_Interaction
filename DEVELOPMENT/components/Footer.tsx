@@ -37,7 +37,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation column */}
-          <div>
+          <nav aria-label="Footer">
             <h3 className="text-si-white text-xs font-semibold uppercase tracking-widest mb-4">
               Navigate
             </h3>
@@ -53,16 +53,16 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <p className="text-si-white-dim text-xs">
+            <p className="text-si-white-muted text-xs">
               © 2026 Synergistic Interaction Pty Ltd, ABN 33 686 618 397. All rights reserved.
             </p>
-            <p className="text-si-white-dim text-xs max-w-md">
+            <p className="text-si-white-muted text-xs max-w-md">
               Synergistic Interaction Pty Ltd provides AI adoption advisory and
               implementation services. Information on this site is general in
               nature and is not legal, financial or other professional advice.

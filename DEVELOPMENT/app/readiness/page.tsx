@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: 'AI Readiness Self-Check',
   description:
     'A two minute self-check to see where your business stands with AI. It runs entirely in your browser, nothing is sent or stored.',
+  alternates: { canonical: '/readiness' },
 };
 
 export default function ReadinessPage() {

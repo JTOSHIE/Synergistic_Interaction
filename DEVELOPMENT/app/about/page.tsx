@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: 'About',
   description:
     'Twenty-five years of turning new technology into business change, across Australia, New Zealand, the USA and the UK. AI is simply the current chapter.',
+  alternates: { canonical: '/about' },
 };
 
 const acts = [
