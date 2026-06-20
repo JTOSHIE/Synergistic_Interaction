@@ -1,8 +1,7 @@
 // Target path in repo: app/insights/page.tsx
 // Synergistic Interaction, Insights index (AI-led repositioning)
 // Server component. Uses the existing design tokens: si-bg, si-teal, si-teal-light, si-white, si-white-muted, si-gradient.
-// Note: these are the planned pieces. The article bodies are a separate content task. Once written, each card
-// becomes a link to app/insights/[slug]/page.tsx.
+// Each card links to its article at app/insights/[slug].
 // Interactivity is isolated in the small client components under components/motion.
 
 import type { Metadata } from 'next';
@@ -17,24 +16,28 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: 'human-in-the-loop',
     topic: 'Method',
     title: 'Why the smartest AI rule is to keep a human in the loop',
     summary:
       'The single discipline that makes AI safe in a real business, and why it matters more, not less, as the tools get more capable.',
   },
   {
+    slug: 'right-ai-not-the-best-ai',
     topic: 'Tools',
     title: 'You do not need the best AI. You need the right one.',
     summary:
       'How to choose a model for your business based on your tools, your budget and where your data is allowed to live, instead of chasing the newest release.',
   },
   {
+    slug: 'fix-ai-fatigue',
     topic: 'Adoption',
     title: 'AI fatigue is real, and here is how to fix it',
     summary:
       'Most businesses already have AI and it is not delivering. The problem is rarely the tools, and the fix is simpler than buying more of them.',
   },
   {
+    slug: 'ai-governance-small-business',
     topic: 'Governance',
     title: 'What AI governance actually means for a small business',
     summary:
@@ -75,14 +78,20 @@ export default function InsightsPage() {
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-5">
           {articles.map((a, i) => (
-            <Reveal key={a.title} className="h-full" delay={i * 80}>
-              <article className="h-full p-7 rounded-2xl border border-white/10 bg-white/5 flex flex-col transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1">
+            <Reveal key={a.slug} className="h-full" delay={i * 80}>
+              <Link
+                href={`/insights/${a.slug}`}
+                className="group block h-full p-7 rounded-2xl border border-white/10 bg-white/5 flex flex-col transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
+              >
                 <span className="text-si-teal text-xs font-semibold tracking-widest uppercase mb-3">
                   {a.topic}
                 </span>
                 <h2 className="text-lg font-bold text-si-white mb-3 leading-snug">{a.title}</h2>
-                <p className="text-si-white-muted text-sm leading-relaxed">{a.summary}</p>
-              </article>
+                <p className="text-si-white-muted text-sm leading-relaxed mb-4">{a.summary}</p>
+                <span className="mt-auto text-si-teal text-sm font-medium">
+                  Read article &rarr;
+                </span>
+              </Link>
             </Reveal>
           ))}
         </div>

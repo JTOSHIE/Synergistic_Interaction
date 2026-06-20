@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Store, Calculator, HardHat, Factory, Landmark, Stethoscope, Scale } from 'lucide-react';
 import Reveal from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
@@ -18,30 +19,37 @@ const sectors = [
     name: 'Retail, wholesale and category management',
     flagship: true,
     body: 'Where it began. Twenty-five years of category management across some of the largest retail networks in Australia, New Zealand, the USA and the UK is the origin of the discipline we now bring to AI. For retailers and wholesalers that means faster range planning, supplier negotiation preparation, performance and variance analysis, and marketing and brief development, all done in a fraction of the time and to a consistent standard.',
+    Icon: Store,
   },
   {
     name: 'Accounting and bookkeeping',
     body: 'Document-heavy, deadline-driven work where AI earns its place quickly. Drafting and formatting client deliverables, extracting and reconciling figures from statements, summarising legislation in plain English, and handling routine client correspondence, with a qualified person reviewing and signing off everything that goes out.',
+    Icon: Calculator,
   },
   {
     name: 'Builders and trades',
     body: 'The paperwork that eats into billable time. Tender and quote drafting, contract and project documentation, variation and claims paperwork, and site reporting, produced quickly and consistently so the team can stay on the tools.',
+    Icon: HardHat,
   },
   {
     name: 'Manufacturing and supply chain',
     body: 'Supplier and quality documentation, regulatory and compliance reporting, technical writing, and performance analysis, brought together and produced to a consistent standard. A natural neighbour to the retail and wholesale work we know well.',
+    Icon: Factory,
   },
   {
     name: 'Government and not-for-profit',
     body: 'Submission and grant writing, stakeholder communication, report production and policy synthesis, with the transparency and oversight these organisations are held to built in from the start.',
+    Icon: Landmark,
   },
   {
     name: 'Medical and allied health',
     body: 'Patient communication, multilingual support for diverse communities, documentation discipline and research synthesis, always with appropriate clinical oversight and strict privacy controls.',
+    Icon: Stethoscope,
   },
   {
     name: 'Law firms and practices',
     body: 'A great deal of legal work is back-end production, and that is where AI helps. Document creation and drafting support, research and verification, and evidence and document review and cataloguing, all under the build, review and approve discipline, where AI produces and the qualified practitioner edits, corrects and signs off. The judgement, and the accountability, stay with the practitioner.',
+    Icon: Scale,
   },
 ];
 
@@ -96,15 +104,12 @@ export default function IndustriesPage() {
                     Where it began
                   </span>
                 )}
-                <h2
-                  className={
-                    s.flagship
-                      ? 'text-xl sm:text-2xl font-bold text-si-white mt-2 mb-3'
-                      : 'text-xl sm:text-2xl font-bold text-si-white mb-3'
-                  }
-                >
-                  {s.name}
-                </h2>
+                <div className={`flex items-center gap-3 mb-3 ${s.flagship ? 'mt-2' : ''}`}>
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-si-teal/10 border border-si-teal/20 text-si-teal shrink-0">
+                    <s.Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-si-white">{s.name}</h2>
+                </div>
                 <p className="text-si-white-muted leading-relaxed">{s.body}</p>
               </div>
             </Reveal>

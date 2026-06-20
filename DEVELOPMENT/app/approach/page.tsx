@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Compass, PenLine, Hammer, Check, RefreshCw } from 'lucide-react';
 import Reveal from '@/components/motion/Reveal';
 import FlowDiagram from '@/components/motion/FlowDiagram';
 
@@ -19,26 +20,31 @@ const steps = [
     number: '01',
     title: 'Discovery',
     body: 'We sit with your business and learn the actual work. Not the org chart, the real day to day. What your people do, what slows them down, and where the time goes.',
+    Icon: Compass,
   },
   {
     number: '02',
     title: 'Specification',
     body: 'We write the brief that AI works from. Your language, your people and figures, your house style, your rules and your standards. You review it, and you own it.',
+    Icon: PenLine,
   },
   {
     number: '03',
     title: 'Build',
     body: 'We build the workflows, templates and tools, and test them against your real work rather than a demo.',
+    Icon: Hammer,
   },
   {
     number: '04',
     title: 'Build, review, approve',
     body: 'In daily use, AI produces and your expert reviews and approves. Only approved work goes out. AI accelerates, it does not replace.',
+    Icon: Check,
   },
   {
     number: '05',
     title: 'Iterate',
     body: 'We tune the setup as the work shows us more. It improves with use, so you are never stuck with a one-off deployment.',
+    Icon: RefreshCw,
   },
 ];
 
@@ -116,9 +122,14 @@ export default function ApproachPage() {
           <div className="space-y-8">
             {steps.map((s, i) => (
               <Reveal key={s.number} delay={i * 70}>
-                <div className="flex gap-5 sm:gap-8">
-                  <div className="text-si-teal text-sm font-semibold tracking-widest pt-1 shrink-0 w-8">
-                    {s.number}
+                <div className="flex gap-5 sm:gap-6">
+                  <div className="flex flex-col items-center shrink-0">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-si-teal/10 border border-si-teal/20 text-si-teal">
+                      <s.Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+                    </div>
+                    <span className="text-si-teal text-xs font-semibold tracking-widest mt-2">
+                      {s.number}
+                    </span>
                   </div>
                   <div>
                     <h3 className="text-si-white font-semibold text-lg mb-1">{s.title}</h3>
