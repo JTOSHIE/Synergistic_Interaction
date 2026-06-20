@@ -115,3 +115,29 @@
     background-clip: text;
   }
 }
+
+/* Flow diagram connectors: a gentle dot travelling along the line. */
+@keyframes si-flow-x {
+  0% { left: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@keyframes si-flow-y {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.si-flow-dot-x { animation: si-flow-x 2.6s ease-in-out infinite; }
+.si-flow-dot-y { animation: si-flow-y 2.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .si-flow-dot-x,
+  .si-flow-dot-y {
+    animation: none;
+    opacity: 0;
+  }
+}

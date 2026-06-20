@@ -43,7 +43,7 @@ export default function Header() {
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between" aria-label="Main navigation">
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal rounded" aria-label="Synergistic Interaction — Home">
+        <Link href="/" className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal rounded" aria-label="Synergistic Interaction, Home">
           <Image
             src="/logo.svg"
             alt="Synergistic Interaction"

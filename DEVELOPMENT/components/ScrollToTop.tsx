@@ -1,4 +1,4 @@
-// Scroll to top button — appears after 400px scroll
+// Scroll to top button, appears after 400px scroll
 'use client';
 
 import { useEffect, useState } from 'react';

@@ -1,4 +1,4 @@
-// Contact form API — Resend integration
+// Contact form API, Resend integration
 // V7 §11.3: Captures: name, org, role, email, phone, categories, message, referral
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
@@ -62,17 +62,17 @@ Reply to: ${sanitise(body.email)}
         from: 'Website <noreply@synergisticinteraction.com.au>',
         to: [destinationEmail],
         replyTo: body.email,
-        subject: `Category Assessment Request — ${sanitise(body.organisation)}`,
+        subject: `Category Assessment Request: ${sanitise(body.organisation)}`,
         html: `
           <h2>New Category Assessment Request</h2>
           <p><strong>Name:</strong> ${sanitise(body.name)}</p>
           <p><strong>Organisation:</strong> ${sanitise(body.organisation)}</p>
           <p><strong>Role:</strong> ${sanitise(body.role)}</p>
           <p><strong>Email:</strong> ${sanitise(body.email)}</p>
-          <p><strong>Phone:</strong> ${body.phone ? sanitise(body.phone) : '—'}</p>
+          <p><strong>Phone:</strong> ${body.phone ? sanitise(body.phone) : 'Not provided'}</p>
           <p><strong>Categories:</strong> ${body.categories.map(sanitise).join(', ')}</p>
           <p><strong>Message:</strong><br>${sanitise(body.message)}</p>
-          <p><strong>Referral:</strong> ${body.referral ? sanitise(body.referral) : '—'}</p>
+          <p><strong>Referral:</strong> ${body.referral ? sanitise(body.referral) : 'Not specified'}</p>
           <hr>
           <p style="color:#888;font-size:12px;">Submitted via synergisticinteraction.com.au/get-started</p>
         `,
@@ -83,9 +83,9 @@ Reply to: ${sanitise(body.email)}
         console.error('[contact] Resend error:', emailError);
       }
     } else {
-      // RESEND_API_KEY not set — log to console only
+      // RESEND_API_KEY not set, log to console only
       console.log(`[contact] New submission from ${body.email}:\n${emailText}`);
-      console.warn('[contact] RESEND_API_KEY not set — form submission logged only, no email sent');
+      console.warn('[contact] RESEND_API_KEY not set, form submission logged only, no email sent');
     }
 
     return NextResponse.json({ success: true, message: 'Assessment request received.' }, { status: 200 });

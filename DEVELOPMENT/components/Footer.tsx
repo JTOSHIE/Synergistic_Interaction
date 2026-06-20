@@ -1,4 +1,4 @@
-// Footer — AI-led repositioning
+// Footer, AI-led repositioning
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand column */}
           <div className="md:col-span-2">
-            <Link href="/" aria-label="Synergistic Interaction — Home">
+            <Link href="/" aria-label="Synergistic Interaction, Home">
               <Image
                 src="/logo.svg"
                 alt="Synergistic Interaction"

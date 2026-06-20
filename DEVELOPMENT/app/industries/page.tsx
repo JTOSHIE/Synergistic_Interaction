@@ -1,9 +1,11 @@
 // Target path in repo: app/industries/page.tsx
-// Synergistic Interaction — Industries (AI-led repositioning)
+// Synergistic Interaction, Industries (AI-led repositioning)
 // Server component. Uses the existing design tokens: si-bg, si-teal, si-teal-light, si-white, si-white-muted, si-gradient.
+// Interactivity is isolated in the small client components under components/motion.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Reveal from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'Industries',
@@ -43,6 +45,9 @@ const sectors = [
   },
 ];
 
+const hoverClass =
+  'transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1';
+
 export default function IndustriesPage() {
   return (
     <main>
@@ -77,31 +82,32 @@ export default function IndustriesPage() {
       {/* Sectors */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto space-y-5">
-          {sectors.map((s) => (
-            <div
-              key={s.name}
-              className={
-                s.flagship
-                  ? 'p-7 sm:p-8 rounded-2xl border border-si-teal/30 bg-si-teal/5'
-                  : 'p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5'
-              }
-            >
-              {s.flagship && (
-                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
-                  Where it began
-                </span>
-              )}
-              <h2
+          {sectors.map((s, i) => (
+            <Reveal key={s.name} delay={i * 60}>
+              <div
                 className={
                   s.flagship
-                    ? 'text-xl sm:text-2xl font-bold text-si-white mt-2 mb-3'
-                    : 'text-xl sm:text-2xl font-bold text-si-white mb-3'
+                    ? `p-7 sm:p-8 rounded-2xl border border-si-teal/30 bg-si-teal/5 ${hoverClass}`
+                    : `p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5 ${hoverClass}`
                 }
               >
-                {s.name}
-              </h2>
-              <p className="text-si-white-muted leading-relaxed">{s.body}</p>
-            </div>
+                {s.flagship && (
+                  <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                    Where it began
+                  </span>
+                )}
+                <h2
+                  className={
+                    s.flagship
+                      ? 'text-xl sm:text-2xl font-bold text-si-white mt-2 mb-3'
+                      : 'text-xl sm:text-2xl font-bold text-si-white mb-3'
+                  }
+                >
+                  {s.name}
+                </h2>
+                <p className="text-si-white-muted leading-relaxed">{s.body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -109,36 +115,40 @@ export default function IndustriesPage() {
       {/* Cross alignment */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-5">
-            One method, every sector
-          </h2>
-          <p className="text-si-white-muted leading-relaxed">
-            The four capabilities, knowledge systems, document production, review
-            and investigation, and research and verification, are the same in
-            every industry. Only the domain changes. The discipline behind them
-            was built at retail scale, across hundreds of stores and thousands of
-            products, and it transfers cleanly to a practice, a workshop or a back
-            office. Your sector is the shape. The method is the constant.
-          </p>
+          <Reveal>
+            <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-5">
+              One method, every sector
+            </h2>
+            <p className="text-si-white-muted leading-relaxed">
+              The four capabilities, knowledge systems, document production, review
+              and investigation, and research and verification, are the same in
+              every industry. Only the domain changes. The discipline behind them
+              was built at retail scale, across hundreds of stores and thousands of
+              products, and it transfers cleanly to a practice, a workshop or a back
+              office. Your sector is the shape. The method is the constant.
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-si-white mb-5">
-            Not sure where AI fits your sector?
-          </h2>
-          <p className="text-si-white-muted leading-relaxed mb-10">
-            The readiness assessment is built to answer exactly that, for your
-            business specifically.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center px-7 py-4 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
-          >
-            Book an AI Readiness Assessment
-          </Link>
+          <Reveal>
+            <h2 className="text-3xl font-bold text-si-white mb-5">
+              Not sure where AI fits your sector?
+            </h2>
+            <p className="text-si-white-muted leading-relaxed mb-10">
+              The readiness assessment is built to answer exactly that, for your
+              business specifically.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-7 py-4 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
+            >
+              Book an AI Readiness Assessment
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>
