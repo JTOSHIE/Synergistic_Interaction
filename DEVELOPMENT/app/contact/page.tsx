@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'Contact',
   description:
     'Start with a fixed-price AI Readiness Assessment. A quick chat to see whether we are a fit costs you nothing. No jargon, no pressure, no lock-in.',
+  alternates: { canonical: '/contact' },
 };
 
 const steps = [

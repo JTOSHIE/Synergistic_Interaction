@@ -6,7 +6,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Reveal from '@/components/motion/Reveal';
+import JsonLd from '@/components/JsonLd';
+import { BASE_URL } from '@/lib/site';
 import { articles, getArticle } from '../articles';
+
+// Publication date for the articles in this round, current date in ISO format.
+const PUBLISHED = '2026-06-20';
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -23,6 +28,7 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.description,
+    alternates: { canonical: `/insights/${slug}` },
   };
 }
 
@@ -35,8 +41,41 @@ export default async function ArticlePage({
   const article = getArticle(slug);
   if (!article) notFound();
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    author: { '@type': 'Person', name: 'Joshua Thompson' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Synergistic Interaction',
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.svg` },
+    },
+    image: `${BASE_URL}/opengraph-image`,
+    datePublished: PUBLISHED,
+    mainEntityOfPage: `${BASE_URL}/insights/${slug}`,
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: `${BASE_URL}/insights` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: `${BASE_URL}/insights/${slug}`,
+      },
+    ],
+  };
+
   return (
     <main>
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       {/* Header */}
       <section className="relative pt-28 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-si-gradient" aria-hidden="true" />

@@ -8,11 +8,13 @@ import Link from 'next/link';
 import { Compass, PenLine, Hammer, Check, RefreshCw } from 'lucide-react';
 import Reveal from '@/components/motion/Reveal';
 import FlowDiagram from '@/components/motion/FlowDiagram';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Approach',
   description:
     'How we get AI working in your business, safely. A simple repeatable method, the right tools for your setup and budget, and a build-review-approve discipline that keeps your people and your judgement in charge.',
+  alternates: { canonical: '/approach' },
 };
 
 const steps = [
@@ -83,9 +85,20 @@ const faqs = [
   },
 ];
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 export default function ApproachPage() {
   return (
     <main>
+      <JsonLd data={faqJsonLd} />
       {/* Hero */}
       <section className="relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-si-gradient" aria-hidden="true" />

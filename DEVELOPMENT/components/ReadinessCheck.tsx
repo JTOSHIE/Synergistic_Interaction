@@ -195,7 +195,7 @@ export default function ReadinessCheck() {
           See my result
         </button>
         {!allAnswered && (
-          <p className="text-si-white-dim text-sm">Answer all six questions to see your result.</p>
+          <p className="text-si-white-muted text-sm">Answer all six questions to see your result.</p>
         )}
       </div>
     </div>

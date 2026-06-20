@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Capabilities',
   description:
     'Bespoke AI built around the work you actually do. Knowledge systems, document production, large-scale review and investigation, research and verification, and governed automation, with a human always in the loop.',
+  alternates: { canonical: '/capabilities' },
 };
 
 const capabilities = [

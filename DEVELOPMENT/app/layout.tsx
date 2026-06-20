@@ -3,9 +3,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import JsonLd from '@/components/JsonLd';
+import { organizationJsonLd } from '@/lib/site';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -79,11 +82,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* V7 §6.1 Option C: NO Google Analytics, use Vercel Analytics (not blocked) */}
       </head>
       <body className="bg-si-bg text-si-white min-h-screen flex flex-col antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-si-teal focus:text-si-bg focus:font-semibold"
+        >
+          Skip to content
+        </a>
+        <JsonLd data={organizationJsonLd} />
         <Header />
-        <div className="flex-1">{children}</div>
+        <div id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+          {children}
+        </div>
         <Footer />
-        {/* Vercel Analytics, not blocked by Great Firewall */}
+        {/* Vercel Analytics and Speed Insights, not blocked by Great Firewall */}
         <Analytics />
+        <SpeedInsights />
         <ScrollToTop />
       </body>
     </html>
