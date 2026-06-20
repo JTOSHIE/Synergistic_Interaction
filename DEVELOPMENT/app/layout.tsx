@@ -2,7 +2,7 @@
 // Vercel Analytics included (no Google Analytics, blocked by Great Firewall, V7 §6.1 Option C)
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
