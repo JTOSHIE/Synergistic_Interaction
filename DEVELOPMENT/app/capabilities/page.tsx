@@ -1,9 +1,11 @@
 // Target path in repo: app/capabilities/page.tsx
-// Synergistic Interaction — Capabilities (AI-led repositioning)
+// Synergistic Interaction, Capabilities (AI-led repositioning)
 // Server component. Uses the existing design tokens: si-bg, si-teal, si-teal-light, si-white, si-white-muted, si-gradient.
+// Interactivity is isolated in the small client components under components/motion.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Reveal from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'Capabilities',
@@ -77,20 +79,19 @@ export default function CapabilitiesPage() {
       {/* Capability sections */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto space-y-5">
-          {capabilities.map((c) => (
-            <div
-              key={c.title}
-              className="p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5"
-            >
-              <h2 className="text-xl sm:text-2xl font-bold text-si-white mb-3">{c.title}</h2>
-              <p className="text-si-white-muted leading-relaxed mb-5">{c.body}</p>
-              <div className="pt-4 border-t border-white/10">
-                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
-                  Where it helps
-                </span>
-                <p className="text-si-white-muted text-sm leading-relaxed mt-2">{c.where}</p>
+          {capabilities.map((c, i) => (
+            <Reveal key={c.title} delay={i * 70}>
+              <div className="p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1">
+                <h2 className="text-xl sm:text-2xl font-bold text-si-white mb-3">{c.title}</h2>
+                <p className="text-si-white-muted leading-relaxed mb-5">{c.body}</p>
+                <div className="pt-4 border-t border-white/10">
+                  <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                    Where it helps
+                  </span>
+                  <p className="text-si-white-muted text-sm leading-relaxed mt-2">{c.where}</p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -98,34 +99,38 @@ export default function CapabilitiesPage() {
       {/* Bespoke vs generic */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-5">
-            The same model. A completely different result.
-          </h2>
-          <p className="text-si-white-muted leading-relaxed">
-            Out of the box, AI produces ordinary output. Configured to your
-            business, it produces remarkable output. That configuration is the
-            work. It is what turns AI from a novelty your staff dabble with into a
-            capability your business runs on.
-          </p>
+          <Reveal>
+            <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-5">
+              The same model. A completely different result.
+            </h2>
+            <p className="text-si-white-muted leading-relaxed">
+              Out of the box, AI produces ordinary output. Configured to your
+              business, it produces remarkable output. That configuration is the
+              work. It is what turns AI from a novelty your staff dabble with into a
+              capability your business runs on.
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-si-white mb-5">
-            Not sure which of these your business needs?
-          </h2>
-          <p className="text-si-white-muted leading-relaxed mb-10">
-            That is exactly what the assessment is for. We work out where AI will
-            help you most, then build only what earns its place.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center px-7 py-4 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
-          >
-            Book an AI Readiness Assessment
-          </Link>
+          <Reveal>
+            <h2 className="text-3xl font-bold text-si-white mb-5">
+              Not sure which of these your business needs?
+            </h2>
+            <p className="text-si-white-muted leading-relaxed mb-10">
+              That is exactly what the assessment is for. We work out where AI will
+              help you most, then build only what earns its place.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-7 py-4 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
+            >
+              Book an AI Readiness Assessment
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>

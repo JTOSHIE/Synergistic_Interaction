@@ -1,9 +1,11 @@
 // Target path in repo: app/contact/page.tsx
-// Synergistic Interaction — Contact (AI-led repositioning)
+// Synergistic Interaction, Contact (AI-led repositioning)
 // Server component. Uses the existing design tokens: si-bg, si-teal, si-teal-light, si-white, si-white-muted, si-gradient.
 // This page uses working email and phone links, so it functions immediately with no backend.
+// Interactivity is isolated in the small client components under components/motion.
 
 import type { Metadata } from 'next';
+import Reveal from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -73,16 +75,20 @@ export default function ContactPage() {
       {/* What happens next */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-12">What happens next</h2>
+          <Reveal>
+            <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-12">What happens next</h2>
+          </Reveal>
           <div className="grid sm:grid-cols-3 gap-8">
-            {steps.map((s) => (
-              <div key={s.number}>
-                <div className="text-si-teal text-sm font-semibold tracking-widest mb-3">
-                  {s.number}
+            {steps.map((s, i) => (
+              <Reveal key={s.number} delay={i * 80}>
+                <div>
+                  <div className="text-si-teal text-sm font-semibold tracking-widest mb-3">
+                    {s.number}
+                  </div>
+                  <h3 className="text-si-white font-semibold text-lg mb-2">{s.title}</h3>
+                  <p className="text-si-white-muted text-sm leading-relaxed">{s.body}</p>
                 </div>
-                <h3 className="text-si-white font-semibold text-lg mb-2">{s.title}</h3>
-                <p className="text-si-white-muted text-sm leading-relaxed">{s.body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -91,29 +97,33 @@ export default function ContactPage() {
       {/* Get in touch */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-8">Get in touch</h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            <a
-              href="mailto:jt@synergisticinteraction.com.au?subject=AI%20Readiness%20Assessment"
-              className="block p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-si-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
-            >
-              <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
-                Email
-              </span>
-              <p className="text-si-white font-medium mt-2 break-words">
-                jt@synergisticinteraction.com.au
-              </p>
-            </a>
-            <a
-              href="tel:+61417673828"
-              className="block p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-si-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
-            >
-              <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
-                Phone
-              </span>
-              <p className="text-si-white font-medium mt-2">0417 673 828</p>
-            </a>
-          </div>
+          <Reveal>
+            <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-8">Get in touch</h2>
+          </Reveal>
+          <Reveal>
+            <div className="grid sm:grid-cols-2 gap-5">
+              <a
+                href="mailto:jt@synergisticinteraction.com.au?subject=AI%20Readiness%20Assessment"
+                className="block p-6 rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
+              >
+                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                  Email
+                </span>
+                <p className="text-si-white font-medium mt-2 break-words">
+                  jt@synergisticinteraction.com.au
+                </p>
+              </a>
+              <a
+                href="tel:+61417673828"
+                className="block p-6 rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:border-si-teal/40 hover:shadow-[0_14px_40px_-18px_rgba(0,201,167,0.45)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
+              >
+                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                  Phone
+                </span>
+                <p className="text-si-white font-medium mt-2">0417 673 828</p>
+              </a>
+            </div>
+          </Reveal>
 
           <div className="mt-10 text-center">
             <a

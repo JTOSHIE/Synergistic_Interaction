@@ -1,5 +1,5 @@
-// Root layout — all pages share this structure
-// Vercel Analytics included (no Google Analytics — blocked by Great Firewall, V7 §6.1 Option C)
+// Root layout, all pages share this structure
+// Vercel Analytics included (no Google Analytics, blocked by Great Firewall, V7 §6.1 Option C)
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
@@ -75,14 +75,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="alternate" hrefLang="en-AU" href={BASE_URL} />
         <link rel="alternate" hrefLang="x-default" href={BASE_URL} />
-        {/* V7 §6.1 Option C: NO Google Fonts here — CJK fonts use system stack only */}
-        {/* V7 §6.1 Option C: NO Google Analytics — use Vercel Analytics (not blocked) */}
+        {/* V7 §6.1 Option C: NO Google Fonts here, CJK fonts use system stack only */}
+        {/* V7 §6.1 Option C: NO Google Analytics, use Vercel Analytics (not blocked) */}
       </head>
       <body className="bg-si-bg text-si-white min-h-screen flex flex-col antialiased">
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />
-        {/* Vercel Analytics — not blocked by Great Firewall */}
+        {/* Vercel Analytics, not blocked by Great Firewall */}
         <Analytics />
         <ScrollToTop />
       </body>
