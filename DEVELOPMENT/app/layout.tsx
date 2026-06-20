@@ -7,6 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import ChatWidget from '@/components/ChatWidget';
 import JsonLd from '@/components/JsonLd';
 import { BASE_URL, organizationJsonLd } from '@/lib/site';
 import '@/styles/globals.css';
@@ -96,6 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SpeedInsights />
         <ScrollToTop />
+        <ChatWidget />
       </body>
     </html>
   );
