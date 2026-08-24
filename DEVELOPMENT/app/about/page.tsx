@@ -12,7 +12,7 @@ import CountUp from '@/components/motion/CountUp';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Twenty-five years of turning new technology into business change, across Australia, New Zealand, the USA and the UK. AI is simply the current chapter.',
+    'Twenty-five years of category management and business change across Australia, New Zealand, the USA and the UK. AI is simply the current chapter.',
   alternates: { canonical: '/about' },
 };
 
@@ -25,7 +25,7 @@ const acts = [
   {
     era: '2007 to 2019',
     title: 'Transformation at national scale',
-    body: 'Back home, we co-founded a category management business that grew to more than 300 people and managed category for every store of one of the largest hardware retailers in Australia and New Zealand. More than 330 stores, thousands of products, and global suppliers. It was transformation at national scale, done in the field rather than in a presentation.',
+    body: 'Back home, we founded a category management business that grew to more than 300 people and managed category for every store of one of the largest hardware retailers in Australia and New Zealand. More than 330 stores, thousands of products, and global suppliers. It was transformation at national scale, done in the field rather than in a presentation.',
   },
   {
     era: 'Today',
@@ -61,7 +61,7 @@ export default function AboutPage() {
             About
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-si-white mb-6 leading-tight">
-            Twenty-five years of turning new technology into business change
+            Twenty-five years of category management and business change
           </h1>
           <p className="text-lg text-si-white-muted leading-relaxed">
             AI is not a new direction for Synergistic Interaction. It is the
@@ -148,12 +148,20 @@ export default function AboutPage() {
                 Principal and Director, Synergistic Interaction
               </p>
               <p className="text-si-white-muted leading-relaxed">
-                Synergistic Interaction is led by Joshua Thompson, who has built and
-                delivered category and technology transformation across Australia,
-                New Zealand, the USA and the United Kingdom for more than 25 years.
-                The focus now is helping established businesses and practices adopt
-                AI the practical way, with their people trained and their judgement
-                kept firmly in charge.
+                Synergistic Interaction is led by Joshua Thompson, who has spent
+                more than 25 years in category management, merchandise leadership
+                and retail technology across Australia, New Zealand, the USA and
+                the United Kingdom: range and space strategy, supplier
+                negotiation, planogram and store execution at national scale, and
+                the systems that make them measurable. A Certified SAFe 6 Scrum
+                Master, he now helps established businesses adopt AI the practical
+                way, with their people trained and their judgement kept firmly in
+                charge.
+              </p>
+              <p className="text-si-white-muted leading-relaxed mt-4">
+                Engagements run as fixed-price projects, fractional leadership at
+                one to three days a week, or ongoing advisory, whichever fits the
+                work.
               </p>
             </div>
           </Reveal>

@@ -1,7 +1,9 @@
-// CountUp: animates a number from zero to its target when it scrolls into view,
-// driven by requestAnimationFrame. Under prefers-reduced-motion it shows the
-// final value immediately with no animation. Numbers are formatted with
-// Australian English grouping, for example 3,500.
+// CountUp: shows the real target value in server-rendered HTML so crawlers and
+// no-JS visitors always see the true figure, then animates from zero to the
+// target on the client the first time it scrolls into view. Driven by
+// requestAnimationFrame. Under prefers-reduced-motion it simply shows the
+// final value with no animation. Numbers use Australian English grouping,
+// for example 3,500.
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -18,7 +20,9 @@ interface CountUpProps {
 export default function CountUp({ value, durationMs = 1600, plus = false, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const reduced = useReducedMotion();
-  const [display, setDisplay] = useState(0);
+  // Initialise with the real value: this is what the server renders and what
+  // hydration first paints, so the page never claims zero to anyone.
+  const [display, setDisplay] = useState(value);
   const started = useRef(false);
 
   useEffect(() => {

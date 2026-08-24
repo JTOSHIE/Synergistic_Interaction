@@ -1,96 +1,123 @@
-// Contact form API, Resend integration
-// V7 §11.3: Captures: name, org, role, email, phone, categories, message, referral
+// Contact enquiry API. Server-side only. Validates the enquiry, applies a
+// light in-memory rate limit and a honeypot check, then sends the enquiry by
+// email via Resend. If the Resend key is not configured the route degrades
+// gracefully and steers the visitor to email directly, so the site never
+// breaks. The in-memory rate limit resets on cold starts, which is acceptable
+// for a light front-of-site form.
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-interface ContactFormData {
-  name: string;
-  organisation: string;
-  role: string;
-  email: string;
-  phone?: string;
-  categories: string[];
-  message: string;
-  referral?: string;
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const hits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    hits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
+  return false;
+}
+
+function clientIp(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0]!.trim();
+  return request.headers.get('x-real-ip') ?? 'unknown';
 }
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function sanitise(str: string): string {
-  return str.replace(/[<>'"]/g, '').trim().slice(0, 500);
+function clean(value: unknown, max: number): string {
+  if (typeof value !== 'string') return '';
+  return value.replace(/[<>]/g, '').trim().slice(0, max);
 }
 
 export async function POST(request: NextRequest) {
+  const ip = clientIp(request);
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { ok: false, message: 'Too many messages in a short time. Please email jt@synergisticinteraction.com.au directly.' },
+      { status: 429 },
+    );
+  }
+
+  let body: Record<string, unknown>;
   try {
-    const body = (await request.json()) as ContactFormData;
+    body = (await request.json()) as Record<string, unknown>;
+  } catch {
+    return NextResponse.json({ ok: false, message: 'That request could not be read. Please try again.' }, { status: 400 });
+  }
 
-    // Server-side validation
-    if (!body.name?.trim()) return NextResponse.json({ error: 'Name is required' }, { status: 400 });
-    if (!body.organisation?.trim()) return NextResponse.json({ error: 'Organisation is required' }, { status: 400 });
-    if (!body.role?.trim()) return NextResponse.json({ error: 'Role is required' }, { status: 400 });
-    if (!body.email?.trim() || !isValidEmail(body.email)) return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
-    if (!body.message?.trim()) return NextResponse.json({ error: 'Message is required' }, { status: 400 });
-    if (!body.categories?.length) return NextResponse.json({ error: 'At least one product category is required' }, { status: 400 });
+  // Honeypot: pretend success so bots learn nothing.
+  if (clean(body.website, 200).length > 0) {
+    return NextResponse.json({ ok: true });
+  }
 
-    const destinationEmail = process.env.CONTACT_DESTINATION_EMAIL ?? 'jt@synergisticinteraction.com.au';
+  const name = clean(body.name, 120);
+  const email = clean(body.email, 200);
+  const organisation = clean(body.organisation, 200);
+  const phone = clean(body.phone, 60);
+  const message = clean(body.message, 4000);
 
-    const emailText = `
-NEW CATEGORY ASSESSMENT REQUEST
-================================
-Submitted: ${new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })} AEST
+  if (!name) return NextResponse.json({ ok: false, message: 'Please add your name.' }, { status: 400 });
+  if (!email || !isValidEmail(email)) return NextResponse.json({ ok: false, message: 'Please add a valid email address.' }, { status: 400 });
+  if (!message) return NextResponse.json({ ok: false, message: 'Please add a short message.' }, { status: 400 });
 
-Name:         ${sanitise(body.name)}
-Organisation: ${sanitise(body.organisation)}
-Role:         ${sanitise(body.role)}
-Email:        ${sanitise(body.email)}
-Phone:        ${body.phone ? sanitise(body.phone) : 'Not provided'}
-Categories:   ${body.categories.map(sanitise).join(', ')}
-Referral:     ${body.referral ? sanitise(body.referral) : 'Not specified'}
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json(
+      { ok: false, message: 'The form is briefly unavailable. Please email jt@synergisticinteraction.com.au directly.' },
+      { status: 503 },
+    );
+  }
 
-Message:
-${sanitise(body.message)}
+  const destination = process.env.CONTACT_DESTINATION_EMAIL ?? 'jt@synergisticinteraction.com.au';
+  const fromAddress = process.env.CONTACT_FROM_EMAIL ?? 'Synergistic Interaction <enquiries@synergisticinteraction.com.au>';
 
-================================
-Reply to: ${sanitise(body.email)}
-    `.trim();
+  const submitted = new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' });
+  const emailText = [
+    'NEW WEBSITE ENQUIRY',
+    '===================',
+    `Submitted:    ${submitted} (Melbourne time)`,
+    '',
+    `Name:         ${name}`,
+    `Email:        ${email}`,
+    `Organisation: ${organisation || 'Not provided'}`,
+    `Phone:        ${phone || 'Not provided'}`,
+    '',
+    'Message:',
+    message,
+  ].join('\n');
 
-    if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const { error: emailError } = await resend.emails.send({
-        from: 'Website <noreply@synergisticinteraction.com.au>',
-        to: [destinationEmail],
-        replyTo: body.email,
-        subject: `Category Assessment Request: ${sanitise(body.organisation)}`,
-        html: `
-          <h2>New Category Assessment Request</h2>
-          <p><strong>Name:</strong> ${sanitise(body.name)}</p>
-          <p><strong>Organisation:</strong> ${sanitise(body.organisation)}</p>
-          <p><strong>Role:</strong> ${sanitise(body.role)}</p>
-          <p><strong>Email:</strong> ${sanitise(body.email)}</p>
-          <p><strong>Phone:</strong> ${body.phone ? sanitise(body.phone) : 'Not provided'}</p>
-          <p><strong>Categories:</strong> ${body.categories.map(sanitise).join(', ')}</p>
-          <p><strong>Message:</strong><br>${sanitise(body.message)}</p>
-          <p><strong>Referral:</strong> ${body.referral ? sanitise(body.referral) : 'Not specified'}</p>
-          <hr>
-          <p style="color:#888;font-size:12px;">Submitted via synergisticinteraction.com.au/get-started</p>
-        `,
-        text: emailText,
-      });
-
-      if (emailError) {
-        console.error('[contact] Resend error:', emailError);
-      }
-    } else {
-      // RESEND_API_KEY not set, log to console only
-      console.log(`[contact] New submission from ${body.email}:\n${emailText}`);
-      console.warn('[contact] RESEND_API_KEY not set, form submission logged only, no email sent');
+  try {
+    const resend = new Resend(apiKey);
+    const { error } = await resend.emails.send({
+      from: fromAddress,
+      to: destination,
+      replyTo: email,
+      subject: `Website enquiry from ${name}`,
+      text: emailText,
+    });
+    if (error) {
+      return NextResponse.json(
+        { ok: false, message: 'That did not send. Please email jt@synergisticinteraction.com.au directly.' },
+        { status: 502 },
+      );
     }
-
-    return NextResponse.json({ success: true, message: 'Assessment request received.' }, { status: 200 });
-  } catch (error) {
-    console.error('[contact] Error processing submission:', error);
-    return NextResponse.json({ error: 'Internal server error. Please email us directly.' }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json(
+      { ok: false, message: 'That did not send. Please email jt@synergisticinteraction.com.au directly.' },
+      { status: 502 },
+    );
   }
 }
