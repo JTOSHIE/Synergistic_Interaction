@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/capabilities', label: 'Capabilities' },
   { href: '/approach', label: 'Approach' },
   { href: '/industries', label: 'Industries' },
+  { href: '/category-management', label: 'Category Management' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];

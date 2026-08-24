@@ -20,9 +20,9 @@ import HeroNetwork from '@/components/motion/HeroNetwork';
 import FlowDiagram from '@/components/motion/FlowDiagram';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Synergistic Interaction: Practical AI Adoption for Australian Business' },
+  title: { absolute: 'Synergistic Interaction: Category Management and Practical AI Adoption' },
   description:
-    'We help established Australian businesses and practices adopt AI the practical way. A fixed-price readiness assessment, the right tools and workflows, staff training, and a human always in the loop. Weeks, not years.',
+    'Specialist category management for retailers and suppliers, and practical AI adoption for established Australian businesses. Range, space, price and negotiation, delivered with AI carrying the analysis and a human always in the loop.',
   alternates: { canonical: '/' },
 };
 
@@ -107,8 +107,8 @@ const outcomes = [
 ];
 
 const stats = [
-  { value: 25, plus: false, label: 'Years of experience' },
-  { value: 3500, plus: true, label: 'Stores reached' },
+  { value: 25, plus: false, label: 'Years of category management' },
+  { value: 3500, plus: true, label: 'Stores reached by our first platform' },
   { value: 330, plus: true, label: 'Stores in the national network' },
 ];
 
@@ -130,31 +130,92 @@ export default function HomePage() {
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-si-teal/10 border border-si-teal/20 text-si-teal text-xs font-medium mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-si-teal" />
-            Practical AI adoption for Australian business
+            Category management and practical AI adoption
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-si-white mb-6 leading-tight">
-            Get your business genuinely using AI.{' '}
-            <span className="text-si-teal">In weeks, not years.</span>
+            Twenty-five years of category management.{' '}
+            <span className="text-si-teal">Now delivered at AI speed.</span>
           </h1>
           <p className="text-lg sm:text-xl text-si-white-muted mb-10 leading-relaxed max-w-2xl mx-auto">
-            Most businesses your size are too busy to ignore AI and too small to
-            have anyone to lead it. We work out how you actually run, give your
-            people the right tools and training, and keep a human in the loop the
-            whole way.
+            Synergistic Interaction is a Melbourne consultancy built on 25 years
+            of retail category management across Australia, New Zealand, the USA
+            and the UK. Range, space, price and negotiation, delivered with AI
+            carrying the analysis and a category veteran making the calls.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/contact"
+              href="/category-management"
               className="inline-flex items-center justify-center px-6 py-3.5 bg-si-teal text-si-bg font-semibold rounded-xl hover:bg-si-teal-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal focus-visible:ring-offset-2 focus-visible:ring-offset-si-bg"
             >
-              Book an AI Readiness Assessment
+              Explore the category practice
             </Link>
             <Link
               href="/capabilities"
               className="inline-flex items-center justify-center px-6 py-3.5 border border-white/20 text-si-white rounded-xl hover:border-si-teal hover:text-si-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-si-teal"
             >
-              See what we do
+              Practical AI adoption
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Two practices */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <Reveal>
+            <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-3">
+              Two practices, one discipline
+            </h2>
+            <p className="text-si-white-muted leading-relaxed mb-10">
+              Everything we do runs on the same build, review, approve
+              discipline. Deep category expertise decides what matters. AI
+              carries the volume.
+            </p>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 gap-5">
+            <Reveal>
+              <Link
+                href="/category-management"
+                className="block h-full p-7 sm:p-8 rounded-2xl border border-si-teal/30 bg-si-teal/5 hover:border-si-teal/60 transition-colors"
+              >
+                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                  Specialist practice
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold text-si-white mt-2 mb-3">
+                  Category management
+                </h3>
+                <p className="text-si-white-muted leading-relaxed mb-4">
+                  Category strategy, range architecture, planogram and space
+                  planning, pricing and margin design, and negotiation support
+                  for retailers and suppliers. Twenty-five years across four
+                  countries.
+                </p>
+                <span className="inline-flex items-center gap-1 text-si-teal text-sm font-medium">
+                  Explore the practice <span aria-hidden="true">&rarr;</span>
+                </span>
+              </Link>
+            </Reveal>
+            <Reveal delay={80}>
+              <Link
+                href="/capabilities"
+                className="block h-full p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-white/25 transition-colors"
+              >
+                <span className="text-si-teal text-xs font-semibold tracking-widest uppercase">
+                  Delivery engine
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold text-si-white mt-2 mb-3">
+                  Practical AI adoption
+                </h3>
+                <p className="text-si-white-muted leading-relaxed mb-4">
+                  Readiness assessments, the right tools and workflows, staff
+                  training and bespoke AI systems, with a human always in the
+                  loop. For established Australian businesses and practices.
+                </p>
+                <span className="inline-flex items-center gap-1 text-si-teal text-sm font-medium">
+                  See the capabilities <span aria-hidden="true">&rarr;</span>
+                </span>
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -349,12 +410,13 @@ export default function HomePage() {
             </h2>
             <p className="text-si-white-muted leading-relaxed max-w-2xl mb-12">
               This is not a new venture chasing a trend. Behind Synergistic
-              Interaction is 25 years of turning new technology into real business
-              change, including building one of the first web-based category
-              management systems in the world, independently validated by Cornell
-              University, and running category management across one of the largest
-              retail networks in Australia and New Zealand. AI is simply the current
-              chapter.
+              Interaction is 25 years of category management and retail technology
+              change: building one of the first web-based category management
+              platforms in the world, deployed across more than 3,500 stores in the
+              USA and independently validated by Cornell University, then running
+              category management for a national hardware network of more than 330
+              stores across Australia and New Zealand, spanning more than 2,000
+              products and 20 global suppliers. AI is simply the current chapter.
             </p>
           </Reveal>
           <Reveal>

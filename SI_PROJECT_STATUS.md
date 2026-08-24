@@ -28,7 +28,7 @@ government RSS sources, and wired the contact form with Resend email sending.
 | OG image PNG | Screenshot public/og-image.html at 1200×630 |
 | Baidu Webmaster Tools | Domain is live — can be done now |
 | Mandarin native review | Native speaker review of transcreated copy |
-| ⚠️ Resend email wiring | Code wired — RESEND_API_KEY still needed. 1) Sign up resend.com 2) Verify domain 3) `echo "re_xxxx" \| vercel env add RESEND_API_KEY production` 4) `vercel --prod` |
+| ⚠️ Contact form | Code complete: enquiry form plus rebuilt /api/contact Resend route with honeypot and rate limit. Pending RESEND_API_KEY in Vercel production, which could not be verified from the build session. Until it is set the form degrades gracefully and steers visitors to email directly. 1) Sign up resend.com 2) Verify domain 3) `vercel env add RESEND_API_KEY production` 4) redeploy |
 | ✅ Regulatory feed | Real ACCC + Consumer Affairs Victoria RSS feeds wired — live data after first Vercel Cron ingest |
 | OpenAI + Vercel KV | Regulatory feed pipeline requires OPENAI_API_KEY + KV provisioning for AI triage |
 | DNS propagation | A record `76.76.21.21` set at Crazy Domains — may take up to 24hrs to fully propagate |
@@ -51,6 +51,7 @@ government RSS sources, and wired the contact form with Resend email sending.
 | Session 13 | Canvas colour fix (CategoryGridVisual + HomepageHero), ProofBar 1736× → 13 Yrs, Mandarin locale ProofBar alignment, status doc rebuild | TBC files |
 | Session 14 | Domain synergisticinteraction.com.au + www added to Vercel, ABN 33 686 618 397 in footer, 14 real ACCC + Consumer Affairs Victoria RSS feeds wired (all placeholders removed), Resend contact form email wired, NEXT_PUBLIC_SITE_URL updated to real domain, sitemap + robots confirmed using env var | 4 files |
 | Session 15 | Remove Mandarin language toggle (header + hreflang), remove Store Setup & Fitout section from category-expertise, remove LinkedIn link, remove $50M vs 1,736× ROI comparison block from why-compliance-matters, add CategoryDashboard canvas component (Hardware & Building Products sample data) to our-approach | 9 files |
+| Sessions 16 and 17 combined | Category Management practice page at /category-management (header, footer, sitemap, industries flagship cross-link), category-first homepage (hero, CTAs, Two Practices section, track record copy, metadata and keywords), About page category lead, principal bio with SAFe 6 Scrum Master and merchandise leadership, engagement models line, footer blurb and legal line, CountUp SSR fix so crawlers see real figures, contact enquiry form and rebuilt /api/contact Resend route with honeypot and rate limit, on-site assistant knowledge extended to cover the category practice, removed dead i18n files and unused packages (gsap, @gsap/react, three, three-mesh-bvh, @types/three, i18next, next-i18next, react-i18next, react-hook-form) | 12+ files |
 
 ---
 

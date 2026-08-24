@@ -112,6 +112,14 @@ export default function IndustriesPage() {
                   <h2 className="text-xl sm:text-2xl font-bold text-si-white">{s.name}</h2>
                 </div>
                 <p className="text-si-white-muted leading-relaxed">{s.body}</p>
+                {s.flagship && (
+                  <Link
+                    href="/category-management"
+                    className="inline-flex items-center gap-1 mt-4 text-si-teal text-sm font-medium hover:text-si-teal-light transition-colors"
+                  >
+                    Explore the category management practice <span aria-hidden="true">&rarr;</span>
+                  </Link>
+                )}
               </div>
             </Reveal>
           ))}

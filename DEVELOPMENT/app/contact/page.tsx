@@ -6,6 +6,7 @@
 
 import type { Metadata } from 'next';
 import Reveal from '@/components/motion/Reveal';
+import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -92,6 +93,22 @@ export default function ContactPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Send a message */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <h2 className="text-2xl sm:text-3xl font-bold text-si-white mb-3">Send a message</h2>
+            <p className="text-si-white-muted leading-relaxed mb-10">
+              Tell us a little about your business and we will come back to you
+              within one business day.
+            </p>
+          </Reveal>
+          <Reveal>
+            <ContactForm />
+          </Reveal>
         </div>
       </section>
 

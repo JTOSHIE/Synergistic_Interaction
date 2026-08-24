@@ -1,11 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // V7 §5.3: Three.js WebGPU addons imports
   experimental: {
     // serverActions are enabled by default in Next.js 15
   },
-  transpilePackages: ['three'],
 
   async headers() {
     return [

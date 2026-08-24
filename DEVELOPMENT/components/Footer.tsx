@@ -7,6 +7,7 @@ const navLinks = [
   { label: 'Capabilities', href: '/capabilities' },
   { label: 'Approach', href: '/approach' },
   { label: 'Industries', href: '/industries' },
+  { label: 'Category Management', href: '/category-management' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
   { label: 'Insights', href: '/insights' },
@@ -30,9 +31,10 @@ export default function Footer() {
               />
             </Link>
             <p className="text-si-white-muted text-sm leading-relaxed max-w-md">
-              Synergistic Interaction helps established Australian businesses and
-              practices adopt AI the practical way. Bespoke systems, the right
-              tools, staff trained, and a human always in the loop.
+              Synergistic Interaction is a specialist category management and AI
+              adoption consultancy for Australian businesses. Deep retail
+              expertise, the right tools, staff trained, and a human always in
+              the loop.
             </p>
           </div>
 
@@ -63,9 +65,10 @@ export default function Footer() {
               © 2026 Synergistic Interaction Pty Ltd, ABN 33 686 618 397. All rights reserved.
             </p>
             <p className="text-si-white-muted text-xs max-w-md">
-              Synergistic Interaction Pty Ltd provides AI adoption advisory and
-              implementation services. Information on this site is general in
-              nature and is not legal, financial or other professional advice.
+              Synergistic Interaction Pty Ltd provides category management and AI
+              adoption advisory and implementation services. Information on this
+              site is general in nature and is not legal, financial or other
+              professional advice.
             </p>
           </div>
         </div>
